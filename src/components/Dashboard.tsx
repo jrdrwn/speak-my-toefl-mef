@@ -1,3 +1,5 @@
+import { QUESTIONS } from "@/data/questions";
+
 interface DashboardProps {
   userName: string;
   scores: number[];
@@ -8,12 +10,16 @@ interface DashboardProps {
 const Dashboard = ({ userName, scores, onStartTest, onLogout }: DashboardProps) => {
   const bestScore = scores.length > 0 ? Math.max(...scores) : "—";
   const avgScore = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : "—";
+  const listeningCount = QUESTIONS.listening.length;
+  const structureCount = QUESTIONS.structure.length;
+  const readingCount = QUESTIONS.reading.length;
+  const fullCount = listeningCount + structureCount + readingCount;
 
   const sections = [
-    { type: "listening", icon: "🎧", bg: "bg-amber-50", title: "Section 1 — Listening Comprehension", desc: "Short conversations, longer conversations & talks", badge: "Part A · B · C", badgeClass: "bg-amber-100 text-amber-800", qs: "50 Qs", mins: "35 min" },
-    { type: "structure", icon: "✏️", bg: "bg-blue-50", title: "Section 2 — Structure & Written Expression", desc: "Sentence completion & error identification", badge: "Grammar · Syntax", badgeClass: "bg-blue-100 text-blue-800", qs: "40 Qs", mins: "25 min" },
-    { type: "reading", icon: "📖", bg: "bg-green-50", title: "Section 3 — Reading Comprehension", desc: "Academic passages with inference & vocabulary", badge: "5 Passages", badgeClass: "bg-green-100 text-green-800", qs: "50 Qs", mins: "55 min" },
-    { type: "full", icon: "🏆", bg: "bg-purple-50", title: "Full Practice Test — All Sections", desc: "Complete simulation · Listening + Structure + Reading", badge: "Official Format", badgeClass: "bg-purple-100 text-purple-800", qs: "140 Qs", mins: "115 min", special: true },
+    { type: "listening", icon: "🎧", bg: "bg-amber-50", title: "Section 1 — Listening Comprehension", desc: "Short conversations, longer conversations & talks", badge: "Part A · B · C", badgeClass: "bg-amber-100 text-amber-800", qs: `${listeningCount} Qs`, mins: "35 min" },
+    { type: "structure", icon: "✏️", bg: "bg-blue-50", title: "Section 2 — Structure & Written Expression", desc: "Sentence completion & error identification", badge: "Grammar · Syntax", badgeClass: "bg-blue-100 text-blue-800", qs: `${structureCount} Qs`, mins: "25 min" },
+    { type: "reading", icon: "📖", bg: "bg-green-50", title: "Section 3 — Reading Comprehension", desc: "Academic passages with inference & vocabulary", badge: "5 Passages", badgeClass: "bg-green-100 text-green-800", qs: `${readingCount} Qs`, mins: "55 min" },
+    { type: "full", icon: "🏆", bg: "bg-purple-50", title: "Full Practice Test — All Sections", desc: "Complete simulation · Listening + Structure + Reading", badge: "Official Format", badgeClass: "bg-purple-100 text-purple-800", qs: `${fullCount} Qs`, mins: "115 min", special: true },
   ];
 
   return (
