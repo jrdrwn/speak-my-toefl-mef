@@ -1,6 +1,6 @@
 {
-  "name": "MEF",
-  "short_name": "MEF",
+  "name": "MEF TOEFL Test",
+  "short_name": "MET",
   "description": "Practice TOEFL-style sections with timed tests and instant feedback.",
   "id": "/",
   "start_url": "/",
