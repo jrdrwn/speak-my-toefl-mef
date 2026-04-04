@@ -159,17 +159,20 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
       <div className="p-6 bg-card rounded-b-xl">
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs text-muted-foreground font-sans">
-            Question {currentIndex + 1} of {total}
+            Questionn {currentIndex + 1} of {total}
           </span>
           <div className="flex flex-wrap gap-1 max-w-[220px]">
             {Array.from({ length: showDots }).map((_, i) => (
               <div
                 key={i}
                 onClick={() => setCurrentIndex(i)}
-                className={`w-5 h-5 rounded-full border-2 cursor-pointer transition-all ${
-                  answers[i] !== undefined ? "bg-navy border-navy" : "border-border"
+                className={`w-5 h-5 rounded-full border-2 cursor-pointer transition-all flex items-center justify-center text-[0.5rem] ${
+                  answers[i] !== undefined ? "bg-navy border-navy text-white " : "border-border "
                 } ${i === currentIndex ? "border-gold ring-2 ring-gold/40" : ""}`}
-              />
+              >
+
+                {i}
+              </div>
             ))}
           </div>
         </div>
