@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { Question, LISTENING_SCRIPTS } from "@/data/questions";
+import { LISTENING_SCRIPTS, Question } from "@/data/questions";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface TestScreenProps {
   questions: Question[];
@@ -13,19 +13,74 @@ interface TestScreenProps {
 
 const LETTERS = ["A", "B", "C", "D"];
 
+const SPEECH_CONFIG = {
+  lang: "en-US",
+  rate: 0.9,
+  pitch: 1,
+  volume: 1,
+} as const;
+
+const PREFERRED_VOICE_NAMES = [
+  "Google US English",
+  "Microsoft Aria Online (Natural) - English (United States)",
+  "Microsoft Jenny Online (Natural) - English (United States)",
+  "Samantha",
+  "Alex",
+  "Daniel",
+];
+
+const pickConsistentVoice = (): SpeechSynthesisVoice | null => {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  for (const preferred of PREFERRED_VOICE_NAMES) {
+    const exact = voices.find((v) => v.name === preferred);
+    if (exact) return exact;
+  }
+
+  const enUs = voices.find((v) => v.lang.toLowerCase() === "en-us");
+  if (enUs) return enUs;
+
+  const english = voices.find((v) => v.lang.toLowerCase().startsWith("en"));
+  return english ?? null;
+};
+
 const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, onExit }: TestScreenProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [timeLeft, setTimeLeft] = useState(totalSeconds);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const synthRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const answersRef = useRef<Record<number, number>>({});
+  const onFinishRef = useRef(onFinish);
+  const selectedVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
+
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
+
+  useEffect(() => {
+    onFinishRef.current = onFinish;
+  }, [onFinish]);
+
+  useEffect(() => {
+    const updateVoice = () => {
+      selectedVoiceRef.current = pickConsistentVoice();
+    };
+
+    updateVoice();
+    window.speechSynthesis.addEventListener("voiceschanged", updateVoice);
+    return () => {
+      window.speechSynthesis.removeEventListener("voiceschanged", updateVoice);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft((t) => {
         if (t <= 1) {
           clearInterval(interval);
-          onFinish(answers);
+          onFinishRef.current(answersRef.current);
           return 0;
         }
         return t - 1;
@@ -73,12 +128,23 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
     if (!script) return;
 
     const utterance = new SpeechSynthesisUtterance(script);
-    utterance.lang = "en-US";
-    utterance.rate = 0.9;
+    utterance.lang = SPEECH_CONFIG.lang;
+    utterance.rate = SPEECH_CONFIG.rate;
+    utterance.pitch = SPEECH_CONFIG.pitch;
+    utterance.volume = SPEECH_CONFIG.volume;
+
+    if (!selectedVoiceRef.current) {
+      selectedVoiceRef.current = pickConsistentVoice();
+    }
+    if (selectedVoiceRef.current) {
+      utterance.voice = selectedVoiceRef.current;
+    }
+
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
     synthRef.current = utterance;
     setIsSpeaking(true);
+
     window.speechSynthesis.speak(utterance);
   }, [getListeningIndex, isSpeaking]);
 
