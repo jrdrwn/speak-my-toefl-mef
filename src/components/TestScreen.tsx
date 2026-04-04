@@ -1,4 +1,4 @@
-import { LISTENING_SCRIPTS, Question } from "@/data/questions";
+import { Question } from "@/data/questions";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface TestScreenProps {
@@ -13,41 +13,15 @@ interface TestScreenProps {
 
 const LETTERS = ["A", "B", "C", "D"];
 
-const SPEECH_CONFIG = {
-  lang: "en-US",
-  rate: 0.9,
-  pitch: 1,
-  volume: 1,
-} as const;
-
-const getSpeechEngine = (): SpeechSynthesis | null => {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
-  return window.speechSynthesis ?? null;
-};
-
-const pickConsistentVoice = (): SpeechSynthesisVoice | null => {
-  const speech = getSpeechEngine();
-  if (!speech) return null;
-
-  const voices = speech.getVoices();
-  if (!voices.length) return null;
-
-  const enUs = voices.find((v) => v.lang.toLowerCase() === "en-us");
-  if (enUs) return enUs;
-
-  const english = voices.find((v) => v.lang.toLowerCase().startsWith("en"));
-  return english ?? null;
-};
-
 const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, onExit }: TestScreenProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [timeLeft, setTimeLeft] = useState(totalSeconds);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const synthRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const [audioError, setAudioError] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const answersRef = useRef<Record<number, number>>({});
   const onFinishRef = useRef(onFinish);
-  const selectedVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
 
   useEffect(() => {
     answersRef.current = answers;
@@ -58,17 +32,25 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
   }, [onFinish]);
 
   useEffect(() => {
-    const speech = getSpeechEngine();
-    if (!speech) return;
+    const audio = new Audio();
+    audio.preload = "auto";
 
-    const updateVoice = () => {
-      selectedVoiceRef.current = pickConsistentVoice();
+    const handleEnded = () => setIsSpeaking(false);
+    const handleError = () => {
+      setIsSpeaking(false);
+      setAudioError("Audio custom untuk soal ini belum tersedia.");
     };
 
-    updateVoice();
-    speech.addEventListener("voiceschanged", updateVoice);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("error", handleError);
+    audioRef.current = audio;
+
     return () => {
-      speech.removeEventListener("voiceschanged", updateVoice);
+      audio.pause();
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("error", handleError);
+      audio.src = "";
+      audioRef.current = null;
     };
   }, []);
 
@@ -113,48 +95,45 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
     return -1;
   }, [testType, currentIndex]);
 
+  const stopAudio = useCallback(() => {
+    if (!audioRef.current) return;
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    setIsSpeaking(false);
+  }, []);
+
   const playAudio = useCallback(() => {
-    const speech = getSpeechEngine();
-    if (!speech) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
     if (isSpeaking) {
-      speech.cancel();
-      setIsSpeaking(false);
+      stopAudio();
       return;
     }
 
     const idx = getListeningIndex();
-    const script = idx >= 0 ? LISTENING_SCRIPTS[idx] : null;
-    if (!script) return;
+    if (idx < 0) return;
 
-    const utterance = new SpeechSynthesisUtterance(script);
-    utterance.lang = SPEECH_CONFIG.lang;
-    utterance.rate = SPEECH_CONFIG.rate;
-    utterance.pitch = SPEECH_CONFIG.pitch;
-    utterance.volume = SPEECH_CONFIG.volume;
-
-    if (!selectedVoiceRef.current) {
-      selectedVoiceRef.current = pickConsistentVoice();
-    }
-    if (selectedVoiceRef.current) {
-      utterance.voice = selectedVoiceRef.current;
+    const source = `/listening/${idx}.mp3`;
+    const sourceUrl = new URL(source, window.location.origin).toString();
+    if (audio.src !== sourceUrl) {
+      audio.src = source;
     }
 
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-    synthRef.current = utterance;
-    setIsSpeaking(true);
-
-    speech.speak(utterance);
-  }, [getListeningIndex, isSpeaking]);
+    audio.currentTime = 0;
+    setAudioError(null);
+    void audio.play()
+      .then(() => setIsSpeaking(true))
+      .catch(() => {
+        setIsSpeaking(false);
+        setAudioError("Audio tidak bisa diputar di device ini.");
+      });
+  }, [getListeningIndex, isSpeaking, stopAudio]);
 
   useEffect(() => {
-    const speech = getSpeechEngine();
-    if (speech) {
-      speech.cancel();
-    }
-    setIsSpeaking(false);
-  }, [currentIndex]);
+    stopAudio();
+    setAudioError(null);
+  }, [currentIndex, stopAudio]);
 
   const showDots = Math.min(total, 30);
 
@@ -207,6 +186,7 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
             <div className="flex-1">
               <div className="text-sm font-semibold text-navy font-sans">{q.audio}</div>
               <div className="text-xs text-muted-foreground font-sans">{q.part} · Click ▶ to listen</div>
+              {audioError && <div className="text-xs text-destructive font-sans mt-1">{audioError}</div>}
             </div>
             <div className="flex items-center gap-0.5 h-5">
               {[6, 14, 10, 16, 8, 12].map((h, i) => (
