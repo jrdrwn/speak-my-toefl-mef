@@ -21,11 +21,11 @@ const SPEECH_CONFIG = {
 } as const;
 
 const PREFERRED_VOICE_NAMES = [
-  "Google US English",
-  "Microsoft Aria Online (Natural) - English (United States)",
-  "Microsoft Jenny Online (Natural) - English (United States)",
-  "Samantha",
-  "Alex",
+  // "Google US English",
+  // "Microsoft Aria Online (Natural) - English (United States)",
+  // "Microsoft Jenny Online (Natural) - English (United States)",
+  // "Samantha",
+  // "Alex",
   "Daniel",
 ];
 
