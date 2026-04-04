@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MEF icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1f43" />
+      <stop offset="100%" stop-color="#203d72" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#bg)" />
+  <rect x="74" y="74" width="364" height="364" rx="84" fill="#d8b85e" opacity="0.18" />
+  <text x="256" y="292" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="164" font-weight="700" fill="#d8b85e">M</text>
+</svg>
