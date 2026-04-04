@@ -157,12 +157,12 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
 
       {/* Body */}
       <div className="p-6 bg-card rounded-b-xl">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 flex-col md:flex-row gap-3">
           <span className="text-xs text-muted-foreground font-sans">
             Questionn {currentIndex + 1} of {total}
           </span>
-          <div className="flex flex-wrap gap-1 max-w-[220px]">
-            {Array.from({ length: showDots }).map((_, i) => (
+          <div className="flex flex-wrap gap-1 max-w-[400px]">
+            {Array.from({ length: total }).map((_, i) => (
               <div
                 key={i}
                 onClick={() => setCurrentIndex(i)}
