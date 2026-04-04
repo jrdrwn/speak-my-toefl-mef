@@ -1,10 +1,9 @@
-const CACHE_NAME = "mef-cache-v1";
+const CACHE_NAME = "mef-cache-v2";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/manifest.webmanifest",
-  "/favicon.ico",
-  "/pwa-icon.svg",
+  "/pwa/favicon-196.png",
   "/pwa/apple-icon-180.png",
   "/pwa/manifest-icon-192.maskable.png",
   "/pwa/manifest-icon-512.maskable.png",
