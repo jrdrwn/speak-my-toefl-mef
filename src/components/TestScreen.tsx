@@ -171,7 +171,7 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
                 } ${i === currentIndex ? "border-gold ring-2 ring-gold/40" : ""}`}
               >
 
-                {i}
+                {i+1}
               </div>
             ))}
           </div>
