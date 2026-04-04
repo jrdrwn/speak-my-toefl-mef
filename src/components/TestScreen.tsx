@@ -20,23 +20,9 @@ const SPEECH_CONFIG = {
   volume: 1,
 } as const;
 
-const PREFERRED_VOICE_NAMES = [
-  // "Google US English",
-  // "Microsoft Aria Online (Natural) - English (United States)",
-  // "Microsoft Jenny Online (Natural) - English (United States)",
-  // "Samantha",
-  // "Alex",
-  "Daniel",
-];
-
 const pickConsistentVoice = (): SpeechSynthesisVoice | null => {
   const voices = window.speechSynthesis.getVoices();
   if (!voices.length) return null;
-
-  for (const preferred of PREFERRED_VOICE_NAMES) {
-    const exact = voices.find((v) => v.name === preferred);
-    if (exact) return exact;
-  }
 
   const enUs = voices.find((v) => v.lang.toLowerCase() === "en-us");
   if (enUs) return enUs;
