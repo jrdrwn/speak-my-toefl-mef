@@ -20,8 +20,16 @@ const SPEECH_CONFIG = {
   volume: 1,
 } as const;
 
+const getSpeechEngine = (): SpeechSynthesis | null => {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
+  return window.speechSynthesis ?? null;
+};
+
 const pickConsistentVoice = (): SpeechSynthesisVoice | null => {
-  const voices = window.speechSynthesis.getVoices();
+  const speech = getSpeechEngine();
+  if (!speech) return null;
+
+  const voices = speech.getVoices();
   if (!voices.length) return null;
 
   const enUs = voices.find((v) => v.lang.toLowerCase() === "en-us");
@@ -50,14 +58,17 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
   }, [onFinish]);
 
   useEffect(() => {
+    const speech = getSpeechEngine();
+    if (!speech) return;
+
     const updateVoice = () => {
       selectedVoiceRef.current = pickConsistentVoice();
     };
 
     updateVoice();
-    window.speechSynthesis.addEventListener("voiceschanged", updateVoice);
+    speech.addEventListener("voiceschanged", updateVoice);
     return () => {
-      window.speechSynthesis.removeEventListener("voiceschanged", updateVoice);
+      speech.removeEventListener("voiceschanged", updateVoice);
     };
   }, []);
 
@@ -103,8 +114,11 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
   }, [testType, currentIndex]);
 
   const playAudio = useCallback(() => {
+    const speech = getSpeechEngine();
+    if (!speech) return;
+
     if (isSpeaking) {
-      window.speechSynthesis.cancel();
+      speech.cancel();
       setIsSpeaking(false);
       return;
     }
@@ -131,11 +145,14 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
     synthRef.current = utterance;
     setIsSpeaking(true);
 
-    window.speechSynthesis.speak(utterance);
+    speech.speak(utterance);
   }, [getListeningIndex, isSpeaking]);
 
   useEffect(() => {
-    window.speechSynthesis.cancel();
+    const speech = getSpeechEngine();
+    if (speech) {
+      speech.cancel();
+    }
     setIsSpeaking(false);
   }, [currentIndex]);
 
