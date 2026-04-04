@@ -62,7 +62,7 @@ const PwaInstallPrompt = () => {
     <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-xl rounded-xl border bg-background/95 p-4 shadow-lg backdrop-blur-sm">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold">Install MEF</p>
+          <p className="text-sm font-semibold">Install MEF TOEFL Test</p>
           {isiOS && !deferredPrompt ? (
             <p className="mt-1 text-sm text-muted-foreground">
               Tap Share, then choose Add to Home Screen.
