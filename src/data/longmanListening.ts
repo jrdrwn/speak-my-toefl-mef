@@ -438,6 +438,492 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
     ]
   },
   {
+    "title": "★ Part B (Q31–38)",
+    "audioFile": "1-08 Part B, Conversation_ Questions.m4a",
+    "questionOffset": 0,
+    "audioOffset": 0,
+    "questions": [
+      {
+        "q": "A male student runs into a senior student on campus and asks her for help. What year is the woman?",
+        "a": [
+          "She's a senior.",
+          "She's a junior.",
+          "She's a transfer student.",
+          "She's a graduate student."
+        ],
+        "correct": 0,
+        "audio": "1-08 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Dalam percakapan, wanita tersebut menyebutkan dirinya sebagai mahasiswa senior (tingkat akhir) — Kunci: A.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "The male student is asking for guidance about his major. What is the main topic of their conversation?",
+        "a": [
+          "How to transfer to a junior college",
+          "How to find his way around campus",
+          "What courses are required for a literature major",
+          "Who won the campus election"
+        ],
+        "correct": 2,
+        "audio": "1-08 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Topik utama percakapan: mata kuliah apa saja yang diwajibkan untuk jurusan sastra (literature major) — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "They discuss required courses for the literature major. How many required courses are there?",
+        "a": [
+          "Three",
+          "Five",
+          "Eight",
+          "Ten"
+        ],
+        "correct": 2,
+        "audio": "1-08 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Disebutkan bahwa terdapat delapan mata kuliah wajib untuk jurusan tersebut — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "The senior student describes one specific required course. Which course is described?",
+        "a": [
+          "American literature",
+          "World literature",
+          "Literary analysis",
+          "Surveying"
+        ],
+        "correct": 2,
+        "audio": "1-08 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Mata kuliah yang dideskripsikan secara spesifik adalah literary analysis (analisis sastra) — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "A lecture about dolphins and their abilities. Where did the woman learn about dolphins?",
+        "a": [
+          "In a book",
+          "From a television program",
+          "During a trip that she took",
+          "From a lecture"
+        ],
+        "correct": 3,
+        "audio": "1-09 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Informasi tentang lumba-lumba diperoleh dari sebuah kuliah (lecture) — Kunci: D.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "The lecture continues about dolphin sonar abilities. What do dolphins use sonar for?",
+        "a": [
+          "To communicate with other dolphins",
+          "To recognize objects in the water",
+          "To learn human language",
+          "To express fear"
+        ],
+        "correct": 1,
+        "audio": "1-09 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Lumba-lumba menggunakan sonar untuk mengenali objek di dalam air (echolocation) — Kunci: B.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "The lecturer discusses dolphin intelligence research. How many words did the dolphins learn?",
+        "a": [
+          "Five",
+          "Fifteen",
+          "Fifty",
+          "Five hundred"
+        ],
+        "correct": 2,
+        "audio": "1-09 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Disebutkan angka lima puluh (fifty) dalam konteks penelitian kecerdasan lumba-lumba — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "The lecture concludes with a summary about dolphin intelligence. What does the lecturer conclude?",
+        "a": [
+          "It is limited.",
+          "It is greater than human intelligence.",
+          "It is less than previously thought.",
+          "We are beginning to learn how much they have."
+        ],
+        "correct": 3,
+        "audio": "1-09 Part B, Conversation_ Questions.m4a",
+        "part": "★ Part B (Q31–38)",
+        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Kesimpulan: kita baru mulai memahami seberapa besar kecerdasan lumba-lumba — Kunci: D.",
+        "audioSeekMinute": 0
+      }
+    ]
+  },
+  {
+    "title": "★ Part C (Q39–50)",
+    "audioFile": "1-11 Part C, Talk_ Questions 39-42.m4a",
+    "questionOffset": 0,
+    "audioOffset": 0,
+    "questions": [
+      {
+        "q": "Talk 1: A talk about the Sierra Club organization. What is the main purpose of the Sierra Club?",
+        "a": [
+          "To protect its members",
+          "To save the natural environment",
+          "To honor the memory of John Muir",
+          "To improve San Francisco's natural beauty"
+        ],
+        "correct": 1,
+        "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Tujuan utama Sierra Club adalah melindungi lingkungan alam (natural environment) — Kunci: B.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 1 (cont.): The speaker describes how long the Sierra Club has existed. How long has the Sierra Club been in existence?",
+        "a": [
+          "For less than a year",
+          "Only for a decade",
+          "For more than a century",
+          "For at least two centuries"
+        ],
+        "correct": 2,
+        "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Sierra Club telah berdiri lebih dari satu abad (more than a century) — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 1 (cont.): The speaker describes where the Sierra Club operates. Where does the Sierra Club operate?",
+        "a": [
+          "San Francisco",
+          "All fifty states",
+          "The Sierra Nevadas",
+          "The eastern United States"
+        ],
+        "correct": 2,
+        "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Sierra Club beroperasi di pegunungan Sierra Nevada — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 1 (cont.): The speaker describes the Sierra Club's reach. How far does the Sierra Club's reach extend?",
+        "a": [
+          "All over the world",
+          "In the entire United States",
+          "Only in California",
+          "Only in the Sierra Nevadas"
+        ],
+        "correct": 1,
+        "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Sierra Club beroperasi di seluruh Amerika Serikat — Kunci: B.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 2: A campus tour guide introduces facilities to new students. Who are the people listening to this talk?",
+        "a": [
+          "Students signing up for athletic teams",
+          "Students going on a tour of a university campus",
+          "Students playing various sports",
+          "Students attending a university dedication ceremony"
+        ],
+        "correct": 1,
+        "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Situasinya adalah tur kampus universitas untuk mahasiswa baru — Kunci: B.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 2 (cont.): The guide explains what is needed to use the athletic facilities. What is needed to use the athletic facilities?",
+        "a": [
+          "Membership on an athletic team",
+          "Enrollment in an exercise class",
+          "A valid student identification card",
+          "Permission from a faculty member"
+        ],
+        "correct": 2,
+        "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Yang diperlukan untuk menggunakan fasilitas olahraga adalah kartu identitas mahasiswa yang berlaku — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 2 (cont.): A student asks about joining an intramural sport. Where should a student go to sign up for an intramural sport?",
+        "a": [
+          "To the tennis courts",
+          "To the arena",
+          "To the gymnasium",
+          "To the Athletic Department office"
+        ],
+        "correct": 3,
+        "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Untuk mendaftar olahraga intramural, mahasiswa harus pergi ke kantor Athletic Department — Kunci: D.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 2 (cont.): The guide describes one more facility on the tour. What will the group do next?",
+        "a": [
+          "Go to the Art Center",
+          "Sign up for sports classes",
+          "Visit the exercise room",
+          "Watch a football game"
+        ],
+        "correct": 0,
+        "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Langkah berikutnya dalam tur adalah mengunjungi Art Center — Kunci: A.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 3: A lecture comparing two schools of literary thought. What field do the two schools of thought belong to?",
+        "a": [
+          "Science",
+          "Art",
+          "Literature",
+          "Music"
+        ],
+        "correct": 2,
+        "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Kuliah ini membahas dua aliran pemikiran dalam bidang sastra (literature) — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 3 (cont.): The lecturer compares the two schools of thought. How do the two schools compare?",
+        "a": [
+          "They are completely different.",
+          "They are somewhat similar but have an essential difference.",
+          "They are exactly the same in all respects.",
+          "They are unrelated."
+        ],
+        "correct": 1,
+        "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Kedua aliran memiliki kesamaan namun berbeda secara esensial — Kunci: B.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 3 (cont.): The lecturer describes the first school of thought. How is the first school of thought described?",
+        "a": [
+          "Objective",
+          "Idealistic",
+          "Philosophical",
+          "Environmental"
+        ],
+        "correct": 0,
+        "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Aliran pertama bersifat objektif (berdasarkan fakta dan observasi nyata) — Kunci: A.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Talk 3 (cont.): The lecturer describes what the second school emphasizes. What does the second school of thought emphasize?",
+        "a": [
+          "Heredity",
+          "Environment",
+          "Idealism",
+          "Natural laws"
+        ],
+        "correct": 2,
+        "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
+        "part": "★ Part C (Q39–50)",
+        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Aliran kedua menekankan lingkungan/environment sebagai faktor utama — Kunci: C.",
+        "audioSeekMinute": 0
+      }
+    ]
+  },
+  {
+    "title": "Exercise 1 — Last Line Focus",
+    "audioFile": "1-14 TOEFL Exercise 1.m4a",
+    "questionOffset": 0,
+    "audioOffset": 0,
+    "questions": [
+      {
+        "q": "💡 Strategi: Dengarkan baris terakhir percakapan. Kata-kata di baris terakhir sering mengandung implikasi, idiom, atau ekspresi yang menjadi kunci jawaban. — What does the woman think about the movie?",
+        "a": [
+          "She has strong ideas about movies.",
+          "She prefers comedies over westerns and romances.",
+          "She doesn't like today's matinee.",
+          "She does not know."
+        ],
+        "correct": 3,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir wanita: 'I have no idea.' = Dia tidak tahu — Kunci: D.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Dialogue: Was anyone at home at Barb's house? → 'I rang the bell, but no one answered.' — What does the man imply?",
+        "a": [
+          "Barb answered the bell.",
+          "The house was probably empty.",
+          "The bell wasn't in the house.",
+          "The house doesn't have a bell."
+        ],
+        "correct": 1,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | 'No one answered' mengimplikasikan rumah kemungkinan kosong — Kunci: B.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Dialogue: How do you think the interview went? → 'I think it's highly unlikely that I got the job.' — What does the man imply?",
+        "a": [
+          "It's unlikely that he'll go to the interview.",
+          "He thinks he'll be recommended for a high-level job.",
+          "The interview was apparently quite unsuccessful.",
+          "He had an excellent interview."
+        ],
+        "correct": 2,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | 'Highly unlikely that I got the job' = wawancara tampaknya tidak berhasil — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what will the man do?",
+        "a": [
+          "He is leaving now.",
+          "He has to go out of his way.",
+          "He will not be leaving soon.",
+          "He will do it his own way."
+        ],
+        "correct": 0,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir mengindikasikan dia akan segera pergi — Kunci: A.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what happened with the door?",
+        "a": [
+          "He locked the door.",
+          "He tried unsuccessfully to get into the house.",
+          "He was able to open the door.",
+          "He left the house without locking the door."
+        ],
+        "correct": 2,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Implikasi dari baris terakhir: dia berhasil membuka pintu — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what does the woman feel about the dinner?",
+        "a": [
+          "She doesn't like to listen to turkeys.",
+          "She thinks the dinner sounds special.",
+          "She especially likes the roast turkey.",
+          "She'd prefer a different dinner."
+        ],
+        "correct": 3,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Nada baris terakhir mengindikasikan preferensi untuk makan malam yang berbeda — Kunci: D.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what does the man mean?",
+        "a": [
+          "He'll be busy with her homework tonight.",
+          "He can't help her tonight.",
+          "He's sorry he can't ever help her.",
+          "He'll help her with her physics."
+        ],
+        "correct": 1,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir menyiratkan dia tidak bisa membantu malam ini — Kunci: B.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what does the woman imply about the lecture?",
+        "a": [
+          "Her eyes hurt.",
+          "She thought the lecture was great.",
+          "The class was boring.",
+          "She didn't want to watch Professor Martin."
+        ],
+        "correct": 2,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Implikasi baris terakhir: kuliah membosankan — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what is implied about the bills?",
+        "a": [
+          "Not all the bills have been paid.",
+          "They don't have enough credit to pay the bills.",
+          "What she said on the phone was not credible.",
+          "He used a credit card to pay some of the bills."
+        ],
+        "correct": 0,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir mengindikasikan belum semua tagihan dibayar — Kunci: A.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what will she do?",
+        "a": [
+          "She'll call back quickly.",
+          "She'll definitely be back by 4:00.",
+          "She'll give it back by 4:00.",
+          "She'll try to return fast."
+        ],
+        "correct": 3,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | 'Try to return fast' = mencoba kembali dengan cepat — Kunci: D.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what does the woman say about Tim?",
+        "a": [
+          "She hasn't seen Tim.",
+          "Tim was there only for a moment.",
+          "Tim was around a short time ago.",
+          "Tim will return in a minute."
+        ],
+        "correct": 2,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir: Tim ada di sini baru saja — Kunci: C.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what does the woman imply about the parking spot?",
+        "a": [
+          "She doesn't like the place he chose.",
+          "She doesn't want to get into the car.",
+          "She's glad the spot is reserved.",
+          "They can't park the car there."
+        ],
+        "correct": 3,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Implikasi: tidak bisa parkir di sana — Kunci: D.",
+        "audioSeekMinute": 0
+      },
+      {
+        "q": "Based on the last line of the dialogue, what does the man imply about the food?",
+        "a": [
+          "There's plenty to eat.",
+          "The refrigerator's broken.",
+          "The food isn't in the refrigerator.",
+          "He's not sure if there's enough food."
+        ],
+        "correct": 0,
+        "audio": "1-14 TOEFL Exercise 1.m4a",
+        "part": "Exercise 1 — Last Line Focus",
+        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir mengindikasikan makanan cukup tersedia — Kunci: A.",
+        "audioSeekMinute": 0
+      }
+    ]
+  },
+  {
     "title": "Exercise 2 — Synonyms",
     "audioFile": "",
     "questionOffset": 30,
