@@ -1,16 +1,19 @@
+import { LONGMAN_LISTENING_QUESTIONS } from "@/data/longmanListening";
 import { QUESTIONS } from "@/data/questions";
 
 interface DashboardProps {
   userName: string;
   scores: number[];
-  onStartTest: (type: string) => void;
+  onStartExam: () => void;
   onLogout: () => void;
+  startDisabled?: boolean;
+  startLabel?: string;
 }
 
-const Dashboard = ({ userName, scores, onStartTest, onLogout }: DashboardProps) => {
+const Dashboard = ({ userName, scores, onStartExam, onLogout, startDisabled = false, startLabel = "Mulai" }: DashboardProps) => {
   const bestScore = scores.length > 0 ? Math.max(...scores) : "—";
   const avgScore = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : "—";
-  const listeningCount = QUESTIONS.listening.length;
+  const listeningCount = LONGMAN_LISTENING_QUESTIONS.length;
   const structureCount = QUESTIONS.structure.length;
   const readingCount = QUESTIONS.reading.length;
   const fullCount = listeningCount + structureCount + readingCount;
@@ -27,7 +30,7 @@ const Dashboard = ({ userName, scores, onStartTest, onLogout }: DashboardProps) 
       <div className="gradient-navy p-6 rounded-t-xl flex items-center justify-between">
         <div>
           <h1 className="text-xl font-display font-bold text-card">TOEFL ITP Practice</h1>
-          <p className="text-gold text-xs font-sans mt-0.5">Choose a section or take the full test</p>
+          <p className="text-gold text-xs font-sans mt-0.5">Mulai satu alur penuh, section di bawah hanya preview</p>
         </div>
         <button onClick={onLogout} className="bg-gold/20 border border-gold/40 rounded-full px-4 py-1.5 text-gold-light text-sm font-sans hover:bg-gold/30 transition-colors">
           👤 {userName}
@@ -51,13 +54,21 @@ const Dashboard = ({ userName, scores, onStartTest, onLogout }: DashboardProps) 
           </div>
         </div>
 
-        <p className="text-xs text-muted-foreground tracking-widest uppercase font-sans mb-4">Practice Sections</p>
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <p className="text-xs text-muted-foreground tracking-widest uppercase font-sans">Practice Sections</p>
+          <button
+            onClick={onStartExam}
+            disabled={startDisabled}
+            className="gradient-gold text-navy font-bold font-sans rounded-full px-5 py-2 text-sm hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {startLabel}
+          </button>
+        </div>
         <div className="flex flex-col gap-3">
           {sections.map((s) => (
             <div
               key={s.type}
-              onClick={() => onStartTest(s.type)}
-              className={`border rounded-xl p-5 cursor-pointer flex items-center gap-4 transition-all hover:border-gold hover:shadow-md hover:-translate-y-0.5 bg-card ${s.special ? "border-purple-400 bg-purple-50/30" : "border-border"}`}
+              className={`border rounded-xl p-5 flex items-center gap-4 bg-card ${s.special ? "border-purple-400 bg-purple-50/30" : "border-border"}`}
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 ${s.bg}`}>
                 {s.icon}

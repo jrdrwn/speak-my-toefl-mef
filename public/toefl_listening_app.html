@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longman TOEFL — Listening Short Dialogues</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f0;
+      color: #1a1a18;
+      min-height: 100vh
+    }
+
+    .app {
+      padding: 1.5rem 1rem;
+      max-width: 860px;
+      margin: 0 auto
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1.25rem
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a18
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #666;
+      margin-top: 3px
+    }
+
+    .tabs-wrap {
+      overflow-x: auto;
+      margin-bottom: .75rem;
+      padding-bottom: 4px
+    }
+
+    .tabs {
+      display: flex;
+      gap: 5px;
+      width: max-content
+    }
+
+    .tab {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #fff;
+      color: #555;
+      transition: all .15s;
+      white-space: nowrap
+    }
+
+    .tab.active {
+      background: #e6f1fb;
+      color: #185FA5;
+      border-color: #185FA5
+    }
+
+    .tab:hover:not(.active) {
+      background: #f0f0ec
+    }
+
+    .progress-bar {
+      background: #e8e8e4;
+      border-radius: 999px;
+      height: 5px;
+      margin-bottom: 1rem;
+      overflow: hidden
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #185FA5;
+      border-radius: 999px;
+      transition: width .3s
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin-bottom: 1.25rem
+    }
+
+    .stat {
+      background: #fff;
+      border-radius: 8px;
+      padding: .65rem;
+      text-align: center;
+      border: 1px solid #e0e0d8
+    }
+
+    .stat-num {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a18
+    }
+
+    .stat-lbl {
+      font-size: 11px;
+      color: #888;
+      margin-top: 1px
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0d8;
+      border-radius: 12px;
+      padding: 1.1rem;
+      margin-bottom: .9rem
+    }
+
+    .q-meta {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: .5rem;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600
+    }
+
+    .badge-ex {
+      background: #fff8e1;
+      color: #b45309
+    }
+
+    .badge-toefl {
+      background: #e6f1fb;
+      color: #185FA5
+    }
+
+    .badge-rev {
+      background: #e8f5e9;
+      color: #1a7a4a
+    }
+
+    .dialogue {
+      background: #f8f7f2;
+      border-radius: 8px;
+      padding: .8rem;
+      margin-bottom: .85rem;
+      font-size: 13px;
+      line-height: 1.75
+    }
+
+    .dialogue .speaker {
+      font-weight: 600;
+      color: #1a1a18;
+      margin-right: 5px
+    }
+
+    .dialogue .line {
+      font-style: italic;
+      color: #444
+    }
+
+    .dialogue .narrator-line {
+      margin-top: 5px;
+      font-weight: 600;
+      color: #185FA5;
+      font-size: 12px
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid #e0e0d8;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .15s;
+      font-size: 13px;
+      color: #1a1a18;
+      background: #fff
+    }
+
+    .opt:hover:not(.disabled) {
+      background: #f5f5f0
+    }
+
+    .opt.correct {
+      border-color: #1a7a4a;
+      background: #e8f5e9;
+      color: #1a7a4a
+    }
+
+    .opt.wrong {
+      border-color: #b91c1c;
+      background: #fef2f2;
+      color: #b91c1c
+    }
+
+    .opt.disabled {
+      cursor: default
+    }
+
+    .opt-label {
+      font-weight: 700;
+      min-width: 18px;
+      flex-shrink: 0
+    }
+
+    .explanation {
+      margin-top: .65rem;
+      padding: .7rem;
+      background: #f8f7f2;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: #555;
+      line-height: 1.65;
+      border-left: 3px solid #185FA5
+    }
+
+    .explanation strong {
+      color: #1a1a18;
+      font-weight: 600
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: .85rem;
+      flex-wrap: wrap;
+      gap: 7px
+    }
+
+    .nav-btn {
+      padding: 7px 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #fff;
+      color: #1a1a18;
+      transition: all .15s
+    }
+
+    .nav-btn:hover {
+      background: #f0f0ec
+    }
+
+    .nav-btn.primary {
+      background: #185FA5;
+      color: #fff;
+      border-color: #185FA5
+    }
+
+    .nav-btn.primary:hover {
+      background: #0C447C
+    }
+
+    .nav-btn:disabled {
+      opacity: .4;
+      cursor: default
+    }
+
+    .q-counter {
+      font-size: 12px;
+      color: #888
+    }
+
+    .score-screen {
+      text-align: center;
+      padding: 2.5rem 1rem
+    }
+
+    .score-big {
+      font-size: 52px;
+      font-weight: 700;
+      color: #185FA5
+    }
+
+    .score-label {
+      font-size: 15px;
+      color: #666;
+      margin: 4px 0 1.5rem
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 360px;
+      margin: 0 auto 1.5rem
+    }
+
+    .note {
+      font-size: 12px;
+      color: #555;
+      font-style: italic;
+      margin-bottom: .7rem;
+      padding: .5rem .75rem;
+      background: #f0f7ff;
+      border-radius: 8px;
+      border-left: 3px solid #185FA5
+    }
+
+    .audio-note {
+      font-size: 12px;
+      color: #888;
+      padding: .5rem .75rem;
+      background: #f8f7f2;
+      border-radius: 8px;
+      margin-bottom: .85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .tab.part-a {
+      background: #fff8e1;
+      color: #b45309;
+      border-color: #f59e0b;
+      font-weight: 700
+    }
+
+    .tab.part-a.active {
+      background: #b45309;
+      color: #fff;
+      border-color: #b45309
+    }
+
+    .badge-parta {
+      background: #fff8e1;
+      color: #b45309
+    }
+
+    .note-parta {
+      background: #fffbeb;
+      border-left: 3px solid #f59e0b;
+      color: #78350f
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app" id="root"></div>
+  <script>
+    const DATA = {
+
+      ex2: {
+        label: "Exercise 2 — Synonyms", type: "exercise",
+        note: "Pilih jawaban yang mengandung sinonim dari kata kunci di baris terakhir dialogue.",
+        qs: [
+          { d: [{ s: "(woman)", l: "Did you see the manager about the job in the bookstore?" }, { s: "(man)", l: "Yes, and I also had to fill out an application." }, { s: "(narrator)", l: "What does the man mean?", q: true }], opts: ["He got a job as bookstore manager.", "The bookstore was not accepting applications.", "He saw a book about how to apply for jobs.", "It was necessary to complete a form."], ans: 3, exp: "Key word: 'fill out an application' → synonym: 'complete a form' (D). Fill out = complete; application = form." },
+          { d: [{ s: "(man)", l: "We're planning to leave for the trip at about 2:00." }, { s: "(woman)", l: "Couldn't we leave before noon?" }, { s: "(narrator)", l: "What does the woman ask?", q: true }], opts: ["If they could leave at noon", "If it is possible to go by 12:00", "Why they can't leave at noon", "If they could leave the room"], ans: 1, exp: "'Before noon' = 'by 12:00'. The woman wants to leave earlier — noon = 12:00." },
+          { d: [{ s: "(man)", l: "Was the concert well-received?" }, { s: "(woman)", l: "The audience applauded for a long time after the performance." }, { s: "(narrator)", l: "What does the woman say about the concert?", q: true }], opts: ["The performance went on for a long time.", "There was applause throughout the performance.", "The people clapped on and on after the concert.", "The audience waited for a long time for the concert to begin."], ans: 2, exp: "'Applauded' = 'clapped'; 'long time after the performance' = 'on and on after the concert'. Option C has the best synonyms." },
+        ]
+      },
+
+      toefl_ex2: {
+        label: "TOEFL Exercise 2 — Synonyms", type: "toefl",
+        note: "Audio-based. Look for synonyms for key words in the last line of each dialogue.",
+        qs: [
+          { d: [], opts: ["The final exam was harder than the others.", "There were two exams rather than one.", "He thought the exam would be easier.", "The exam was not very difficult."], ans: 3, exp: "'Didn't do well' due to insufficient study → result implies exam difficulty was appropriate; 'not very difficult' is the synonym paraphrase here." },
+          { d: [], opts: ["He's not feeling very well.", "He's rather sick of working.", "He's feeling better today than yesterday.", "He'd really rather not answer the question."], ans: 0, exp: "Key implication: not well → 'He's not feeling very well' is the direct paraphrase." },
+          { d: [], opts: ["The company was founded about a year ago.", "It was just established that he could go into business.", "The family is well-established.", "The business only lasted a year."], ans: 0, exp: "'Just started/established recently' ≈ 'founded about a year ago'." },
+          { d: [], opts: ["He did not look at the right schedule.", "The plane landed in the right place.", "The plane arrived on time.", "He had to wait for the plane to land."], ans: 2, exp: "Dialogue implies plane arrived as scheduled → 'arrived on time'." },
+          { d: [], opts: ["She'd rather go running.", "She doesn't want to go into the pool.", "She'll change clothes quickly and go swimming.", "She needs a sweatsuit to go running."], ans: 1, exp: "She does not want to swim → 'doesn't want to go into the pool'." },
+          { d: [], opts: ["The firefighters saved the homes for last.", "A firefighter saved the hillside last night.", "The homes on the hillside were burned.", "The houses weren't destroyed."], ans: 3, exp: "'Firefighters saved' = houses were NOT destroyed. Option D." },
+          { d: [], opts: ["There's enough soup.", "The spices are adequate.", "She thinks the soup's too salty.", "The man should add more salt and pepper."], ans: 2, exp: "Key word relates to saltiness → 'soup's too salty'." },
+          { d: [], opts: ["He was lucky to receive a grant for his studies.", "He used his fortune to pay his fees.", "He is a scholar at a college with low fees.", "He paid to get a scholarship."], ans: 0, exp: "'Won a scholarship' = 'lucky to receive a grant for his studies.'" },
+          { d: [], opts: ["It profited from previous mistakes.", "It earned a lot of money.", "This was the last year that it would make a profit.", "It was not so successful."], ans: 3, exp: "Last line implies limited success → 'not so successful'." },
+          { d: [], opts: ["Chuck's bank account has too much money in it.", "He thinks Chuck has the wrong kind of bank account.", "He thinks that Chuck is on his way home from the bank.", "There isn't enough money in Chuck's account."], ans: 3, exp: "Dialogue implies insufficient funds → 'there isn't enough money in Chuck's account'." },
+        ]
+      },
+
+      ex3: {
+        label: "Exercise 3 — Avoid Similar Sounds", type: "exercise",
+        note: "Jawaban yang benar BUKAN yang mengandung bunyi mirip dari kata kunci di baris terakhir.",
+        qs: [
+          { d: [{ s: "(woman)", l: "I heard that Sally just moved into a new, big house near the beach." }, { s: "(man)", l: "But Sally doesn't have a cent!" }, { s: "(narrator)", l: "What does the man mean?", q: true }], opts: ["Sally has no sense of responsibility.", "Sally sent her friend to the house.", "Sally has no money.", "Sally is on the set with her."], ans: 2, exp: "'Cent' = money. Sound traps: 'sense' (A), 'sent' (B), 'set' (D). Correct answer: C — 'no money'." },
+          { d: [{ s: "(woman)", l: "Did they get the new car they wanted?" }, { s: "(man)", l: "No, they lacked the money." }, { s: "(narrator)", l: "What does the man mean?", q: true }], opts: ["They locked the map in a car.", "They looked many times in the car.", "It cost a lot of money when the car leaked oil.", "They didn't have enough money to buy another car."], ans: 3, exp: "'Lacked the money' = didn't have enough money. Sound traps: 'locked' (A), 'looked' (B), 'leaked' (C)." },
+          { d: [{ s: "(man)", l: "Have you finished packing yet?" }, { s: "(woman)", l: "You should call the porter to get the suitcases." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["It's important to pack the suitcases.", "They need help carrying their bags.", "The man should pack his suit in case he needs it.", "The suitcases are quite portable."], ans: 1, exp: "'Porter' = someone who carries bags = 'help carrying their bags'. Sound trap: 'suitcase/suit case' (C)." },
+        ]
+      },
+
+      toefl_ex3: {
+        label: "TOEFL Exercise 3 — Similar Sounds", type: "toefl",
+        note: "Audio-based. Careful to avoid answers with similar sounds — correct answer rephrases the MEANING.",
+        qs: [
+          { d: [], opts: ["She has to wait for some cash.", "The waiter is bringing a glass of water.", "The lawn is too dry.", "She needs to watch out for a crash."], ans: 0, exp: "Sound traps: 'water', 'lawn/watch', 'crash'. Correct inference: she needs cash." },
+          { d: [], opts: ["The sweater's the wrong size.", "The man's feet aren't sweating.", "The sweater makes the man seem fat.", "The sweet girl doesn't feel right."], ans: 0, exp: "Sweater doesn't fit → 'wrong size'. Sound traps: 'sweating' (B), 'sweet' (D)." },
+          { d: [], opts: ["He has been regularly using a computer.", "He communicates with a Boston company.", "He regularly goes to communities around Boston.", "He has been traveling back and forth to Boston."], ans: 3, exp: "Frequent travel to Boston → 'traveling back and forth to Boston'." },
+          { d: [], opts: ["He thought the lesson didn't matter.", "He couldn't learn the lesson.", "He learned a massive number of details.", "He didn't like most of the lesson."], ans: 3, exp: "'Didn't like most' captures the meaning correctly." },
+          { d: [], opts: ["Some animals started the first fire.", "Animals are killed by forest fires.", "In the first frost, animals die.", "Frost can kill animals."], ans: 3, exp: "'Frost can kill animals.' Sound traps: 'first fire' (A), 'first frost' (C)." },
+          { d: [], opts: ["Twenty pairs of shoes are on sale.", "The shoe salesclerk spent twenty dollars on pears.", "The shoes cost twenty dollars.", "The shoes could be repaired for twenty dollars."], ans: 2, exp: "The shoes cost twenty dollars. Sound trap: 'pairs/pears' (B)." },
+          { d: [], opts: ["Tom tended to dislike biology lab.", "Attendance wasn't necessary at biology lab.", "Tom went to biology lab.", "There was a tendency to require biology lab."], ans: 2, exp: "Tom went to biology lab. Avoid 'tended/tendency' sound traps." },
+          { d: [], opts: ["The meal will be served at noon.", "The males should be driven there by noon.", "He's expecting the ice to melt before noon.", "The letters ought to be delivered at 12:00."], ans: 0, exp: "'Meal served at noon'. Avoid 'males/meal' sound trap." },
+          { d: [], opts: ["The weather will probably get worse later.", "The newspaper headlines described a bad storm.", "There was news about a headstrong man.", "He had a new bed."], ans: 0, exp: "Weather getting worse. Avoid 'head/headlines' and 'new/news' sound traps." },
+          { d: [], opts: ["If she could do the grocery shopping", "If she prefers cooked vegetables or salad", "If she could help prepare the salad", "If she minds shopping for vegetables"], ans: 2, exp: "About helping prepare the salad. Avoid 'grocery/cooked' sound traps." },
+        ]
+      },
+
+      ex4: {
+        label: "Exercise 4 — Who, What, Where", type: "exercise",
+        note: "Draw conclusions about who is speaking, what they are doing, and where the conversation takes place.",
+        qs: [
+          { d: [{ s: "(man)", l: "I'd like to deposit this check in my account, please." }, { s: "(woman)", l: "Would you like any cash back?" }, { s: "(narrator)", l: "Who is the woman?", q: true }], opts: ["A store clerk", "A bank teller", "An accountant", "A waitress"], ans: 1, exp: "'Deposit a check' + 'cash back' = banking transaction. The woman is a bank teller." },
+          { d: [{ s: "(woman)", l: "Have you deposited your paycheck yet?" }, { s: "(man)", l: "No, but that's next on my list of errands." }, { s: "(narrator)", l: "What will the man probably do next?", q: true }], opts: ["Earn his paycheck", "Write a check for a deposit on an apartment", "Go to a bank", "Make a list of errands to run"], ans: 2, exp: "Depositing paycheck is 'next on his list of errands' → he will go to a bank." },
+          { d: [{ s: "(man)", l: "Did you get the bread, eggs, and milk?" }, { s: "(woman)", l: "Now we need to stand in line at the checkout counter." }, { s: "(narrator)", l: "Where does this conversation probably take place?", q: true }], opts: ["In a restaurant", "At a bakery", "On a farm", "In a market"], ans: 3, exp: "'Bread, eggs, milk' + 'checkout counter' = supermarket/market setting." },
+        ]
+      },
+
+      toefl_ex4: {
+        label: "TOEFL Exercise 4 — Who, What, Where", type: "toefl",
+        note: "Audio-based. Draw conclusions about who, what, and where.",
+        qs: [
+          { d: [], opts: ["In a photography studio", "In a biology laboratory", "In an office", "In the library"], ans: 2, exp: "Dialogue context clues suggest a professional office setting." },
+          { d: [], opts: ["He's a pilot.", "He's a flight attendant.", "He's a member of the ground crew.", "He works clearing land."], ans: 0, exp: "Dialogue clues suggest the man is a pilot." },
+          { d: [], opts: ["Wash the dishes immediately", "Use as many dishes as possible", "Wash the dishes for as long as possible", "Wait until later to clean up"], ans: 0, exp: "Dialogue implies wash dishes right away." },
+          { d: [], opts: ["In a bank", "In a restaurant", "At a service station", "In a beauty salon"], ans: 3, exp: "Dialogue context clues suggest a beauty salon." },
+          { d: [], opts: ["A salesclerk in a shoe store", "A shoe repairperson", "A party caterer", "A salesclerk in a fixtures department"], ans: 0, exp: "Dialogue clues suggest a shoe store salesclerk." },
+          { d: [], opts: ["On a playground", "In a parking lot", "At a zoo", "In a photo studio"], ans: 3, exp: "Dialogue context clues suggest a photo studio." },
+          { d: [], opts: ["Respond to the mail", "Put the letters in a file", "Create a pending file", "File the answers she received to the letters"], ans: 3, exp: "Dialogue implies filing/organizing letters." },
+          { d: [], opts: ["In an airplane", "In a police car", "In a theater", "At a fireworks exhibit"], ans: 3, exp: "Dialogue clues suggest a fireworks exhibit." },
+          { d: [], opts: ["Take care of Bob", "Invite Bob to dinner", "Let Bob know that they accept his invitation", "Respond to the woman's question"], ans: 2, exp: "Dialogue implies letting Bob know they accept his invitation." },
+          { d: [], opts: ["A pharmacist", "A dentist", "A teacher", "A business manager"], ans: 1, exp: "Dialogue context clues suggest a dentist." },
+        ]
+      },
+
+      toefl_ex5: {
+        label: "TOEFL Exercise 5 — Passives", type: "toefl",
+        note: "Audio-based. Be particularly careful of passive voice — who is doing what to whom.",
+        qs: [
+          { d: [], opts: ["If the restaurant is on the corner", "If the man would like to go to the restaurant", "If the vegetables are fresh", "If vegetarian food can be obtained"], ans: 3, exp: "Passive: 'can be obtained' — focus on whether vegetarian food is available." },
+          { d: [], opts: ["He admitted that he wanted to go to law school in the fall.", "The law school accepted him as a student.", "The law professor admitted that he would be a student in the fall semester.", "He would be admitted to law school after the fall semester."], ans: 1, exp: "Passive: 'was admitted' → the law school accepted him. Option B." },
+          { d: [], opts: ["Mark's plants were cared for in his absence.", "Mark's plan was to be out of town.", "Mark was careful about his plans for the out-of-town trip.", "She was careful while Mark was gone."], ans: 0, exp: "Passive: 'plants were cared for' — someone took care of them while he was away." },
+          { d: [], opts: ["The lights in the trees were destroyed in the storm.", "The storm damaged the trees.", "The falling trees destroyed a store.", "In the light the destruction of the storm could be seen."], ans: 1, exp: "Storm was the agent of destruction → 'the storm damaged the trees'." },
+          { d: [], opts: ["She was broke from skiing.", "She went skiing in spite of her accident.", "Her leg was hurt on a skiing trip.", "Her skis were broken in the mountains."], ans: 2, exp: "Passive: 'leg was hurt' — her leg was injured during a skiing trip." },
+          { d: [], opts: ["The road the horses took was long and hard.", "It was hard to find the hidden houses.", "The riders worked the horses too much.", "It was hard for people to ride the horses for long."], ans: 2, exp: "Active/passive: 'horses were worked hard' → 'riders worked the horses too much'." },
+          { d: [], opts: ["He didn't want the coffee that the woman ordered.", "He wasn't sure if the woman wanted coffee.", "He assumed the woman had ordered coffee.", "He was unaware that coffee had already been ordered."], ans: 3, exp: "Passive: 'coffee had already been ordered' — he didn't know it was taken care of." },
+          { d: [], opts: ["The car was in the left parking lot at the airport.", "The friends parked their car at the airport.", "The airport couldn't hold a lot of cars.", "There were a lot of cars to the left of the parking lot."], ans: 1, exp: "The friends (active) parked their car at the airport." },
+          { d: [], opts: ["The students pointed at Mac.", "Mac was present when the other students made the appointment.", "The class representative suggested Mac to the other students.", "Mac was chosen by his classmates to represent them."], ans: 3, exp: "Passive: 'Mac was chosen by his classmates' — they selected him." },
+          { d: [], opts: ["After the earthquake, the insurance company came out to inspect the damage.", "The insurance company insisted that the building be repaired to meet earthquake safety standards.", "The inhabitants paid their premiums after the earthquake.", "The insurance company paid for the earthquake damage."], ans: 3, exp: "Passive implies insurance company paid → Option D." },
+        ]
+      },
+
+      ex6: {
+        label: "Exercise 6 — Multiple Nouns", type: "exercise",
+        note: "Think carefully about WHO is doing WHAT to WHOM.",
+        qs: [
+          { d: [{ s: "(man)", l: "Why is Bill not at work this week?" }, { s: "(woman)", l: "His doctor made him take a week off." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["The doctor decided to take some time off from work.", "The doctor told Bill he wasn't too weak to work.", "Bill was mad when the doctor took some time off.", "Bill took a vacation on his doctor's orders."], ans: 3, exp: "'His doctor made HIM take a week off' → Bill took time off because the doctor ordered it. Option D." },
+          { d: [{ s: "(man)", l: "Why is Paul going back home this summer?" }, { s: "(woman)", l: "He's returning to Vermont for his sister's wedding." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["Paul is getting married this summer.", "Paul's sister is returning from Vermont to get married.", "Paul will be there when his sister gets married this summer.", "Paul's sister is coming to his wedding in Vermont."], ans: 2, exp: "Paul is going TO Vermont for HIS SISTER'S wedding (not his own). Option C." },
+          { d: [{ s: "(man)", l: "Did you hear that John's uncle died?" }, { s: "(woman)", l: "Yes, and John was named beneficiary in his uncle's will." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["John received an inheritance when his uncle died.", "It's a benefit that John's name is the same as his uncle's.", "John knows that his uncle will come to the benefit.", "John's uncle gave him a beneficial name."], ans: 0, exp: "'Named beneficiary in his uncle's will' = John will inherit money → 'John received an inheritance'. Option A." },
+        ]
+      },
+
+      toefl_ex6: {
+        label: "TOEFL Exercise 6 — Multiple Nouns", type: "toefl",
+        note: "Audio-based. Be particularly careful about who is doing what to whom.",
+        qs: [
+          { d: [], opts: ["The passenger waited at the corner.", "The passenger looked for a taxi at the corner.", "The cab driver waited for the passenger.", "The passenger cornered the waiting taxi driver."], ans: 2, exp: "The cab driver was waiting — 'The cab driver waited for the passenger.'" },
+          { d: [], opts: ["It was hard for her to hear Jane last night.", "Jane gave a harp recital last night.", "Jane was playing hard while she was hurt.", "She played the harp last night for Jane."], ans: 1, exp: "Jane performed — 'Jane gave a harp recital last night.' Avoid 'hard/harp' sound trap." },
+          { d: [], opts: ["The baby sister went to bed quite early.", "The children were forced to go to bed early.", "The baby-sitter made the bed after the children got up.", "The baby-sitter did not stay up late."], ans: 3, exp: "The baby-sitter didn't stay up very late — Option D." },
+          { d: [], opts: ["The man taught his son about football.", "The boy is receiving the ball from his dad.", "The ball is being tossed into the air by the boy.", "The man is playing with the ball in the sun."], ans: 0, exp: "The man (dad) taught his son → Option A." },
+          { d: [], opts: ["The students were told to go listen to the speaker.", "The professor attended that evening's lecture.", "The students were given directions to the lecture.", "The professor was directed to the lecture hall."], ans: 0, exp: "Students were directed to attend — 'students were told to go listen to the speaker'." },
+          { d: [], opts: ["The manager went to the supply room.", "The clerk set supplies on the floor.", "The clerk went to the supply room at the manager's request.", "The clerk backed into the manager in the supply room."], ans: 2, exp: "Clerk went at manager's request → Option C." },
+          { d: [], opts: ["The librarian was quite reserved with the students for two days.", "Within two days the librarian had the books for the students.", "The librarian reserved the books for the students.", "The students put the books on hold for two days."], ans: 2, exp: "The librarian reserved the books → Option C." },
+          { d: [], opts: ["The chairman decided that Tony would serve on the board for another year.", "The chairman elected the board.", "The board decided Tony could be chairman after one year.", "Tony became chairman for one more year."], ans: 0, exp: "Chairman decided about Tony → Option A." },
+          { d: [], opts: ["The judge defended the murderer.", "The judge tried to protect the defendant from the murderer.", "The judge said that the defendant was a criminal.", "The defense couldn't make a judgment about the criminal."], ans: 2, exp: "Judge made a ruling about the defendant → Option C." },
+          { d: [], opts: ["The woman should announce the names of the committee members.", "He is thankful to be appointed to the committee.", "He is sure about the time of the appointment with the committee.", "The woman will serve on the committee."], ans: 1, exp: "He received an appointment — 'thankful to be appointed to the committee'." },
+        ]
+      },
+
+      ex7: {
+        label: "Exercise 7 — Negatives", type: "exercise",
+        note: "The best answer uses the OPPOSITE meaning of the negative in the last line.",
+        qs: [
+          { d: [{ s: "(man)", l: "I can't seem to get the door unlocked." }, { s: "(woman)", l: "That isn't the right key for the door." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["The key in the drawer is on the right.", "The man should write the message on the door.", "The man has the wrong key.", "The right key isn't in the drawer."], ans: 2, exp: "'That isn't the right key' = the man HAS THE WRONG KEY. Option C expresses the opposite." },
+          { d: [{ s: "(man)", l: "Were you pleased with last week's convention?" }, { s: "(woman)", l: "Nothing went as planned." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["The convention was disorganized.", "She didn't plan to attend the convention.", "She planned the convention last week.", "She wasn't pleased with the last week of the convention."], ans: 0, exp: "'Nothing went as planned' = everything was disorganized. Option A." },
+          { d: [{ s: "(woman)", l: "Are you planning to go to college next year?" }, { s: "(man)", l: "I'm really unsure about the idea." }, { s: "(narrator)", l: "What does the man mean?", q: true }], opts: ["He definitely wants to go to college.", "He is certain about his plans.", "He's hesitant about attending college.", "His idea is to go to college."], ans: 2, exp: "'Unsure' = hesitant/uncertain → 'He's hesitant about attending college.' Option C." },
+        ]
+      },
+
+      toefl_ex7: {
+        label: "TOEFL Exercise 7 — Negatives", type: "toefl",
+        note: "Audio-based. Be particularly careful of negative expressions.",
+        qs: [
+          { d: [], opts: ["She is very busy.", "She has lots of free time.", "It is not necessary to take out the trash.", "She will do it if she has time."], ans: 0, exp: "Negative expression implies she IS busy → 'She is very busy.'" },
+          { d: [], opts: ["The interview is very important.", "He is worried about the interview.", "What he's wearing to the interview is important.", "He is not concerned about the interview."], ans: 3, exp: "Negative implies he doesn't care → 'not concerned about the interview'." },
+          { d: [], opts: ["He has almost all the notes.", "His attendance was perfect.", "He went to all the lectures but one.", "He missed more than one psychology class."], ans: 2, exp: "'Almost all' = all but one → 'went to all the lectures but one'." },
+          { d: [], opts: ["They passed the library at 6:00.", "The library opens at 6:00 in the summer.", "The library closes at 6:00.", "You can't check out more than six books in the summer."], ans: 2, exp: "Negative implies library NOT open → 'closes at 6:00'." },
+          { d: [], opts: ["Water the plants once a day.", "Give the plants no more water.", "Water the plants often while the man is gone.", "Give the plants a limited amount of water."], ans: 3, exp: "Negative implies limiting water → 'give the plants a limited amount of water'." },
+          { d: [], opts: ["The service satisfied her.", "The food was worse than the service.", "She thought the service was bad.", "Neither the food nor the service was satisfying."], ans: 3, exp: "'Neither...nor' → both food AND service were unsatisfying. Option D." },
+          { d: [], opts: ["He told his kids to leave.", "He seriously wanted the woman to go.", "He was joking when he told the woman to leave.", "He left with the woman."], ans: 2, exp: "Negative/ironic expression = joking → 'joking when he told the woman to leave'." },
+          { d: [], opts: ["The project will take all their effort.", "They have no other work to do.", "It's impossible to finish.", "They aren't even close to finishing the project."], ans: 3, exp: "Negative implies far from done → 'aren't even close to finishing'." },
+          { d: [], opts: ["She doesn't mind an hour more.", "She'd rather stay more than an hour.", "It's better to stay than go.", "She prefers to leave."], ans: 3, exp: "Negative expression implies she wants to go → 'prefers to leave'." },
+          { d: [], opts: ["The service at the hotel wasn't too good.", "This hotel gave excellent service.", "The service at the hotel could have been improved.", "This hotel's service was the same as at other hotels."], ans: 0, exp: "Negative implies bad service → 'service wasn't too good'." },
+        ]
+      },
+
+      ex8: {
+        label: "Exercise 8 — Double Negatives", type: "exercise",
+        note: "Two negatives make a positive. NOT + negative expression = positive meaning.",
+        qs: [
+          { d: [{ s: "(man)", l: "Paula, you worked so hard setting up the field trip." }, { s: "(woman)", l: "I hope no one's unhappy with the arrangements." }, { s: "(narrator)", l: "What does Paula mean?", q: true }], opts: ["She hopes everyone will be pleased.", "She knows no one is happy with what she has done.", "She's arranged to take a trip because she's unhappy.", "Everyone's happy with the condition of the field."], ans: 0, exp: "'No one's unhappy' = everyone IS happy/pleased. Double negative → positive: She hopes everyone will be pleased." },
+          { d: [{ s: "(woman)", l: "How was your history exam?" }, { s: "(man)", l: "I didn't study enough, so I didn't do well." }, { s: "(narrator)", l: "What does the man mean?", q: true }], opts: ["He studied a lot and passed.", "He failed in spite of his effort.", "He got a good grade even though he didn't study.", "His grade was poor because of inadequate preparation."], ans: 3, exp: "'Didn't study enough' + 'didn't do well' → poor grade due to lack of preparation. Option D." },
+          { d: [{ s: "(man)", l: "Were your friends able to get tickets for the concert?" }, { s: "(woman)", l: "Mark couldn't get tickets for the concert, and neither could Paul." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["Although Mark couldn't get both tickets, Paul did.", "Both were unable to obtain tickets.", "Neither Mark nor Paul wanted to go to the concert.", "Mark tried to get tickets, but Paul didn't."], ans: 1, exp: "'Mark couldn't' + 'neither could Paul' → BOTH were unable. Option B." },
+        ]
+      },
+
+      toefl_ex8: {
+        label: "TOEFL Exercise 8 — Double Negatives", type: "toefl",
+        note: "Audio-based. Be particularly careful of double negatives.",
+        qs: [
+          { d: [], opts: ["He'll definitely be elected.", "The election is now complete.", "She has high hopes for his chances.", "It may happen."], ans: 0, exp: "Double negative implies certainty → 'He'll definitely be elected.'" },
+          { d: [], opts: ["Both parts of his game were bad.", "He served better than he volleyed.", "Some parts of his game were better than others.", "He played rather well."], ans: 3, exp: "Negative + comparative ('not bad') implies he played well → 'played rather well'." },
+          { d: [], opts: ["It is a surprise that he was prepared.", "He was not ready, as usual.", "He prepared a really big surprise.", "His strong preparation came as no surprise."], ans: 3, exp: "Double negative: expected/no surprise → 'His strong preparation came as no surprise.'" },
+          { d: [], opts: ["She felt good enough to go out.", "She went out to get some medicine.", "She felt like dancing, so she went out with everyone.", "She stayed home because she was sick."], ans: 3, exp: "Negatives imply she stayed home sick → Option D." },
+          { d: [], opts: ["She has problems that others aren't aware of.", "Others aren't aware of her problems.", "She knows she's been a problem.", "She doesn't have a care in the world."], ans: 3, exp: "'Doesn't have a care' = carefree → 'She doesn't have a care in the world.'" },
+          { d: [], opts: ["Steve wanted to finish his paper, and so did Paul.", "Both Steve's and Paul's papers were incomplete.", "Steve and Paul were busy doing their term papers.", "When Steve wasn't able to finish his paper, Paul couldn't help."], ans: 1, exp: "Both couldn't finish → 'Both Steve's and Paul's papers were incomplete.'" },
+          { d: [], opts: ["It wasn't George's responsibility to pay the bill.", "Bill was irresponsible about paying George's rent.", "George acted carelessly by not taking care of the bill.", "George took responsibility for the unpaid bill."], ans: 3, exp: "Implies George DID take responsibility → Option D." },
+          { d: [], opts: ["It's fortunate that he was accepted.", "It's good that he wasn't admitted.", "Fortunately, the university didn't admit him.", "It's too bad he was rejected."], ans: 0, exp: "Double negative → positive: 'It's fortunate that he was accepted.'" },
+          { d: [], opts: ["The first essay was better than the second.", "The first and second drafts couldn't be better.", "The second draft of the essay was much better than the first.", "Both versions were poorly written."], ans: 1, exp: "'Couldn't be better' = both excellent → 'The first and second drafts couldn't be better.'" },
+          { d: [], opts: ["Roger has been bothered.", "Roger wasn't the least bit disturbed.", "The problems have had little effect on Roger.", "Roger hasn't been disturbed."], ans: 1, exp: "'Not the least bit disturbed' = absolutely NOT bothered → Option B." },
+        ]
+      },
+
+      toefl_ex9: {
+        label: "TOEFL Exercise 9 — Almost Negatives", type: "toefl",
+        note: "Audio-based. Careful of 'almost negative' expressions: hardly, barely, scarcely, rarely, seldom.",
+        qs: [
+          { d: [], opts: ["There's little rain in July.", "In July it never rains.", "It rains hard in July.", "When it rains in July, it rains hard."], ans: 0, exp: "'Hardly any rain' → 'There's little rain in July.' Almost negative = very little." },
+          { d: [], opts: ["The university accepted three students.", "None of the students is going to the university.", "John was not accepted.", "Two were not admitted."], ans: 3, exp: "'Hardly any' accepted → only a few, meaning most were not admitted → 'Two were not admitted.'" },
+          { d: [], opts: ["Although he did pass, Mark's exam grade wasn't too good.", "Mark failed his history exam.", "The highest grade on the history exam went to Mark.", "Professor Franks didn't pass Mark on the history exam."], ans: 0, exp: "'Barely passed' → 'did pass, but grade wasn't too good.' Almost negative = just barely." },
+          { d: [], opts: ["He often has long waits in Dr. Roberts's office.", "He must wait patiently for Robert.", "Dr. Roberts is generally punctual.", "He doesn't mind waiting for Dr. Roberts."], ans: 2, exp: "'Rarely late' → 'Dr. Roberts is generally punctual.' Almost negative = almost always on time." },
+          { d: [], opts: ["Betty often takes vacations in winter.", "Betty prefers to take vacations in winter.", "Occasionally Betty works one week during vacation.", "A winter vacation is unusual for Betty."], ans: 3, exp: "'Seldom/rarely' winter vacation → 'A winter vacation is unusual for Betty.'" },
+          { d: [], opts: ["He rarely spends time on his courses.", "He's an excellent student.", "He never studies.", "His books are always open."], ans: 1, exp: "'Hardly ever fails' → implies high performance → 'He's an excellent student.'" },
+          { d: [], opts: ["He finished the exam in plenty of time.", "He was scared he wouldn't finish.", "He used every possible minute to finish.", "He was unable to complete the exam."], ans: 2, exp: "'Barely finished' → 'He used every possible minute to finish.'" },
+          { d: [], opts: ["This was a very long staff meeting.", "This was the only staff meeting in a long time.", "The meeting lasted only until one o'clock.", "The one staff meeting should've lasted longer."], ans: 0, exp: "'Seldom has such a long meeting' → 'This was a very long staff meeting.'" },
+          { d: [], opts: ["Meat tastes delicious to him when it's cooked rare.", "He isn't sure if the meal is delicious.", "This meat is the best he's tasted in a long time.", "He'd like to eat some meat from this delicatessen."], ans: 2, exp: "'Hardly ever has such good meat' → 'This meat is the best he's tasted in a long time.'" },
+          { d: [], opts: ["He broke his arm trying to move it.", "He only hurt the broken arm.", "He only tries to move the broken arm.", "There's no pain if he rests quietly."], ans: 3, exp: "'Barely any pain' when resting → 'There's no pain if he rests quietly.'" },
+        ]
+      },
+
+      ex10: {
+        label: "Exercise 10 — Negatives + Comparatives", type: "exercise",
+        note: "The best answer expresses a SUPERLATIVE or very strong idea. Negative + comparative = superlative.",
+        qs: [
+          { d: [{ s: "(woman)", l: "Have you gotten over your cold yet?" }, { s: "(man)", l: "I couldn't be feeling any better today." }, { s: "(narrator)", l: "What does the man mean?", q: true }], opts: ["He's feeling terrific.", "He felt a lot worse today.", "He's not feeling too well today.", "He's a bit better today."], ans: 0, exp: "'Couldn't be feeling any better' = feeling as good as possible = TERRIFIC. Negative + comparative = superlative positive." },
+          { d: [{ s: "(woman)", l: "What did you think of Mike when you first met him?" }, { s: "(man)", l: "He couldn't have been more unfriendly." }, { s: "(narrator)", l: "What does the man mean?", q: true }], opts: ["Mike was extremely friendly when he met him.", "Mike could have met him sooner.", "Mike didn't seem to like him at all.", "When he met Mike, he didn't have a friend."], ans: 2, exp: "'Couldn't have been more unfriendly' = EXTREMELY UNFRIENDLY = didn't like him at all. Option C." },
+          { d: [{ s: "(man)", l: "Did you see Theresa's grade on the math exam? It was unbelievable!" }, { s: "(woman)", l: "No one else could have done better." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["Theresa could've gotten a higher grade.", "Anyone could get a good grade.", "Theresa got the highest grade.", "A high grade is impossible for anyone."], ans: 2, exp: "'No one else could have done better' = Theresa did THE BEST = highest grade. Option C." },
+        ]
+      },
+
+      toefl_ex10: {
+        label: "TOEFL Exercise 10 — Negatives + Comparatives", type: "toefl",
+        note: "Audio-based. Be particularly careful of comparatives with negatives — they express SUPERLATIVE meanings.",
+        qs: [
+          { d: [], opts: ["She's not very happy.", "She didn't do very well on the exam.", "She could be somewhat happier.", "She's delighted with the results."], ans: 3, exp: "Negative + comparative → superlative: DELIGHTED → 'She's delighted with the results.'" },
+          { d: [], opts: ["Paula is always lazy.", "Paula didn't work very hard this semester.", "Paula made a strong effort.", "Paula could have worked harder."], ans: 2, exp: "'Couldn't have worked harder' = worked as hard as possible → 'Paula made a strong effort.'" },
+          { d: [], opts: ["The prices were great!", "The prices were too high.", "She didn't buy much because of the prices.", "The prices could have been lower."], ans: 0, exp: "'Couldn't have been better prices' → 'The prices were great!' Superlative positive." },
+          { d: [], opts: ["She is not very smart.", "She always tells him everything.", "He doesn't know her very well.", "She's extremely intelligent."], ans: 3, exp: "'Couldn't be more intelligent' → 'She's extremely intelligent.' Superlative." },
+          { d: [], opts: ["The patient absolutely didn't need the surgery.", "The necessity for the surgery was unquestionable.", "The surgeon felt that the operation was necessary.", "It was essential that the surgery be performed immediately."], ans: 3, exp: "'Couldn't have been more necessary' → 'Essential that surgery be performed immediately.'" },
+          { d: [], opts: ["They were not very lucky.", "No one was hurt.", "The accident was unfortunate.", "She wanted to have better luck."], ans: 1, exp: "'Couldn't have been luckier' = VERY lucky → 'No one was hurt.'" },
+          { d: [], opts: ["Nothing was very difficult.", "The exam wasn't at all easy.", "The exam couldn't have been easier.", "The exam had nothing difficult on it."], ans: 2, exp: "'Couldn't have been easier' = extremely easy → Option C." },
+          { d: [], opts: ["She wants that job very much.", "No one is going to get the job.", "Everybody else wants that job as much as she does.", "She is not sure about taking the job."], ans: 0, exp: "'Couldn't want it more' = wants it EXTREMELY → 'She wants that job very much.'" },
+          { d: [], opts: ["She was second in the race.", "She was almost the slowest person in the race.", "She won the race.", "She was not faster than anyone else."], ans: 2, exp: "'Couldn't have run faster' = ran as fast as possible = WON → 'She won the race.'" },
+          { d: [], opts: ["This math project was extremely complex.", "This math project was less complicated than the last.", "They seldom complete their math projects.", "Complicated math projects are often assigned."], ans: 0, exp: "'Couldn't have been more complex' → 'This math project was extremely complex.'" },
+        ]
+      },
+
+      toefl_ex_skills7_10: {
+        label: "TOEFL Exercise (Skills 7–10)", type: "toefl",
+        note: "Audio-based. Combined: negatives, double negatives, almost negatives, and negatives with comparatives.",
+        qs: [
+          { d: [], opts: ["She can try a little harder.", "There is a lot more that she can do.", "She's doing the best that she can.", "It is impossible for her to do anything."], ans: 2, exp: "'Couldn't do more' → she's already at maximum effort → 'She's doing the best that she can.'" },
+          { d: [], opts: ["She's always been late for the bus.", "The bus has always been late.", "The bus only left on time once.", "Only on this trip has the bus been on time."], ans: 3, exp: "'Rarely on time' + this trip being exceptional → 'Only on this trip has the bus been on time.'" },
+          { d: [], opts: ["There wasn't enough soup to go around.", "We had so much soup that we couldn't finish it.", "Everyone got one serving of soup, but there wasn't enough for seconds.", "Everyone around the table had a lot of soup."], ans: 2, exp: "'Barely enough' = enough for one serving but not seconds → Option C." },
+          { d: [], opts: ["She does want to see the movie.", "It's extremely important to her to go.", "She doesn't want to go there anymore.", "She really couldn't move there."], ans: 2, exp: "Negative implies she no longer wants to go → 'She doesn't want to go there anymore.'" },
+          { d: [], opts: ["She handed the paper in on time.", "She was able to complete the paper, but she didn't turn it in.", "The paper was a complete mess, so she didn't turn it in.", "The paper was unfinished."], ans: 3, exp: "'Barely finished' → the paper was unfinished. Option D." },
+          { d: [], opts: ["Neither Tim nor Sylvia is taking care of Art.", "Sylvia likes modern art even less than Tim does.", "Sylvia doesn't care for anything Tim does.", "Sylvia and Tim agree in their opinion of modern art."], ans: 3, exp: "Both feel the same way → 'Sylvia and Tim agree in their opinion of modern art.'" },
+          { d: [], opts: ["They always work hard in the afternoon.", "They don't do much after lunch.", "After noon they never work.", "It's never hard for them to work in the afternoon."], ans: 1, exp: "'Hardly work after lunch' → 'They don't do much after lunch.'" },
+          { d: [], opts: ["It's hard for him to work when it gets warm.", "Whenever it gets warm, he turns on the air-conditioner.", "The air-conditioner only works when it isn't needed.", "He likes to use the air-conditioner when it is warm."], ans: 1, exp: "He uses AC when warm → 'Whenever it gets warm, he turns on the air-conditioner.'" },
+        ]
+      },
+
+      toefl_ex11: {
+        label: "TOEFL Exercise 11 — Agreement", type: "toefl",
+        note: "Audio-based. Pay attention to expressions of agreement.",
+        qs: [
+          { d: [], opts: ["The trip would cost too much.", "She doesn't think that a trip would be a good idea.", "She would like to take two trips rather than one.", "She would also like to take a trip."], ans: 3, exp: "Agreement → she also wants to take a trip. Option D." },
+          { d: [], opts: ["He would like to see the elections for town council.", "He agrees that Matt should be elected.", "He thinks the elections should take place next month.", "He disagrees with the woman."], ans: 1, exp: "Agreement → he agrees Matt should be elected. Option B." },
+          { d: [], opts: ["She is not sure which course she should take.", "She's not sure if she should take a trip to France.", "She knows that she is not ready for intermediate French.", "She wants to take neither beginning nor intermediate French."], ans: 0, exp: "Agreement + uncertainty → 'She is not sure which course she should take.'" },
+          { d: [], opts: ["The man should repeat what he said.", "The man said something foolish.", "She thinks that the food is the best she has ever tasted.", "She agrees that the food is pretty bad."], ans: 3, exp: "Agreement about bad food → 'She agrees that the food is pretty bad.'" },
+          { d: [], opts: ["This party hasn't been any fun at all.", "He wonders if the woman enjoyed herself.", "He wants to know what she said.", "He's enjoyed himself tremendously."], ans: 3, exp: "Agreement that party was enjoyable → 'He's enjoyed himself tremendously.'" },
+          { d: [], opts: ["She condones what happened.", "She does not like what the man said.", "She agrees with the man about what happened.", "She says that she did not do it."], ans: 2, exp: "Agreement expression → 'She agrees with the man about what happened.'" },
+          { d: [], opts: ["He thinks the parties aren't loud.", "He says that the neighbors don't have many parties.", "He agrees that the upstairs neighbors are noisy.", "The loud parties don't bother him."], ans: 2, exp: "Agreement about noisy neighbors → 'He agrees that the upstairs neighbors are noisy.'" },
+          { d: [], opts: ["She doesn't like this meal too much.", "This food tastes wonderful to her.", "She's not sure if she likes it.", "She can't stand this meal."], ans: 1, exp: "Agreement that food is good → 'This food tastes wonderful to her.'" },
+          { d: [], opts: ["She agrees that getting the car was not a good idea.", "She imagines that she would like to have a similar car.", "She thinks that the man is mistaken about the car.", "She thinks the man has no imagination."], ans: 1, exp: "Agreement about the car → she also wants one like it. Option B." },
+          { d: [], opts: ["He would like the woman to repeat what she said.", "He thinks that one semester is enough time for the course.", "He also thinks that the course should be extended.", "He would like to take the course two semesters from now."], ans: 2, exp: "Agreement that course needs more time → 'He also thinks that the course should be extended.'" },
+        ]
+      },
+
+      ex12: {
+        label: "Exercise 12 — Uncertainty & Suggestion", type: "exercise",
+        note: "The best answer shows UNCERTAINTY or SUGGESTION.",
+        qs: [
+          { d: [{ s: "(man)", l: "Do you know what time they're leaving for the city?" }, { s: "(woman)", l: "They have to leave at four o'clock, don't they?" }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["She's not completely sure when they are leaving.", "They are returning from the city at about 4:00.", "She knows when they are leaving.", "She doesn't have any idea when they are leaving."], ans: 0, exp: "'Don't they?' is a tag question expressing uncertainty → 'She's not completely sure when they are leaving.' Option A." },
+          { d: [{ s: "(woman)", l: "I'm so thirsty from all this walking." }, { s: "(man)", l: "Let's stop and get a drink." }, { s: "(narrator)", l: "What does the man suggest?", q: true }], opts: ["They should stop drinking.", "They should go for a walk.", "They should walk thirty miles.", "They should take a break and have a drink."], ans: 3, exp: "'Let's stop and get a drink' = suggestion to take a break and have a drink. Option D." },
+          { d: [{ s: "(man)", l: "Is the exam still scheduled for 3:00 on Thursday?" }, { s: "(woman)", l: "As far as I know." }, { s: "(narrator)", l: "What does the woman mean?", q: true }], opts: ["The exam is far away.", "She knows that the exam schedule has been changed.", "She is sure that the exam is set for Thursday.", "She thinks she knows when the test is."], ans: 3, exp: "'As far as I know' = I think so but I'm not 100% certain → 'She thinks she knows when the test is.' Option D." },
+        ]
+      },
+
+      toefl_ex12: {
+        label: "TOEFL Exercise 12 — Uncertainty & Suggestion", type: "toefl",
+        note: "Audio-based. Be particularly careful of expressions of uncertainty and suggestion.",
+        qs: [
+          { d: [], opts: ["He's sure about which chapters they are to read.", "He thinks he knows what the assignment is.", "He has to tell her how far she should go.", "The professor told them to read the chapters after the exam."], ans: 1, exp: "Uncertainty → 'He thinks he knows what the assignment is.' Not fully certain." },
+          { d: [], opts: ["The man should take the pie out.", "The man should try something else.", "The man shouldn't try cherry pie.", "The man should feel sorry."], ans: 1, exp: "Suggestion → 'The man should try something else.'" },
+          { d: [], opts: ["He knows the movie starts at 8:00.", "He is not quite sure when the movie begins.", "He thinks the start of the movie has been changed.", "He will start the movie himself at 8:00."], ans: 1, exp: "Uncertainty → 'He is not quite sure when the movie begins.'" },
+          { d: [], opts: ["Not doing the dishes now", "Leaving the house with the dishes", "Leaving later so that they can do the dishes now", "Washing the dishes before they leave"], ans: 3, exp: "Suggestion to do dishes before leaving → Option D." },
+          { d: [], opts: ["She's told Matt he'll go far.", "Matt has far from enough talent.", "She told Matt to roll farther.", "She believes Matt has the ability for the part."], ans: 3, exp: "Expression of belief/confidence → 'She believes Matt has the ability for the part.'" },
+          { d: [], opts: ["They should go to the hospital.", "Mary should visit the man.", "The woman should try not to break her leg.", "They should go on a trip with Mary."], ans: 0, exp: "Suggestion regarding injury → 'They should go to the hospital.'" },
+          { d: [], opts: ["She knows where the children are.", "The children have finished playing ball.", "She's going to the park to find the children.", "She believes that the children are in the park."], ans: 3, exp: "Uncertainty/belief → 'She believes that the children are in the park.'" },
+          { d: [], opts: ["The man should try to borrow some from a neighbor.", "The man should take a check to Tom.", "The man should work on his math assignment with Tom.", "The man should check behind the door."], ans: 1, exp: "Suggestion → 'The man should take a check to Tom.'" },
+          { d: [], opts: ["He thinks the bill is due in the middle of the month.", "The bill is approximately fifteen dollars.", "He knows when they should pay the bill.", "The bill is going to be fifteen days late."], ans: 0, exp: "Uncertainty → 'He thinks the bill is due in the middle of the month.'" },
+          { d: [], opts: ["They should postpone their decision until morning.", "They should go to sleep in the new house.", "They should not buy such a big house.", "They should decide where to go to sleep."], ans: 0, exp: "Suggestion to wait → 'They should postpone their decision until morning.'" },
+        ]
+      },
+
+      toefl_ex_skills1_3: {
+        label: "TOEFL Exercise (Skills 1–3)", type: "toefl",
+        note: "Audio-based. Combined: last line focus, synonyms, and avoid similar sounds.",
+        qs: [
+          { d: [], opts: ["He would like some iced coffee.", "He wants to stop drinking coffee.", "A drink seems like a good idea.", "He needs to drink something to stop his coughing."], ans: 3, exp: "Last line clues: coughing + needs a drink → Option D." },
+          { d: [], opts: ["She would prefer a sunny day.", "The park is too crowded.", "She would like a place that is not so loud.", "She cannot walk because she's too old."], ans: 2, exp: "Noise is the issue → 'She would like a place that is not so loud.'" },
+          { d: [], opts: ["He should open an account.", "He should take a ride on a ship.", "He should try to keep the cost cheap.", "He should try something monotonous to get to sleep."], ans: 2, exp: "Synonym/cost focus → 'He should try to keep the cost cheap.'" },
+          { d: [], opts: ["The department is not changing the requirements.", "He hasn't heard anything about the change.", "The changes are believable.", "What has happened is incredible to him."], ans: 3, exp: "Key word 'incredible/unbelievable' → 'What has happened is incredible to him.'" },
+          { d: [], opts: ["The wait has taken close to an hour.", "They were stranded in their car.", "Most of the people have been in line for hours.", "They made a line in the sand."], ans: 2, exp: "Long lines → 'Most of the people have been in line for hours.'" },
+          { d: [], opts: ["The instructor is selecting several passages.", "The conductor is fair to the passengers.", "The stamp collector is conducting his business.", "The riders are paying for the train trip."], ans: 3, exp: "Train context → 'The riders are paying for the train trip.'" },
+          { d: [], opts: ["The managers will take the train to the program.", "A program to develop new managers will commence soon.", "The new management program is very weak.", "The program will be maintained to the letter."], ans: 1, exp: "Synonym 'commence' = begin/start → Option B." },
+          { d: [], opts: ["The fire started to attack the building.", "The firefighter stared at the attacker.", "The fire probably began at the top of the building.", "The firefighter started to attack the fire."], ans: 2, exp: "Location clue → 'The fire probably began at the top of the building.' Avoid 'started/stared' sound trap." },
+          { d: [], opts: ["He assured the woman that he knew the truth.", "He is sure that it isn't new.", "He thought that the woman was aware of what happened.", "He soon will know the truth."], ans: 2, exp: "Synonym 'aware' = 'knew about it' → Option C." },
+          { d: [], opts: ["The art professor is not one of his fans.", "His drawings were amazing.", "The catches that he made were fantastic.", "His sketches showed a fantasy world."], ans: 1, exp: "Synonym 'drawings' = artwork → 'His drawings were amazing.' Avoid 'catches/sketches/fantasy' sound traps." },
+        ]
+      },
+
+      toefl_ex_skills4_6: {
+        label: "TOEFL Exercise (Skills 4–6)", type: "toefl",
+        note: "Audio-based. Combined: who/what/where, passives, and multiple nouns.",
+        qs: [
+          { d: [], opts: ["In a department store", "In a stationery store", "At the post office", "At the airport"], ans: 1, exp: "Context clues suggest stationery/office supplies → 'In a stationery store.'" },
+          { d: [], opts: ["The teacher gave the students a hand.", "The term papers were turned in.", "The students got the papers from the office.", "The teacher handed the papers to the students."], ans: 3, exp: "Teacher → students direction → 'The teacher handed the papers to the students.'" },
+          { d: [], opts: ["The attendant checked the oil in Mark's car.", "Mark checked to see if he had enough oil in his car.", "Mark checked with the service station attendant.", "Mark wrote a check to pay for the oil."], ans: 1, exp: "Mark (active) checked his own oil → Option B." },
+          { d: [], opts: ["A delivery man", "A famous chef", "A clerk in a fast-food restaurant", "An airline steward"], ans: 3, exp: "Airline/flight setting → 'An airline steward.'" },
+          { d: [], opts: ["They need new print for the additional copies.", "They can make extra copies if necessary.", "Printers are needed for the additional copies.", "Additional copies are needed immediately."], ans: 3, exp: "Urgency for copies → 'Additional copies are needed immediately.'" },
+          { d: [], opts: ["The professor bought two books.", "The students had to purchase two books.", "The students sold two books to the professor.", "The students were required to read two books by the professor."], ans: 3, exp: "Passive + multiple nouns → 'The students were required to read two books by the professor.'" },
+          { d: [], opts: ["The doctor returned to the office.", "Jim asked the doctor to come to the office.", "The doctor will not return until next week.", "Jim was told to come back."], ans: 3, exp: "Jim received instructions → 'Jim was told to come back.'" },
+          { d: [], opts: ["Go to work in the lab", "Sample the work from the lab", "Have the samples delivered", "Send a note to the lab"], ans: 2, exp: "Suggestion: get samples → 'Have the samples delivered.'" },
+          { d: [], opts: ["Mary became the new class president.", "Sue took her place as class president.", "In place of Mary, Sue became senior class president.", "The senior class president replaced Sue and Mary."], ans: 2, exp: "Sue replaced Mary → 'In place of Mary, Sue became senior class president.'" },
+          { d: [], opts: ["The panel was analyzed on the television program.", "A committee evaluated recent political events.", "The program featured a psychoanalyst.", "The panel discussed the television program."], ans: 1, exp: "Panel/committee discussed events → 'A committee evaluated recent political events.'" },
+        ]
+      },
+
+      toefl_rev_1_6: {
+        label: "TOEFL Review Exercise (Skills 1–6)", type: "review",
+        note: "Audio-based. Combined review of all short dialogue skills.",
+        qs: [
+          { d: [], opts: ["He seemed to be rather hungry.", "She was quite angry at him.", "He was trying to hang the posters.", "She believes he was mad."], ans: 3, exp: "Synonym 'mad' = angry/upset → 'She believes he was mad.'" },
+          { d: [], opts: ["The parents are going to stay up late.", "The parents have given Hannah her allowance.", "Lately, the parents have not been so loud.", "Hannah does not have to go to bed early."], ans: 3, exp: "Dialogue implies freedom for Hannah → 'Hannah does not have to go to bed early.'" },
+          { d: [], opts: ["At a department store", "At a service station", "At a collection agency", "In a delivery room"], ans: 1, exp: "Service/car context → 'At a service station.'" },
+          { d: [], opts: ["She just broke some eggs.", "They need to eat fast.", "She is serious about the boat.", "He has a choice to make."], ans: 1, exp: "Urgency implied → 'They need to eat fast.'" },
+          { d: [], opts: ["It was urgent that Ellen do her best.", "He really urged Ellen to do more.", "He was encouraged by Ellen to try harder.", "Ellen told him that she was trying to do better."], ans: 3, exp: "Ellen is the speaker/doer → 'Ellen told him that she was trying to do better.'" },
+          { d: [], opts: ["The car stalled on the road.", "Someone took the car.", "Rob sold his car.", "Rob heard someone steal his car."], ans: 3, exp: "Rob heard the theft → 'Rob heard someone steal his car.'" },
+          { d: [], opts: ["Buying the bigger container", "Putting the milk in the cart", "Taking a carton that is smaller", "Getting the milk tomorrow instead"], ans: 0, exp: "Larger size suggestion → 'Buying the bigger container.'" },
+          { d: [], opts: ["The receptionist welcomed the businesspeople.", "The man created a shipping and receiving business.", "The businesspeople were rather greedy.", "The businesspeople greeted the receptionist."], ans: 3, exp: "Businesspeople greeted the receptionist → Option D." },
+          { d: [], opts: ["The police officer was stationed near the tourist.", "The tourist was forced to accompany the police officer.", "The tourist became mad at the police station.", "The tourist stated that the police officer never came."], ans: 3, exp: "Tourist's perspective → 'The tourist stated that the police officer never came.'" },
+          { d: [], opts: ["He hasn't seen her ideas.", "It was a terrible deal.", "He doesn't like the idea.", "It sounds magnificent to him."], ans: 3, exp: "Agreement/synonym 'magnificent' = wonderful → Option D." },
+        ]
+      },
+
+      toefl_rev_1_10: {
+        label: "TOEFL Review Exercise (Skills 1–10)", type: "review",
+        note: "Audio-based. Complete review of all short dialogue skills: Skills 1–10.",
+        qs: [
+          { d: [], opts: ["In a doctor's office", "At a bar", "In a travel agency", "In a business office"], ans: 2, exp: "Context clues suggest travel planning → 'In a travel agency.'" },
+          { d: [], opts: ["She bought some sheets.", "She got a new piece of clothing.", "She couldn't find anything because she's too short.", "She was sure to greet her boss."], ans: 1, exp: "Synonym: clothing item → 'She got a new piece of clothing.'" },
+          { d: [], opts: ["The hotel was all right, except for the poor view.", "The view from the hotel room was spectacular.", "She would have preferred a better hotel.", "Only a few hotels would have been better."], ans: 1, exp: "Synonym 'spectacular' = amazing/great view → Option B." },
+          { d: [], opts: ["Take a nap", "Try the rest of the work", "See a doctor", "Have a bite to eat"], ans: 2, exp: "Health concern implied → 'See a doctor.'" },
+          { d: [], opts: ["She's an exacting person.", "She can't be expected to give you four of them.", "She generally forgives others.", "She isn't exact about what she gives to others."], ans: 0, exp: "Synonym 'exacting' = precise/demanding → Option A." },
+          { d: [], opts: ["She's unable to take her vacation this year.", "Her vacation next week has been postponed.", "She'll go on vacation next week.", "She'll return from vacation in a week."], ans: 2, exp: "Vacation happening next week → 'She'll go on vacation next week.'" },
+          { d: [], opts: ["The waitress was sitting in the back of the restaurant.", "They were waiting for a seat in the restaurant.", "The customers had a table in the back.", "The waitress sat down behind the table."], ans: 1, exp: "Customers waiting → 'They were waiting for a seat in the restaurant.'" },
+          { d: [], opts: ["It's hard for the market to sell its fruit.", "All of the fresh fruit at the market is hard.", "She hardly ever goes to the market to buy fresh fruit.", "There was a scarcity of fresh fruit at the market."], ans: 2, exp: "Almost negative 'hardly ever' → Option C." },
+          { d: [], opts: ["The man should never be late for school.", "The man can always return to school.", "The man should never go back to school.", "If the man's late to school, he should go through the back door."], ans: 1, exp: "Negative + double negative = he IS allowed back → 'The man can always return to school.'" },
+          { d: [], opts: ["She can't bear to try.", "She is a daring person.", "She doesn't want the man even to try.", "She is challenging the man to make the effort."], ans: 3, exp: "Expression of challenge/dare → 'She is challenging the man to make the effort.'" },
+        ]
+      },
+      ex13: {
+        label: "Exercise 13 — Emphatic Surprise", type: "exercise",
+        note: "The best answer shows what the speaker had ASSUMED before hearing the surprising news.",
+        qs: [
+          {
+            d: [{ s: "(man)", l: "I just got 600 on the TOEFL test!" }, { s: "(woman)", l: "Then you did pass." }, { s: "(narrator)", l: "What had the woman assumed?", q: true }],
+            opts: ["The man had not passed.", "The man would pass easily.", "The man had already passed.", "The man got the score he was expected to get."], ans: 0,
+            exp: "'Then you DID pass' uses emphatic 'did' showing surprise. The woman had assumed he had NOT passed. Option A."
+          },
+          {
+            d: [{ s: "(woman)", l: "Would you like to go skiing this weekend?" }, { s: "(man)", l: "So you can ski!" }, { s: "(narrator)", l: "What had the man assumed?", q: true }],
+            opts: ["The woman was a good skier.", "The woman was going skiing this weekend.", "The woman did not know how to ski.", "The woman did not intend to go skiing."], ans: 2,
+            exp: "'So you CAN ski!' — emphatic surprise. The man had assumed the woman could NOT ski. Option C."
+          },
+          {
+            d: [{ s: "(man)", l: "I just got this letter from my sister." }, { s: "(woman)", l: "So the mail has come already." }, { s: "(narrator)", l: "What had the woman assumed?", q: true }],
+            opts: ["The man's sister never wrote to him.", "The mail had not yet arrived.", "The mail always came early.", "The mail had already arrived."], ans: 1,
+            exp: "'So the mail HAS come already' — emphatic surprise. The woman had assumed the mail had NOT yet arrived. Option B."
+          },
+        ]
+      },
+
+      toefl_ex13: {
+        label: "TOEFL Exercise 13 — Emphatic Surprise", type: "toefl",
+        note: "Audio-based. Be particularly careful of expressions of emphatic surprise.",
+        qs: [
+          {
+            d: [], opts: ["Greg always comes to parties.", "Greg would come to the party later.", "Greg was unable to attend the party.", "Greg would stay at the party for only a moment."], ans: 0,
+            exp: "Emphatic surprise implies the opposite was assumed — Greg DOES always come. 'Greg always comes to parties.'"
+          },
+          {
+            d: [], opts: ["The woman always rode her motorcycle to school.", "The woman was not coming to school today.", "The woman was an expert motorcycle rider.", "The woman did not know how to ride a motorcycle."], ans: 3,
+            exp: "Emphatic 'So you CAN ride!' implies the man assumed she could NOT ride. 'The woman did not know how to ride a motorcycle.'"
+          },
+          {
+            d: [], opts: ["The man was not a very good cook.", "The man never invited friends over for dinner.", "The man would never invite him over for dinner.", "The man was an excellent cook."], ans: 0,
+            exp: "Emphatic surprise implies opposite was assumed — man was NOT a good cook assumed. 'The man was not a very good cook.'"
+          },
+          {
+            d: [], opts: ["The woman had run more than three miles.", "The woman always got lots of exercise.", "The woman ran for three hours in the morning.", "The woman had not gotten much exercise."], ans: 3,
+            exp: "Emphatic surprise: assumed she had NOT gotten much exercise. 'The woman had not gotten much exercise.'"
+          },
+          {
+            d: [], opts: ["He had been somewhere else.", "He had been in the library.", "He had been working on his research project.", "He would start working on his project in five hours."], ans: 1,
+            exp: "Emphatic surprise about location — 'He had been in the library.'"
+          },
+          {
+            d: [], opts: ["He had changed apartments.", "He did not like his new apartment.", "He was still in his old apartment.", "He had moved from a house to an apartment."], ans: 2,
+            exp: "Emphatic surprise: assumed he was still in old apartment. 'He was still in his old apartment.'"
+          },
+          {
+            d: [], opts: ["The woman did not like desserts.", "The woman ate sweets regularly.", "The woman would not share her chocolate cake.", "The woman had eaten his piece of cake."], ans: 3,
+            exp: "Emphatic 'So you DID eat it!' — assumed she had eaten his cake. 'The woman had eaten his piece of cake.'"
+          },
+          {
+            d: [], opts: ["The man was going to study hard.", "The man already had a driver's license.", "The man would not take the test.", "The man had already taken the test."], ans: 3,
+            exp: "Emphatic 'So you HAVE taken it!' — assumed he had already taken the test. 'The man had already taken the test.'"
+          },
+          {
+            d: [], opts: ["She had registered in physics.", "She would go to physics class later.", "She had already taken a physics class.", "She had not enrolled in physics."], ans: 2,
+            exp: "Emphatic surprise: assumed she had already taken physics. 'She had already taken a physics class.'"
+          },
+          {
+            d: [], opts: ["The pipes were not clear.", "The plumber would be late.", "The plumber had already cleared the pipes.", "The pipes did not need to be cleared."], ans: 2,
+            exp: "Emphatic 'So the plumber HAS been here!' — assumed plumber had already cleared the pipes. Option C."
+          },
+        ]
+      },
+
+      toefl_ex_skills11_13: {
+        label: "TOEFL Exercise (Skills 11–13)", type: "toefl",
+        note: "Audio-based. Combined: agreement, uncertainty/suggestion, and emphatic surprise.",
+        qs: [
+          {
+            d: [], opts: ["She plans to talk a lot this month.", "She has a lot to say about the phone bill.", "The bill is high because she has a lot to say.", "She agrees with the man."], ans: 3,
+            exp: "Agreement expression. 'She agrees with the man.'"
+          },
+          {
+            d: [], opts: ["Bill had never really been sick.", "Bill was too sick to come to class.", "Bill had forgotten about the calculus class that morning.", "Bill had forgotten about the calculus class that morning."], ans: 2,
+            exp: "Emphatic surprise about Bill's absence. 'Bill had forgotten about the calculus class that morning.'"
+          },
+          {
+            d: [], opts: ["The man should go out tonight.", "The man should stay home and relax.", "The man should work on the paper tonight.", "The man should go out Monday instead."], ans: 1,
+            exp: "Suggestion expression. 'The man should stay home and relax.'"
+          },
+          {
+            d: [], opts: ["The cafeteria was open in the morning.", "The cafeteria did not serve breakfast.", "The breakfast in the cafeteria was not very tasty.", "The woman never ate breakfast in the cafeteria."], ans: 1,
+            exp: "Emphatic surprise: assumed it did NOT serve breakfast. 'The cafeteria did not serve breakfast.'"
+          },
+          {
+            d: [], opts: ["He believes that it is acceptable to park there.", "The parking lot is too far from their destination.", "He knows that they won't get a ticket.", "He knows where the parking lot is."], ans: 2,
+            exp: "Agreement/certainty expression. 'He knows that they won't get a ticket.'"
+          },
+          {
+            d: [], opts: ["He would be glad to say it over again.", "He would like the woman to repeat what she said.", "He says that he would like to take the class again.", "He's happy the class is over, too."], ans: 3,
+            exp: "Agreement expression. 'He's happy the class is over, too.'"
+          },
+          {
+            d: [], opts: ["He finished all the problems.", "He doesn't believe what the woman said.", "He was able to finish some of the problems.", "Both he and the woman were unsuccessful on the math problems."], ans: 3,
+            exp: "Agreement about difficulty. 'Both he and the woman were unsuccessful on the math problems.'"
+          },
+          {
+            d: [], opts: ["The man had mailed the package.", "The man had forgotten to go to the post office.", "The man had given the package to the woman to mail.", "The man remembered the package after he went to the post office."], ans: 1,
+            exp: "Emphatic surprise: assumed he had forgotten. 'The man had forgotten to go to the post office.'"
+          },
+          {
+            d: [], opts: ["They should take both cars.", "The woman should try not to be afraid.", "The woman should buy a bigger car.", "They should go together in his car."], ans: 3,
+            exp: "Suggestion expression. 'They should go together in his car.'"
+          },
+          {
+            d: [], opts: ["He wants to know if the muffins taste good.", "He thinks the muffins were recently prepared.", "The muffins are not really fresh.", "He's sure that the muffins were just made."], ans: 3,
+            exp: "Emphatic surprise: 'So they WERE just made!' — 'He's sure that the muffins were just made.'"
+          },
+        ]
+      },
+
+      toefl_rev_1_13: {
+        label: "TOEFL Review Exercise (Skills 1–13)", type: "review",
+        note: "Audio-based. Complete review of all short dialogue skills 1–13.",
+        qs: [
+          {
+            d: [], opts: ["Write a message to the man", "Make some phone calls", "Respond to the man's questions", "Get a new phone installed"], ans: 1,
+            exp: "Suggestion/context. 'Make some phone calls.'"
+          },
+          {
+            d: [], opts: ["She's not sure if she's free.", "She'll mark it on her calendar.", "She'll write a check for the calendar.", "Her calendar says she has to have a meeting at 3:00."], ans: 3,
+            exp: "Almost negative/condition. 'Her calendar says she has to have a meeting at 3:00.'"
+          },
+          {
+            d: [], opts: ["He barely rode the bicycle.", "He didn't have enough money.", "The bicycle didn't need to be paid for.", "He paid for the bicycle."], ans: 3,
+            exp: "Contrary meaning/condition. 'He paid for the bicycle.'"
+          },
+          {
+            d: [], opts: ["She fixed the television.", "Bob made the television work.", "The woman looked at Bob on television.", "Bob works for the woman."], ans: 1,
+            exp: "Multiple nouns: Bob did the work. 'Bob made the television work.'"
+          },
+          {
+            d: [], opts: ["He helped her say what she couldn't say.", "She was unable to say anything about him.", "He hasn't helped her very much.", "What he said was very helpful."], ans: 3,
+            exp: "Emphatic/synonym. 'What he said was very helpful.'"
+          },
+          {
+            d: [], opts: ["The man should spend more time on registration.", "The man should walk more quickly through registration.", "The man should send in his registration materials.", "The man should try to avoid registering next semester."], ans: 2,
+            exp: "Suggestion. 'The man should send in his registration materials.'"
+          },
+          {
+            d: [], opts: ["He couldn't find Paula's phone number, so he didn't call her.", "He couldn't give Paula the list over the phone.", "When he went to call Paula, he couldn't find the list.", "He couldn't recollect the number that was on the list."], ans: 2,
+            exp: "Multiple nouns/condition. 'When he went to call Paula, he couldn't find the list.'"
+          },
+          {
+            d: [], opts: ["She couldn't take her luggage to the store.", "She stored her luggage at the train station.", "She carried her luggage from the train station to the store.", "There were no lockers for her bags."], ans: 1,
+            exp: "Contrary condition. 'She stored her luggage at the train station.'"
+          },
+          {
+            d: [], opts: ["The woman had taken a different major.", "The woman had chosen psychology as a major.", "The woman was uninformed.", "The woman needed to see a psychiatrist."], ans: 1,
+            exp: "Emphatic surprise. 'The woman had chosen psychology as a major.'"
+          },
+          {
+            d: [], opts: ["She would like the man to repeat what he said.", "She thinks the exam could have been a little more difficult.", "She shares the same opinion of the exam as the man.", "She believes that the exam was easy."], ans: 2,
+            exp: "Agreement expression. 'She shares the same opinion of the exam as the man.'"
+          },
+        ]
+      },
+
+      ex15_untrue: {
+        label: "Exercise 15 — Untrue Conditions", type: "exercise",
+        note: "An untrue condition implies the OPPOSITE. 'If I had time' = I do NOT have time.",
+        qs: [
+          {
+            d: [{ s: "(man)", l: "Are you going to have something to eat?" }, { s: "(woman)", l: "If the food looked fresh, I would eat some." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["She is not going to eat.", "The food looks fresh.", "She doesn't like fresh food.", "She already ate something."], ans: 0,
+            exp: "'If the food looked fresh' = the food does NOT look fresh. She is NOT going to eat. Option A."
+          },
+          {
+            d: [{ s: "(woman)", l: "The flight must have taken longer than usual." }, { s: "(man)", l: "Had the flight left on time, we would not have arrived so late." }, { s: "(narrator)", l: "What does the man say about the flight?", q: true }],
+            opts: ["It arrived early.", "It was unusually short.", "It left on time.", "It departed late."], ans: 3,
+            exp: "'Had the flight left on time' = it did NOT leave on time. It departed LATE. Option D."
+          },
+          {
+            d: [{ s: "(man)", l: "Are you sure you want to go out? You do not seem to be feeling very well." }, { s: "(woman)", l: "If there were some aspirin in the medicine cabinet, I would not need to go to the drugstore." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["She really is feeling fine.", "There is plenty of aspirin in the medicine cabinet.", "It is necessary to get some aspirin.", "She does not need to go out."], ans: 2,
+            exp: "'If there were some aspirin' = there is NO aspirin. She DOES need to go get some. Option C."
+          },
+        ]
+      },
+
+      toefl_ex15: {
+        label: "TOEFL Exercise 15 — Untrue Conditions", type: "toefl",
+        note: "Audio-based. Be particularly careful of untrue conditions — the condition implies the OPPOSITE is true.",
+        qs: [
+          {
+            d: [], opts: ["The woman did not need to call him.", "The woman called to let him know about the meeting.", "He's not glad that the woman called.", "He already knew about the meeting when the woman called."], ans: 3,
+            exp: "Untrue condition: she DID call, and he already knew. Option D."
+          },
+          {
+            d: [], opts: ["The man often drives too quickly.", "The police do not stop the man too much.", "The man drove rather slowly.", "The police should not stop the man so often."], ans: 0,
+            exp: "Untrue condition: 'If he didn't drive so fast' — he DOES drive fast. 'The man often drives too quickly.'"
+          },
+          {
+            d: [], opts: ["She's so happy they don't have to work on Friday.", "It would be nice if they could finish their work on Friday.", "She wonders if the man would be nice enough to come in to work in her place on Friday.", "It's too bad they must work on Friday."], ans: 3,
+            exp: "Untrue condition: 'If we didn't have to work on Friday' — they DO have to. 'It's too bad they must work on Friday.'"
+          },
+          {
+            d: [], opts: ["She did not put enough postage on the letter.", "The letter arrived last week.", "The letter did not need more postage.", "She did not put any postage on the letter."], ans: 0,
+            exp: "Untrue condition: 'If I had put enough postage' — she did NOT. 'She did not put enough postage on the letter.'"
+          },
+          {
+            d: [], opts: ["He has a dog.", "He doesn't pay attention to dogs.", "He wishes he had a dog.", "Dogs do not need much attention."], ans: 2,
+            exp: "Wish/untrue condition: 'If I had a dog' — he does NOT have one. 'He wishes he had a dog.'"
+          },
+          {
+            d: [], opts: ["They knew they had to prepare for the exam.", "They didn't prepare for the exam.", "As soon as they knew about the exam, they began to prepare for it.", "They knew that the preparation for the exam would take a lot of time."], ans: 1,
+            exp: "Untrue condition: 'If we had known' — they did NOT know. 'They didn't prepare for the exam.'"
+          },
+          {
+            d: [], opts: ["It costs too much for him to go.", "He agrees to go with them.", "He is unworried about the cost of the restaurant.", "The restaurant is rather inexpensive."], ans: 0,
+            exp: "Untrue condition: 'If it weren't so expensive' — it IS expensive. 'It costs too much for him to go.'"
+          },
+          {
+            d: [], opts: ["When Joe saw the car coming, he tried to get out of the way.", "Joe was able to get out of the way because he saw the car coming.", "Joe jumped out of the way of the oncoming car.", "Because Joe didn't see the car coming, he couldn't get out of the way."], ans: 3,
+            exp: "Untrue condition: 'If Joe had seen the car' — he did NOT see it. Option D."
+          },
+          {
+            d: [], opts: ["The woman didn't come.", "The woman wanted to be there.", "The woman was going to leave immediately.", "The woman was not really there."], ans: 0,
+            exp: "Untrue condition: 'If the woman had come' — she did NOT come. Option A."
+          },
+          {
+            d: [], opts: ["Kathy didn't work as hard as possible because she didn't know what the reward was.", "Kathy couldn't have put more effort into the project to win the prize.", "Kathy won first prize because of her hard work on the art project.", "Kathy worked so hard that she knew first prize was hers."], ans: 2,
+            exp: "Untrue condition past: she DID work hard and DID win. 'Kathy won first prize because of her hard work on the art project.'"
+          },
+        ]
+      },
+
+      toefl_ex_skills14_15: {
+        label: "TOEFL Exercise (Skills 14–15)", type: "toefl",
+        note: "Audio-based. Combined: wishes and untrue conditions.",
+        qs: [
+          {
+            d: [], opts: ["She enjoys violent movies.", "She would have preferred a more violent movie.", "She thinks the film was too violent.", "She enjoyed the movie."], ans: 2,
+            exp: "Wish/condition: 'If it weren't so violent' — it IS too violent. 'She thinks the film was too violent.'"
+          },
+          {
+            d: [], opts: ["He left the windows open.", "The rain did not get in.", "He forgot to close the windows.", "The rain got into the house."], ans: 2,
+            exp: "Untrue condition: 'If he had closed the windows' — he did NOT close them. 'He forgot to close the windows.'"
+          },
+          {
+            d: [], opts: ["Her family is unable to come to graduation.", "It is possible that her family will come.", "Her parents are coming to the ceremonies.", "She is not graduating this year."], ans: 0,
+            exp: "Wish/condition: 'I wish my family could come' — they CANNOT. 'Her family is unable to come to graduation.'"
+          },
+          {
+            d: [], opts: ["He is going to miss the conference.", "He will take his vacation next week.", "He will attend the conference.", "He won't miss his vacation."], ans: 2,
+            exp: "Untrue condition implies conference IS happening. 'He will attend the conference.'"
+          },
+          {
+            d: [], opts: ["He enjoys chemistry lab.", "He doesn't have chemistry lab this afternoon.", "He isn't taking chemistry class.", "He has to go to the lab."], ans: 3,
+            exp: "Untrue condition: 'If I didn't have to go to lab' — he DOES have to. 'He has to go to the lab.'"
+          },
+          {
+            d: [], opts: ["They filled up the gas tank at the last service station.", "Although they filled up the tank, they still ran out of gas.", "Even though they didn't stop at the service station, they didn't run out of gas.", "They ran out of gas because they didn't stop at the gas station."], ans: 3,
+            exp: "Untrue condition: they did NOT stop — ran out of gas. Option D."
+          },
+          {
+            d: [], opts: ["His schedule is not really heavy.", "He needs to add a few more courses.", "He enrolled in more courses than he really wants.", "He will register for a lot of courses next semester."], ans: 2,
+            exp: "Untrue condition: he DID register for many courses. 'He enrolled in more courses than he really wants.'"
+          },
+          {
+            d: [], opts: ["She never took the bus to work.", "She regularly takes the bus.", "She doesn't know how to get to work.", "She gets lost on the bus."], ans: 1,
+            exp: "Untrue condition: 'If she didn't take the bus' — she DOES. 'She regularly takes the bus.'"
+          },
+          {
+            d: [], opts: ["She bought some eggs at the store.", "She doesn't have any eggs to lend him.", "He can borrow some eggs.", "She didn't go to the store."], ans: 3,
+            exp: "Untrue condition: 'If I had gone to the store' — she did NOT. 'She didn't go to the store.'"
+          },
+          {
+            d: [], opts: ["Teresa is feeling a lot better.", "The doctor didn't prescribe the medicine.", "Teresa didn't follow the doctor's orders.", "Teresa did exactly what the doctor said."], ans: 3,
+            exp: "Untrue condition: 'If Teresa hadn't followed the doctor's orders' — she DID follow them. Option D."
+          },
+        ]
+      },
+
+      toefl_rev_1_15: {
+        label: "TOEFL Review Exercise (Skills 1–15)", type: "review",
+        note: "Audio-based. Complete review of all short dialogue skills 1–15.",
+        qs: [
+          {
+            d: [], opts: ["Drinking the hot tea", "Making more tea in a few minutes", "Letting the tea cool off a bit", "Having the tea immediately"], ans: 2,
+            exp: "Suggestion. 'Letting the tea cool off a bit.'"
+          },
+          {
+            d: [], opts: ["In a bus station", "In a store", "In a restaurant", "In a theater"], ans: 2,
+            exp: "Context clues. 'In a restaurant.'"
+          },
+          {
+            d: [], opts: ["He's unhappy to end the semester.", "He's glad to be finishing school.", "He couldn't be happier to begin the semester.", "The end of the semester is making him feel sad."], ans: 1,
+            exp: "Emphatic/comparative. 'He's glad to be finishing school.'"
+          },
+          {
+            d: [], opts: ["The storm destroyed the house.", "The house blocked the trees.", "The stormy weather caused the trees to fall.", "During the storm, someone knocked on the door of the house."], ans: 2,
+            exp: "Condition/cause. 'The stormy weather caused the trees to fall.'"
+          },
+          {
+            d: [], opts: ["The team hasn't won often.", "He usually doesn't pay attention to the football team.", "It's out of the ordinary for the team to lose.", "He usually hears about the football games."], ans: 2,
+            exp: "Almost negative/emphatic. 'It's out of the ordinary for the team to lose.'"
+          },
+          {
+            d: [], opts: ["He went to the office every morning.", "He was not working.", "He had to arrive at work earlier than 8 o'clock.", "He had a job."], ans: 3,
+            exp: "Condition/implication. 'He had a job.'"
+          },
+          {
+            d: [], opts: ["He did not enjoy his vacation as much as possible.", "He got lost on his vacation.", "The vacation was really enjoyable.", "He did not really lose his passport."], ans: 2,
+            exp: "Emphatic/condition. 'The vacation was really enjoyable.'"
+          },
+          {
+            d: [], opts: ["It will take eight hours to get to Riverdale on the bus.", "He believes he knows the correct bus.", "He doesn't know where Riverdale is.", "He assures the woman that he knows the way to Riverdale."], ans: 3,
+            exp: "Certainty/agreement. 'He assures the woman that he knows the way to Riverdale.'"
+          },
+          {
+            d: [], opts: ["The laboratory assistant completed one experiment.", "The laboratory assistant couldn't finish one experiment.", "The laboratory assistant didn't want to do more experiments.", "None of the experiments could be completed."], ans: 0,
+            exp: "Almost negative: barely completed one. 'The laboratory assistant completed one experiment.'"
+          },
+          {
+            d: [], opts: ["She would like the man to repeat what he said.", "The semester is really over!", "The semester will never end.", "She has the same wish as the man."], ans: 3,
+            exp: "Agreement/wish. 'She has the same wish as the man.'"
+          },
+        ]
+      },
+
+      ex17_idioms: {
+        label: "Exercise 17 — Idioms", type: "exercise",
+        note: "The best answer might NOT seem related to the idiom in the last line — idioms are metaphorical.",
+        qs: [
+          {
+            d: [{ s: "(man)", l: "I have to take advanced biology from Professor Stanton next semester." }, { s: "(woman)", l: "Don't worry about it. It's a piece of cake." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["The man should try a piece of cake.", "The man should worry about the course.", "The man shouldn't take part in the course.", "The course is easy."], ans: 3,
+            exp: "Idiom: 'a piece of cake' = very easy. The course is easy. Option D."
+          },
+          {
+            d: [{ s: "(woman)", l: "Thanks for changing the oil and putting air in the tires." }, { s: "(man)", l: "It's all in a day's work." }, { s: "(narrator)", l: "What does the man mean?", q: true }],
+            opts: ["It will take him a whole day to do the job.", "This is a regular part of his job.", "He can do the work at the end of the day.", "He's too busy today to do the work."], ans: 1,
+            exp: "Idiom: 'all in a day's work' = a normal routine task. Option B."
+          },
+          {
+            d: [{ s: "(man)", l: "What was it like while the president was giving his speech?" }, { s: "(woman)", l: "You could hear a pin drop." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["The president dropped his pen.", "The audience was very quiet.", "The speech contained several puns.", "The president discussed dropping a bomb."], ans: 1,
+            exp: "Idiom: 'you could hear a pin drop' = complete silence. Option B."
+          },
+        ]
+      },
+
+      toefl_ex17: {
+        label: "TOEFL Exercise 17 — Idioms", type: "toefl",
+        note: "Audio-based. Be particularly careful of idioms.",
+        qs: [
+          {
+            d: [], opts: ["The man's never late.", "It's good that the man was fifteen minutes late.", "It's never good to be late for class.", "It's good that the man went to class, on time or not."], ans: 2,
+            exp: "Idiom: 'better late than never' — 'It's never good to be late for class.'"
+          },
+          {
+            d: [], opts: ["The woman's work is all in her head.", "The woman has to do two experiments rather than one.", "It's a good idea to work together.", "The biology experiment concerns two-headed animals."], ans: 2,
+            exp: "Idiom: 'two heads are better than one' = working together is better. Option C."
+          },
+          {
+            d: [], opts: ["She has no time to work now.", "She doesn't want to work on the report either.", "It's best to get it over with now.", "There's no time to present the report now."], ans: 2,
+            exp: "Idiom: 'no time like the present' = do it now. Option C."
+          },
+          {
+            d: [], opts: ["She's very lucky to get the last book.", "She's sorry she can't get the book today.", "She always has good luck with books.", "She just wanted to look at the book."], ans: 0,
+            exp: "Idiom: 'in luck' = she was lucky. 'She's very lucky to get the last book.'"
+          },
+          {
+            d: [], opts: ["The man doesn't like eating in restaurants.", "She doesn't really like that restaurant.", "Each of them has his own restaurant.", "Everyone has different tastes."], ans: 3,
+            exp: "Idiom: 'to each his own' = everyone has different preferences. 'Everyone has different tastes.'"
+          },
+          {
+            d: [], opts: ["She'll do it immediately.", "It is not possible to do it.", "The man should have told her sooner.", "She would have done it if the man had asked."], ans: 0,
+            exp: "Idiom: 'on the double' = immediately. 'She'll do it immediately.'"
+          },
+          {
+            d: [], opts: ["Abbie used a feather in his art project.", "He was knocked down.", "He was really surprised.", "Abbie's father knocked on the door."], ans: 2,
+            exp: "Idiom: 'knock someone over with a feather' = very surprised. 'He was really surprised.'"
+          },
+          {
+            d: [], opts: ["They are taking a boat trip together.", "The six chapters are all about the boat.", "Everyone has to do the same thing.", "The man will read while he's on the boat."], ans: 2,
+            exp: "Idiom: 'in the same boat' = in the same situation. 'Everyone has to do the same thing.'"
+          },
+          {
+            d: [], opts: ["She is taller than the others.", "She put her science project on top of the others.", "She has a really good head on her shoulders.", "She's the best of them all."], ans: 2,
+            exp: "Idiom: 'a good head on her shoulders' = sensible, intelligent. Option C."
+          },
+          {
+            d: [], opts: ["The man needs to improve his penmanship.", "The man doesn't really need to apply for the scholarship.", "The man needs to fill out the application with dots and crosses.", "The man needs to pay attention to every detail."], ans: 3,
+            exp: "Idiom: 'dot the i's and cross the t's' = pay attention to every detail. Option D."
+          },
+        ]
+      },
+
+      toefl_ex16: {
+        label: "TOEFL Exercise 16 — Two/Three-Part Verbs", type: "toefl",
+        note: "Audio-based. Be particularly careful of two- and three-part verbs (phrasal verbs).",
+        qs: [
+          {
+            d: [], opts: ["Phone their neighbors", "Call to their neighbors over the fence", "Help the neighbors move in", "Visit their neighbors"], ans: 0,
+            exp: "Phrasal verb: 'call up' = phone. 'Phone their neighbors.'"
+          },
+          {
+            d: [], opts: ["The course is becoming more interesting.", "The course used to be more interesting.", "The course is about the same as it was.", "He's not as bored in the class as the woman."], ans: 0,
+            exp: "Phrasal verb: 'pick up' = improve/become more interesting. Option A."
+          },
+          {
+            d: [], opts: ["Her headache is getting worse.", "She felt better this morning than now.", "She seems to be feeling better now.", "She is just getting another headache now."], ans: 2,
+            exp: "Phrasal verb: 'come around' = recover. 'She seems to be feeling better now.'"
+          },
+          {
+            d: [], opts: ["The man should stop breaking his cigarettes in half.", "The man should decrease the number of cigarettes he smokes.", "The man should cut the ends off his cigarettes.", "The man should stop smoking completely."], ans: 3,
+            exp: "Phrasal verb: 'cut out' = stop completely. 'The man should stop smoking completely.'"
+          },
+          {
+            d: [], opts: ["The client presented his case to the lawyer.", "The client was upset about the lawyer's rejection.", "The client was annoyed because the lawyer returned the suitcase.", "The client made the lawyer unhappy about the case."], ans: 1,
+            exp: "Phrasal verb: 'turn down' = reject. 'The client was upset about the lawyer's rejection.'"
+          },
+          {
+            d: [], opts: ["She gets along with lots of people.", "She gets back at people who cross her.", "She gets rid of people she doesn't want to spend time with.", "She tries to get ahead of everyone else."], ans: 2,
+            exp: "Phrasal verb: 'get rid of' = remove/dispose of. Option C."
+          },
+          {
+            d: [], opts: ["He must try to find the children.", "It is necessary for him to clean up after the children.", "The children need to be watched.", "He's going to see what the children have done."], ans: 2,
+            exp: "Phrasal verb: 'look after' = watch/care for. 'The children need to be watched.'"
+          },
+          {
+            d: [], opts: ["They are going on strike.", "They are lying down on the job.", "They are being released from their jobs.", "They are relaxing too much at the factory."], ans: 0,
+            exp: "Phrasal verb: 'walk out' = go on strike. 'They are going on strike.'"
+          },
+          {
+            d: [], opts: ["He is betting that the football team will win.", "He really wants to succeed.", "It is not so difficult to play on the football team.", "He pulled a muscle while playing football."], ans: 1,
+            exp: "Phrasal verb: 'go for it' = want to succeed. 'He really wants to succeed.'"
+          },
+          {
+            d: [], opts: ["She's unsure why she tolerates the man.", "She doesn't know where she put her keys.", "She is actually the one who put the keys in the car.", "She can't understand why the man did what he did."], ans: 3,
+            exp: "Phrasal verb: 'put up with' = tolerate. 'She can't understand why the man did what he did.'"
+          },
+        ]
+      },
+
+      toefl_ex_skills16_17: {
+        label: "TOEFL Exercise (Skills 16–17)", type: "toefl",
+        note: "Audio-based. Combined: two/three-part verbs and idioms.",
+        qs: [
+          {
+            d: [], opts: ["She gets lots of take-out dinners.", "She and her roommate alternate cooking responsibilities.", "Her roommate cooks more often than she does.", "Her roommate does the cooking while she does other chores."], ans: 3,
+            exp: "Phrasal/idiom: arrangement where roommate cooks. 'Her roommate does the cooking while she does other chores.'"
+          },
+          {
+            d: [], opts: ["He resembles his father.", "He has a chipped tooth.", "He lives one block from his father.", "He and his father were playing a game with blocks."], ans: 0,
+            exp: "Idiom: 'a chip off the old block' = resembles parent. 'He resembles his father.'"
+          },
+          {
+            d: [], opts: ["She's going somewhere else.", "She does not like football.", "She has a lot of work to do.", "She is getting sick."], ans: 2,
+            exp: "Phrasal verb: 'tied up' = busy. 'She has a lot of work to do.'"
+          },
+          {
+            d: [], opts: ["He put his foot where he should not have.", "He put the food that the teacher gave him into his mouth.", "He said something embarrassing.", "He told the teacher that his foot was hurt."], ans: 2,
+            exp: "Idiom: 'put his foot in his mouth' = said something embarrassing. Option C."
+          },
+          {
+            d: [], opts: ["She'd like the man to delay his trip.", "She prefers that the man leave a few minutes earlier than he planned.", "She wants to know if the man will stay in the market for only a few minutes.", "She'd like to talk to the man for a few minutes."], ans: 3,
+            exp: "Phrasal verb: 'hold on' = wait. 'She'd like to talk to the man for a few minutes.'"
+          },
+          {
+            d: [], opts: ["The man might start a fire in the park.", "The man parked his car near the fire.", "The man's thinking of doing something dangerous.", "The man's playing a game in the park."], ans: 2,
+            exp: "Idiom: 'playing with fire' = doing something dangerous. Option C."
+          },
+          {
+            d: [], opts: ["The machines do not act very well.", "The machines don't really bother her.", "She would like them to stop the noise.", "She wishes the machines would cut the wood."], ans: 2,
+            exp: "Phrasal verb: 'cut it out' = stop it. 'She would like them to stop the noise.'"
+          },
+          {
+            d: [], opts: ["Fred has a dog that barks a lot.", "Fred has hidden the money in a tree.", "Fred has backed into a tree.", "Fred has made a mistake."], ans: 3,
+            exp: "Idiom: 'barking up the wrong tree' = pursuing wrong course. 'Fred has made a mistake.'"
+          },
+          {
+            d: [], opts: ["She will give him any help he needs.", "He has to give away what he doesn't need.", "He should not give up.", "He should give back what he borrowed."], ans: 3,
+            exp: "Phrasal verb: 'give back' = return. 'He should give back what he borrowed.'"
+          },
+          {
+            d: [], opts: ["She'd rather go swimming than do the homework.", "The chemistry homework is really difficult.", "She's doing the homework by the swimming pool.", "The stream is drying up."], ans: 0,
+            exp: "Context + phrasal verb. 'She'd rather go swimming than do the homework.'"
+          },
+        ]
+      },
+
+      toefl_rev_1_17: {
+        label: "TOEFL Review Exercise (Skills 1–17)", type: "review",
+        note: "Audio-based. Complete review of all short dialogue skills 1–17.",
+        qs: [
+          {
+            d: [], opts: ["There's no more wood inside.", "The wood in the fireplace should be put outside.", "There's a fire outside.", "He needs to bring some wood outside."], ans: 3,
+            exp: "Phrasal verb: 'run out of' = no more. 'He needs to bring some wood outside.'"
+          },
+          {
+            d: [], opts: ["She worked late at a conference.", "Her meeting was canceled.", "She called a conference at work.", "She was late to a conference."], ans: 3,
+            exp: "Idiom: 'held up' = delayed. 'She was late to a conference.'"
+          },
+          {
+            d: [], opts: ["In a hospital", "At a police station", "At the beach", "In a locker room"], ans: 0,
+            exp: "Context clues suggest hospital setting. 'In a hospital.'"
+          },
+          {
+            d: [], opts: ["There was too much room on the dance floor.", "He enjoyed the room where they went dancing.", "The dance floor was too crowded.", "The club needed more rooms for dancing."], ans: 2,
+            exp: "Idiom: 'wall to wall people' = very crowded. 'The dance floor was too crowded.'"
+          },
+          {
+            d: [], opts: ["He could not understand the fax machine.", "He wrote the letter that was sent.", "The fax machine was easy for him to use.", "He was not very good with figures."], ans: 2,
+            exp: "Idiom: 'a piece of cake' = easy. 'The fax machine was easy for him to use.'"
+          },
+          {
+            d: [], opts: ["The woman hit her head on a nail.", "The woman hit his new car.", "The woman was exactly right.", "The woman bought the new car."], ans: 2,
+            exp: "Idiom: 'hit the nail on the head' = exactly right. 'The woman was exactly right.'"
+          },
+          {
+            d: [], opts: ["He would like the woman to help him find his paper.", "He wants the woman to put the paper away.", "He needs the woman to review the paper.", "He would like the woman to write the paper for him."], ans: 0,
+            exp: "Phrasal verb: 'track down' = find. 'He would like the woman to help him find his paper.'"
+          },
+          {
+            d: [], opts: ["Information about the problem is unavailable.", "No one has been informed.", "Everybody knows what is going on.", "Nobody is aware that the problem is serious."], ans: 2,
+            exp: "Idiom: 'word is out' = everyone knows. 'Everybody knows what is going on.'"
+          },
+          {
+            d: [], opts: ["He did not sleep well.", "He never woke up this morning.", "The alarm failed to go off.", "He needed a loud alarm to wake up."], ans: 2,
+            exp: "Idiom: 'sleep through' + alarm context. 'The alarm failed to go off.'"
+          },
+          {
+            d: [], opts: ["The pilot made an emergency landing.", "The pilot was forced to leave the plane in a hurry.", "The pilot fielded questions about the forced landing.", "The plane was damaged when it landed forcefully."], ans: 0,
+            exp: "Idiom: 'come in for a landing' = emergency landing. 'The pilot made an emergency landing.'"
+          },
+        ]
+      },
+
+      toefl_ex22_long: {
+        label: "TOEFL Exercise 22 — Long Conversations", type: "toefl",
+        note: "Audio-based. Listen to each complete conversation and answer the questions that follow.",
+        qs: [
+          { d: [], opts: ["Find work on campus", "Work in the employment office", "Help students find jobs", "Ask the woman questions"], ans: 2, exp: "Role described in conversation. 'Help students find jobs.'" },
+          { d: [], opts: ["In the library", "In a classroom", "In a campus office", "In an apartment"], ans: 2, exp: "Setting clues. 'In a campus office.'" },
+          { d: [], opts: ["No more than ten", "At least twenty", "Not more than twenty", "Up to ten"], ans: 1, exp: "Number detail. 'At least twenty.'" },
+          { d: [], opts: ["Every morning", "Afternoons and weekends", "When he's in class", "Weekdays"], ans: 1, exp: "Schedule detail. 'Afternoons and weekends.'" },
+          { d: [], opts: ["Fill out a form", "Give her some additional information", "Tell her some news", "Phone her"], ans: 0, exp: "Process described. 'Fill out a form.'" },
+          { d: [], opts: ["Just before a vacation", "Just after the end of a school semester", "At the end of the summer", "Just after a break from school"], ans: 1, exp: "Timing context. 'Just after the end of a school semester.'" },
+          { d: [], opts: ["A trip to visit the Eskimos", "A trip the woman is planning to take", "A trip the man has already taken", "A camping trip the man and woman took"], ans: 2, exp: "Conversation reference. 'A trip the man has already taken.'" },
+          { d: [], opts: ["Three hours", "Three complete days", "Three classes", "Three weeks"], ans: 1, exp: "Duration mentioned. 'Three complete days.'" },
+          { d: [], opts: ["Sleeping outside on the ground", "Spending time in a hot tub", "Relaxing at the lodge", "Enjoying excellent food"], ans: 2, exp: "Activity described. 'Relaxing at the lodge.'" },
+          { d: [], opts: ["She'd be scared, but she'd like to try.", "She can't wait.", "It would be quite exciting for her.", "She'd prefer not to try."], ans: 2, exp: "Reaction described. 'It would be quite exciting for her.'" },
+          { d: [], opts: ["All kinds of pollution", "How acid rain has harmed the earth", "Pollution from cars and factories", "The causes and possible effects of acid rain"], ans: 3, exp: "Topic of long talk. 'The causes and possible effects of acid rain.'" },
+          { d: [], opts: ["Nuclear power", "Electricity", "Burning coal and oil", "Solar power"], ans: 2, exp: "Detail from talk. 'Burning coal and oil.'" },
+          { d: [], opts: ["From sulfur dioxide and water vapor", "From sulfur dioxide and nitrogen oxide", "From nitric acid and sulfur dioxide", "From water vapor and nitric acid"], ans: 1, exp: "Scientific detail. 'From sulfur dioxide and nitrogen oxide.'" },
+          { d: [], opts: ["Only in North America", "At the North and South Poles", "In parts of several northern continents", "In equatorial areas"], ans: 2, exp: "Geographic detail. 'In parts of several northern continents.'" },
+          { d: [], opts: ["She should protect herself from the rain.", "She should clean up the water supply.", "She should read a novel.", "She should get more information about acid rain."], ans: 3, exp: "Recommendation. 'She should get more information about acid rain.'" },
+        ]
+      },
+
+      toefl_rev18_22: {
+        label: "TOEFL Review Exercise (Skills 18–22)", type: "review",
+        note: "Audio-based. Long conversations: anticipate topics, draw conclusions, listen for answers in order.",
+        qs: [
+          { d: [], opts: ["To a concert", "To a rehearsal", "To a lecture", "To the library"], ans: 2, exp: "Context of long conversation. 'To a lecture.'" },
+          { d: [], opts: ["One", "Two", "Three", "Four"], ans: 1, exp: "Number mentioned. 'Two.'" },
+          { d: [], opts: ["The bus does not go directly to the Music Building.", "The bus goes very slowly to the Music Building.", "The bus sometimes does not come.", "The bus will not arrive for a while."], ans: 0, exp: "Transportation detail. 'The bus does not go directly to the Music Building.'" },
+          { d: [], opts: ["Walk", "Wait for the bus", "Miss the lecture", "Think of another plan"], ans: 0, exp: "Decision made. 'Walk.'" },
+          { d: [], opts: ["Boring", "Fantastic", "Lengthy", "Faithful"], ans: 1, exp: "Description in conversation. 'Fantastic.'" },
+          { d: [], opts: ["By car", "By plane", "By train", "By bicycle"], ans: 2, exp: "Transportation detail. 'By train.'" },
+          { d: [], opts: ["She went directly to Yellowstone.", "She spent a few weeks in Laramie.", "She stopped at the Devil's Tower National Monument.", "She made a few stops before going on to Yellowstone."], ans: 3, exp: "Travel detail. 'She made a few stops before going on to Yellowstone.'" },
+          { d: [], opts: ["Laramie", "Devil's Tower National Monument", "Old Faithful", "Wyoming"], ans: 1, exp: "Specific stop mentioned. 'Devil's Tower National Monument.'" },
+          { d: [], opts: ["Hear again about Yellowstone", "Take a trip to Yellowstone", "Get a job in a national park", "Move to Yellowstone"], ans: 1, exp: "Expressed wish. 'Take a trip to Yellowstone.'" },
+          { d: [], opts: ["How and when we celebrate Thanksgiving", "The traditional Thanksgiving dinner", "When Thanksgiving began", "Abraham Lincoln"], ans: 2, exp: "Topic of talk. 'When Thanksgiving began.'" },
+          { d: [], opts: ["With colonists in Massachusetts", "Alone and thinking about how Thanksgiving developed", "With a big Thanksgiving dinner", "In an untraditional manner"], ans: 0, exp: "Historical detail. 'With colonists in Massachusetts.'" },
+          { d: [], opts: ["The terrible winter", "The corn harvest", "The development of Thanksgiving Day", "For getting the whole family together"], ans: 2, exp: "Main point. 'The development of Thanksgiving Day.'" },
+          { d: [], opts: ["At many different times", "In July", "Any time in November", "On a Thursday in November"], ans: 3, exp: "Specific timing. 'On a Thursday in November.'" },
+        ]
+      },
+
+      toefl_rev23_27: {
+        label: "TOEFL Review Exercise (Skills 23–27)", type: "review",
+        note: "Audio-based. Long talks: determine topic, draw conclusions, listen for answers in order.",
+        qs: [
+          { d: [], opts: ["Other librarians", "Undergraduate students", "Students who are not in the business department", "Graduate business students"], ans: 3, exp: "Audience of talk. 'Graduate business students.'" },
+          { d: [], opts: ["It opens at 7:00 a.m.", "It closes at 7:00 p.m.", "It closes at midnight.", "It is always open."], ans: 2, exp: "Schedule detail. 'It closes at midnight.'" },
+          { d: [], opts: ["Computer area and business materials", "Magazines and newspapers", "Business department and library staff offices", "First and second floors of the library"], ans: 0, exp: "Location detail. 'Computer area and business materials.'" },
+          { d: [], opts: ["Go home", "Return to class", "Work on the computers", "Tour the library"], ans: 3, exp: "Suggested activity. 'Tour the library.'" },
+          { d: [], opts: ["A student in health services", "A drug abuse lecturer", "A dermatologist", "A representative of the tobacco industry"], ans: 2, exp: "Speaker identification. 'A dermatologist.'" },
+          { d: [], opts: ["How to reduce nicotine and other addictions", "How stress affects the skin", "The effects of alcohol on health", "How to achieve optimal health"], ans: 1, exp: "Topic of talk. 'How stress affects the skin.'" },
+          { d: [], opts: ["Alcohol", "Nicotine", "Caffeine", "A reduced supply of blood"], ans: 3, exp: "Scientific detail. 'A reduced supply of blood.'" },
+          { d: [], opts: ["It increases the flow of blood to the skin.", "It causes increased consumption of alcohol.", "It prevents the skin from receiving enough nourishment.", "It causes stress."], ans: 2, exp: "Effect described. 'It prevents the skin from receiving enough nourishment.'" },
+          { d: [], opts: ["Before the Civil War", "At the end of the Civil War", "At the beginning of the twentieth century", "Within the last decade"], ans: 0, exp: "Historical time period. 'Before the Civil War.'" },
+          { d: [], opts: ["The Civil War ended.", "The U.S. government issued a large amount of paper currency.", "The price of gold plummeted.", "The value of gold became inflated."], ans: 1, exp: "Historical event. 'The U.S. government issued a large amount of paper currency.'" },
+          { d: [], opts: ["The president", "The president's brother", "The president's brother-in-law", "The president's wife"], ans: 2, exp: "Person mentioned. 'The president's brother-in-law.'" },
+          { d: [], opts: ["Issue greenbacks", "Sell gold", "Corner the gold market", "Hold its gold reserves"], ans: 2, exp: "Action mentioned. 'Corner the gold market.'" },
+        ]
+      },
+
+      toefl_ex27: {
+        label: "TOEFL Exercise 27 — Long Talks", type: "toefl",
+        note: "Audio-based. Listen to each complete talk and answer the questions that follow.",
+        qs: [
+          { d: [], opts: ["During a biology laboratory session", "In a biology study group", "On the first day of class", "Just before the final exam"], ans: 2, exp: "Setting of talk. 'On the first day of class.'" },
+          { d: [], opts: ["Once a week", "Two times a week", "Three times a week", "For fifteen hours"], ans: 1, exp: "Schedule detail. 'Two times a week.'" },
+          { d: [], opts: ["To do the first laboratory assignment", "To take the first exam", "To study the laboratory manual", "To read one chapter of the text"], ans: 3, exp: "Assignment detail. 'To read one chapter of the text.'" },
+          { d: [], opts: ["Room assignments", "Exam topics", "Reading assignments", "The first lecture"], ans: 2, exp: "Topic mentioned. 'Reading assignments.'" },
+          { d: [], opts: ["Exams and lab work", "Reading and writing assignments", "Class participation and grades on examinations", "Lecture and laboratory attendance"], ans: 0, exp: "Grade components. 'Exams and lab work.'" },
+          { d: [], opts: ["What caused the Ring of Fire", "The volcanoes of the Ring of Fire", "Hawaiian volcanoes", "Different types of volcanoes"], ans: 1, exp: "Topic of second talk. 'The volcanoes of the Ring of Fire.'" },
+          { d: [], opts: ["The Ring of Fire", "The characteristics of volcanoes in the Ring of Fire", "The volcanoes of Hawaii", "Mauna Loa"], ans: 1, exp: "Main topic. 'The characteristics of volcanoes in the Ring of Fire.'" },
+          { d: [], opts: ["In Hawaii", "In the United States", "Along the Ring of Fire", "Within the Ring of Fire"], ans: 2, exp: "Location detail. 'Along the Ring of Fire.'" },
+          { d: [], opts: ["They are not so violent.", "They are located along the Ring of Fire.", "They contain a lot of gas.", "They contain thick lava."], ans: 2, exp: "Characteristic detail. 'They contain a lot of gas.'" },
+          { d: [], opts: ["A volcano on the Ring of Fire", "An island in Hawaii", "A long, low volcanic mountain", "An explosive volcano"], ans: 2, exp: "Definition detail. 'A long, low volcanic mountain.'" },
+          { d: [], opts: ["An artist", "A tour guide", "An Indian", "Orville Wright"], ans: 3, exp: "Person identified. 'Orville Wright.'" },
+          { d: [], opts: ["Several", "Sixty thousand", "Sixteen million", "Millions and millions"], ans: 2, exp: "Number mentioned. 'Sixteen million.'" },
+          { d: [], opts: ["The National Air and Space Museum", "The Museum of Natural History", "The American History Museum", "The Smithsonian Arts and Industries Building"], ans: 0, exp: "Museum identified. 'The National Air and Space Museum.'" },
+          { d: [], opts: ["The American History Museum", "The Smithsonian Arts and Industries Building", "The Washington Museum", "The National Air and Space Museum"], ans: 3, exp: "Location of Wright Brothers' plane. 'The National Air and Space Museum.'" },
+          { d: [], opts: ["To the White House", "To the Smithsonian", "To the mall", "To various other museums"], ans: 1, exp: "Destination mentioned. 'To the Smithsonian.'" },
+        ]
+      },
+      ex14: {
+        label: "Exercise 14 — Wishes", type: "exercise",
+        note: "A wish implies the OPPOSITE of reality. 'I wish I had time' = I do NOT have time.",
+        qs: [
+          {
+            d: [{ s: "(man)", l: "I have to take advanced biology from Professor Stanton next semester." }, { s: "(woman)", l: "Don't worry about it. It's a piece of cake." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["The man should try a piece of cake.", "The man should worry about the course.", "The man shouldn't take part in the course.", "The course is easy."], ans: 3,
+            exp: "Idiom: 'a piece of cake' = very easy. The course is easy. Option D."
+          },
+          {
+            d: [{ s: "(woman)", l: "Thanks for changing the oil and putting air in the tires." }, { s: "(man)", l: "It's all in a day's work." }, { s: "(narrator)", l: "What does the man mean?", q: true }],
+            opts: ["It will take him a whole day to do the job.", "This is a regular part of his job.", "He can do the work at the end of the day.", "He's too busy today to do the work."], ans: 1,
+            exp: "Idiom: 'all in a day's work' = a normal routine task. Option B."
+          },
+          {
+            d: [{ s: "(man)", l: "What was it like while the president was giving his speech?" }, { s: "(woman)", l: "You could hear a pin drop." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["The president dropped his pen.", "The audience was very quiet.", "The speech contained several puns.", "The president discussed dropping a bomb."], ans: 1,
+            exp: "Idiom: 'you could hear a pin drop' = complete silence. Option B."
+          },
+        ]
+      },
+      toefl_ex14: {
+        label: "TOEFL Exercise 14 — Wishes", type: "toefl",
+        note: "Audio-based. Remember that a wish implies an OPPOSITE meaning of what is currently true.",
+        qs: [
+          {
+            d: [], opts: ["The line is short.", "There are not very many people in front of them.", "The line in front of them is too long.", "Not many people want to get tickets to the concert."], ans: 2,
+            exp: "Wish implies opposite: wishing the line was shorter — 'The line in front of them is too long.'"
+          },
+          {
+            d: [], opts: ["The woman told him about the ticket.", "He wanted the woman to get a ticket.", "He was happy to find out about the ticket.", "The woman did not tell him about the ticket."], ans: 3,
+            exp: "Wish implies opposite: he wishes she had told him — 'The woman did not tell him about the ticket.'"
+          },
+          {
+            d: [], opts: ["She is not working too many hours next week.", "She doesn't have enough hours next week.", "She is working too many hours next week.", "She likes working so much."], ans: 2,
+            exp: "Wish implies opposite: wishes she worked fewer hours — 'She is working too many hours next week.'"
+          },
+          {
+            d: [], opts: ["The department did not change the requirements.", "She likes the new requirements.", "She changed her apartment just before graduation.", "She does not like the changes that the department made."], ans: 3,
+            exp: "Wish implies opposite: wishes they hadn't changed — 'She does not like the changes that the department made.'"
+          },
+          {
+            d: [], opts: ["He is going to the theater.", "He doesn't have enough money.", "He isn't afraid to go.", "He doesn't want to spend the money."], ans: 1,
+            exp: "Wish implies opposite: wishes he had money — 'He doesn't have enough money.'"
+          },
+          {
+            d: [], opts: ["Harry did not prepare enough for the exam.", "Harry studied hard for the exam.", "He has not heard anything about Harry.", "He had a bet with Harry."], ans: 0,
+            exp: "Wish implies opposite: wishes Harry had studied — 'Harry did not prepare enough for the exam.'"
+          },
+          {
+            d: [], opts: ["The algebra course that she is taking is not her favorite.", "She doesn't need to take the algebra course.", "She has a good schedule of courses this semester.", "She's good at math, but she's taking the algebra course anyway."], ans: 0,
+            exp: "Wish implies opposite: wishes she didn't have to take it — 'The algebra course that she is taking is not her favorite.'"
+          },
+          {
+            d: [], opts: ["He was able to find a cheap apartment.", "His apartment is too expensive.", "He doesn't like the apartment's location.", "The apartment is cheap because of its location."], ans: 1,
+            exp: "Wish implies opposite: wishes apartment were cheaper — 'His apartment is too expensive.'"
+          },
+          {
+            d: [], opts: ["He arrived early at the auditorium.", "He got one of the best seats in the auditorium.", "He was not early enough to get a seat at the front.", "He prefers sitting at the back."], ans: 2,
+            exp: "Wish implies opposite: wishes he had arrived earlier — 'He was not early enough to get a seat at the front.'"
+          },
+          {
+            d: [], opts: ["He'd like to work on his social skills at the game.", "He wishes he could work on his term paper for sociology.", "He can't attend the game because of his schoolwork.", "Sociology is less important to him than football this weekend."], ans: 2,
+            exp: "Wish implies opposite: wishes he could go to game — 'He can't attend the game because of his schoolwork.'"
+          },
+        ]
+      },
+      ex16_dialogue: {
+        label: "Exercise 16 — Two-Part Verbs (Dialogue)", type: "exercise",
+        note: "Phrasal verbs describe a situation metaphorically. The best answer captures the real meaning of the phrasal verb.",
+        qs: [
+          {
+            d: [{ s: "(man)", l: "I can't seem to get the door unlocked." }, { s: "(woman)", l: "That isn't the right key for the door." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["The key in the drawer is on the right.", "The man should write the message on the door.", "The man has the wrong key.", "The right key isn't in the drawer."], ans: 2,
+            exp: "'That isn't the right key' — the man has the WRONG key. Option C."
+          },
+          {
+            d: [{ s: "(man)", l: "Were you pleased with last week's convention?" }, { s: "(woman)", l: "Nothing went as planned." }, { s: "(narrator)", l: "What does the woman mean?", q: true }],
+            opts: ["The convention was disorganized.", "She didn't plan to attend the convention.", "She planned the convention last week.", "She wasn't pleased with the last week of the convention."], ans: 0,
+            exp: "'Nothing went as planned' = everything was disorganized. Option A."
+          },
+          {
+            d: [{ s: "(woman)", l: "Are you planning to go to college next year?" }, { s: "(man)", l: "I'm really unsure about the idea." }, { s: "(narrator)", l: "What does the man mean?", q: true }],
+            opts: ["He definitely wants to go to college.", "He is certain about his plans.", "He's hesitant about attending college.", "His idea is to go to college."], ans: 2,
+            exp: "'Unsure' = hesitant/uncertain — 'He's hesitant about attending college.' Option C."
+          },
+        ]
+      },
+      toefl_ex_skills14_revised: {
+        label: "TOEFL Exercise (Skills 14–15) — Full Version", type: "toefl",
+        note: "Audio-based. Combined: wishes (Skill 14) and untrue conditions (Skill 15).",
+        qs: [
+          {
+            d: [], opts: ["She enjoys violent movies.", "She would have preferred a more violent movie.", "She thinks the film was too violent.", "She enjoyed the movie."], ans: 2,
+            exp: "Wish/condition: 'If it weren't so violent' — it IS too violent. 'She thinks the film was too violent.'"
+          },
+          {
+            d: [], opts: ["He left the windows open.", "The rain did not get in.", "He forgot to close the windows.", "The rain got into the house."], ans: 2,
+            exp: "Untrue condition: 'If he had closed the windows' — he did NOT. 'He forgot to close the windows.'"
+          },
+          {
+            d: [], opts: ["Her family is unable to come to graduation.", "It is possible that her family will come.", "Her parents are coming to the ceremonies.", "She is not graduating this year."], ans: 0,
+            exp: "Wish: 'I wish my family could come' — they CANNOT. 'Her family is unable to come to graduation.'"
+          },
+          {
+            d: [], opts: ["He is going to miss the conference.", "He will take his vacation next week.", "He will attend the conference.", "He won't miss his vacation."], ans: 2,
+            exp: "Untrue condition implies conference IS happening — 'He will attend the conference.'"
+          },
+          {
+            d: [], opts: ["He enjoys chemistry lab.", "He doesn't have chemistry lab this afternoon.", "He isn't taking chemistry class.", "He has to go to the lab."], ans: 3,
+            exp: "Untrue condition: 'If I didn't have to go to lab' — he DOES. 'He has to go to the lab.'"
+          },
+          {
+            d: [], opts: ["They filled up the gas tank at the last service station.", "Although they filled up the tank, they still ran out of gas.", "Even though they didn't stop at the service station, they didn't run out of gas.", "They ran out of gas because they didn't stop at the gas station."], ans: 3,
+            exp: "Untrue condition: did NOT stop — ran out of gas. Option D."
+          },
+          {
+            d: [], opts: ["His schedule is not really heavy.", "He needs to add a few more courses.", "He enrolled in more courses than he really wants.", "He will register for a lot of courses next semester."], ans: 2,
+            exp: "Untrue condition: he DID register for many. 'He enrolled in more courses than he really wants.'"
+          },
+          {
+            d: [], opts: ["She never took the bus to work.", "She regularly takes the bus.", "She doesn't know how to get to work.", "She gets lost on the bus."], ans: 1,
+            exp: "Untrue condition: 'If she didn't take the bus' — she DOES. 'She regularly takes the bus.'"
+          },
+          {
+            d: [], opts: ["She bought some eggs at the store.", "She doesn't have any eggs to lend him.", "He can borrow some eggs.", "She didn't go to the store."], ans: 3,
+            exp: "Untrue condition: 'If I had gone to the store' — she did NOT. 'She didn't go to the store.'"
+          },
+          {
+            d: [], opts: ["Teresa is feeling a lot better.", "The doctor didn't prescribe the medicine.", "Teresa didn't follow the doctor's orders.", "Teresa did exactly what the doctor said."], ans: 3,
+            exp: "Untrue condition: 'If Teresa hadn't followed the doctor's orders' — she DID. Option D."
+          },
+        ]
+      },
+      ex18: {
+        label: "Exercise 18 — Long Conversations: Anticipate Topic", type: "exercise",
+        note: "Look at the answer choices together and anticipate the topic of the conversation. Questions 1-5 are about one conversation, 6-10 about another, 11-15 about another.",
+        qs: [
+          {
+            d: [], opts: ["Find work on campus", "Work in the employment office", "Help students find jobs", "Ask the woman questions"], ans: 2,
+            exp: "Clue words: 'work on campus', 'employment office', 'students', 'jobs' — topic is looking for a job on campus. Answer C fits the topic."
+          },
+          {
+            d: [], opts: ["In the library", "In a classroom", "In a campus office", "In an apartment"], ans: 2,
+            exp: "Campus employment context — 'In a campus office.'"
+          },
+          {
+            d: [], opts: ["No more than ten", "At least twenty", "Not more than twenty", "Up to ten"], ans: 1,
+            exp: "Number detail related to job context — 'At least twenty.'"
+          },
+          {
+            d: [], opts: ["Every morning", "Afternoons and weekends", "When he's in class", "Weekdays"], ans: 1,
+            exp: "Schedule detail — 'Afternoons and weekends.'"
+          },
+          {
+            d: [], opts: ["Fill out a form", "Give her some additional information", "Tell her some news", "Phone her"], ans: 0,
+            exp: "Process detail — 'Fill out a form.'"
+          },
+          {
+            d: [], opts: ["Just before a vacation", "Just after the end of a school semester", "At the end of the summer", "Just after a break from school"], ans: 1,
+            exp: "Timing clue — 'Just after the end of a school semester.'"
+          },
+          {
+            d: [], opts: ["A trip to visit the Eskimos", "A trip the woman is planning to take", "A trip the man has already taken", "A camping trip the man and woman took"], ans: 2,
+            exp: "Reference in conversation — 'A trip the man has already taken.'"
+          },
+          {
+            d: [], opts: ["Three hours", "Three complete days", "Three classes", "Three weeks"], ans: 1,
+            exp: "Duration mentioned — 'Three complete days.'"
+          },
+          {
+            d: [], opts: ["Sleeping outside on the ground", "Spending time in a sauna or hot tub", "Relaxing at the lodge", "Enjoying excellent food"], ans: 2,
+            exp: "Activity described — 'Relaxing at the lodge.'"
+          },
+          {
+            d: [], opts: ["She'd be scared, but she'd like to try.", "She can't wait.", "It would be quite exciting for her.", "She'd prefer not to try."], ans: 2,
+            exp: "Reaction described — 'It would be quite exciting for her.'"
+          },
+          {
+            d: [], opts: ["All kinds of pollution", "How acid rain has harmed the earth", "Pollution from cars and factories", "The causes and possible effects of acid rain"], ans: 3,
+            exp: "Clue words: 'acid rain', 'sulfur dioxide', 'nitrogen oxide' — topic is causes and effects of acid rain."
+          },
+          {
+            d: [], opts: ["Nuclear power", "Electricity", "Burning coal and oil", "Solar power"], ans: 2,
+            exp: "Energy source detail — 'Burning coal and oil.'"
+          },
+          {
+            d: [], opts: ["From sulfur dioxide and water vapor", "From sulfur dioxide and nitrogen oxide", "From nitric acid and sulfur dioxide", "From water vapor and nitric acid"], ans: 1,
+            exp: "Scientific detail — 'From sulfur dioxide and nitrogen oxide.'"
+          },
+          {
+            d: [], opts: ["Only in North America", "At the North and South Poles", "In parts of several northern continents", "In equatorial areas"], ans: 2,
+            exp: "Geographic detail — 'In parts of several northern continents.'"
+          },
+          {
+            d: [], opts: ["She should protect herself from the rain.", "She should clean up the water supply.", "She should read a novel.", "She should get more information about acid rain."], ans: 3,
+            exp: "Recommendation — 'She should get more information about acid rain.'"
+          },
+        ]
+      },
+      ex19: {
+        label: "Exercise 19 — Long Conversations: Anticipate Questions", type: "exercise",
+        note: "Study the answer choices and try to determine what the questions will be. The first question has been answered for you.",
+        qs: [
+          {
+            d: [{ s: "Q1 (answered):", l: "What does (someone) want to do?", q: true }],
+            opts: ["Find work on campus", "Work in the employment office", "Help students find jobs", "Ask the woman questions"], ans: 2,
+            exp: "Q1 answer given: 'What does someone want to do?' — Answer: 'Help students find jobs.' (C)"
+          },
+          {
+            d: [{ s: "Q2:", l: "Where does this conversation probably take place?", q: true }],
+            opts: ["In the library", "In a classroom", "In a campus office", "In an apartment"], ans: 2,
+            exp: "Location question — 'In a campus office.'"
+          },
+          {
+            d: [{ s: "Q3:", l: "How many students use the employment office?", q: true }],
+            opts: ["No more than ten", "At least twenty", "Not more than twenty", "Up to ten"], ans: 1,
+            exp: "Number question — 'At least twenty.'"
+          },
+          {
+            d: [{ s: "Q4:", l: "When does the man work?", q: true }],
+            opts: ["Every morning", "Afternoons and weekends", "When he's in class", "Weekdays"], ans: 1,
+            exp: "Schedule question — 'Afternoons and weekends.'"
+          },
+          {
+            d: [{ s: "Q5:", l: "What does the man want the woman to do?", q: true }],
+            opts: ["Fill out a form", "Give her some additional information", "Tell her some news", "Phone her"], ans: 0,
+            exp: "Action question — 'Fill out a form.'"
+          },
+          {
+            d: [{ s: "Q6:", l: "When does this conversation probably take place?", q: true }],
+            opts: ["Just before a vacation", "Just after the end of a school semester", "At the end of the summer", "Just after a break from school"], ans: 1,
+            exp: "Timing question — 'Just after the end of a school semester.'"
+          },
+          {
+            d: [{ s: "Q7:", l: "What trip is being discussed?", q: true }],
+            opts: ["A trip to visit the Eskimos", "A trip the woman is planning to take", "A trip the man has already taken", "A camping trip the man and woman took"], ans: 2,
+            exp: "Trip reference question — 'A trip the man has already taken.'"
+          },
+          {
+            d: [{ s: "Q8:", l: "How long was the trip?", q: true }],
+            opts: ["Three hours", "Three complete days", "Three classes", "Three weeks"], ans: 1,
+            exp: "Duration question — 'Three complete days.'"
+          },
+          {
+            d: [{ s: "Q9:", l: "What activity did the man enjoy on the trip?", q: true }],
+            opts: ["Sleeping outside on the ground", "Spending time in a sauna or hot tub", "Relaxing at the lodge", "Enjoying excellent food"], ans: 2,
+            exp: "Activity question — 'Relaxing at the lodge.'"
+          },
+          {
+            d: [{ s: "Q10:", l: "How does the woman feel about the activity?", q: true }],
+            opts: ["She'd be scared, but she'd like to try.", "She can't wait.", "It would be quite exciting for her.", "She'd prefer not to try."], ans: 2,
+            exp: "Reaction question — 'It would be quite exciting for her.'"
+          },
+          {
+            d: [{ s: "Q11:", l: "What is the topic of this part of the conversation?", q: true }],
+            opts: ["All kinds of pollution", "How acid rain has harmed the earth", "Pollution from cars and factories", "The causes and possible effects of acid rain"], ans: 3,
+            exp: "Topic question — 'The causes and possible effects of acid rain.'"
+          },
+          {
+            d: [{ s: "Q12:", l: "What produces acid rain?", q: true }],
+            opts: ["Nuclear power", "Electricity", "Burning coal and oil", "Solar power"], ans: 2,
+            exp: "Cause question — 'Burning coal and oil.'"
+          },
+          {
+            d: [{ s: "Q13:", l: "What chemicals combine to form acid rain?", q: true }],
+            opts: ["From sulfur dioxide and water vapor", "From sulfur dioxide and nitrogen oxide", "From nitric acid and sulfur dioxide", "From water vapor and nitric acid"], ans: 1,
+            exp: "Chemistry detail question — 'From sulfur dioxide and nitrogen oxide.'"
+          },
+          {
+            d: [{ s: "Q14:", l: "Where does acid rain fall?", q: true }],
+            opts: ["Only in North America", "At the North and South Poles", "In parts of several northern continents", "In equatorial areas"], ans: 2,
+            exp: "Location question — 'In parts of several northern continents.'"
+          },
+          {
+            d: [{ s: "Q15:", l: "What should the woman do?", q: true }],
+            opts: ["She should protect herself from the rain.", "She should clean up the water supply.", "She should read a novel.", "She should get more information about acid rain."], ans: 3,
+            exp: "Recommendation question — 'She should get more information about acid rain.'"
+          },
+        ]
+      },
+      toefl_ex_skills18_22: {
+        label: "TOEFL Review Exercise (Skills 18–22)", type: "review",
+        note: "Audio-based. Long conversations: anticipate topics, draw conclusions about who/what/when/where, listen for answers in order.",
+        qs: [
+          { d: [], opts: ["To a concert", "To a rehearsal", "To a lecture", "To the library"], ans: 2, exp: "Context of conversation — 'To a lecture.'" },
+          { d: [], opts: ["One", "Two", "Three", "Four"], ans: 1, exp: "Number mentioned — 'Two.'" },
+          { d: [], opts: ["The bus does not go directly to the Music Building.", "The bus goes very slowly to the Music Building.", "The bus sometimes does not come.", "The bus will not arrive for a while."], ans: 0, exp: "Transportation detail — 'The bus does not go directly to the Music Building.'" },
+          { d: [], opts: ["Walk", "Wait for the bus", "Miss the lecture", "Think of another plan"], ans: 0, exp: "Decision made — 'Walk.'" },
+          { d: [], opts: ["Boring", "Fantastic", "Lengthy", "Faithful"], ans: 1, exp: "Description — 'Fantastic.'" },
+          { d: [], opts: ["By car", "By plane", "By train", "By bicycle"], ans: 2, exp: "Transportation — 'By train.'" },
+          { d: [], opts: ["She went directly to Yellowstone.", "She spent a few weeks in Laramie.", "She stopped at the Devil's Tower National Monument.", "She made a few stops before going on to Yellowstone."], ans: 3, exp: "Travel detail — 'She made a few stops before going on to Yellowstone.'" },
+          { d: [], opts: ["Laramie", "Devil's Tower National Monument", "Old Faithful", "Wyoming"], ans: 1, exp: "Specific stop — 'Devil's Tower National Monument.'" },
+          { d: [], opts: ["Hear again about Yellowstone", "Take a trip to Yellowstone", "Get a job in a national park", "Move to Yellowstone"], ans: 1, exp: "Expressed wish — 'Take a trip to Yellowstone.'" },
+          { d: [], opts: ["How and when we celebrate Thanksgiving", "The traditional Thanksgiving dinner", "When Thanksgiving began", "Abraham Lincoln"], ans: 2, exp: "Topic — 'When Thanksgiving began.'" },
+          { d: [], opts: ["With colonists in Massachusetts", "Alone and thinking about how Thanksgiving developed", "With a big Thanksgiving dinner", "In an untraditional manner"], ans: 0, exp: "Historical detail — 'With colonists in Massachusetts.'" },
+          { d: [], opts: ["The terrible winter", "The corn harvest", "The development of Thanksgiving Day", "For getting the whole family together"], ans: 2, exp: "Main point — 'The development of Thanksgiving Day.'" },
+          { d: [], opts: ["At many different times", "In July", "Any time in November", "On a Thursday in November"], ans: 3, exp: "Timing detail — 'On a Thursday in November.'" },
+        ]
+      },
+      ex23: {
+        label: "Exercise 23 — Long Talks: Anticipate Topic", type: "exercise",
+        note: "Look at 5 answer choices together to anticipate the topic of the talk. Questions 1-5 are answered for you.",
+        qs: [
+          {
+            d: [{ s: "Topic for Q1-5:", l: "The requirements of a biology class", q: true }],
+            opts: ["During a biology laboratory session", "In a biology study group", "On the first day of class", "Just before the final exam"], ans: 2,
+            exp: "Clue words: 'biology', 'first day of class', 'reading assignments', 'exams', 'lab work' — topic is requirements of a biology class. Q1 answer: 'On the first day of class.'"
+          },
+          {
+            d: [{ s: "Q2:", l: "How often does the class meet?", q: true }],
+            opts: ["Once a week", "Two times a week", "Three times a week", "For fifteen hours"], ans: 1,
+            exp: "Schedule detail — 'Two times a week.'"
+          },
+          {
+            d: [{ s: "Q3:", l: "What should students do before the next class?", q: true }],
+            opts: ["To do the first laboratory assignment", "To take the first exam", "To study the laboratory manual", "To read one chapter of the text"], ans: 3,
+            exp: "Assignment detail — 'To read one chapter of the text.'"
+          },
+          {
+            d: [{ s: "Q4:", l: "What will be discussed at the next class meeting?", q: true }],
+            opts: ["Room assignments", "Exam topics", "Reading assignments", "The first lecture"], ans: 2,
+            exp: "Next topic — 'Reading assignments.'"
+          },
+          {
+            d: [{ s: "Q5:", l: "What counts toward the grade?", q: true }],
+            opts: ["Exams and lab work", "Reading and writing assignments", "Class participation and grades on examinations", "Lecture and laboratory attendance"], ans: 0,
+            exp: "Grade components — 'Exams and lab work.'"
+          },
+          {
+            d: [{ s: "Topic for Q6-10:", l: "What is the topic for questions 6-10?", q: true }],
+            opts: ["What caused the Ring of Fire", "The volcanoes of the Ring of Fire", "Hawaiian volcanoes", "Different types of volcanoes"], ans: 1,
+            exp: "Clue words: 'Ring of Fire', 'volcanoes', 'gas', 'lava', 'Hawaii' — topic is 'The volcanoes of the Ring of Fire.'"
+          },
+          {
+            d: [{ s: "Q7:", l: "What is the main topic?", q: true }],
+            opts: ["The Ring of Fire", "The characteristics of volcanoes in the Ring of Fire", "The volcanoes of Hawaii", "Mauna Loa"], ans: 1,
+            exp: "Main focus — 'The characteristics of volcanoes in the Ring of Fire.'"
+          },
+          {
+            d: [{ s: "Q8:", l: "Where are these volcanoes located?", q: true }],
+            opts: ["In Hawaii", "In the United States", "Along the Ring of Fire", "Within the Ring of Fire"], ans: 2,
+            exp: "Location — 'Along the Ring of Fire.'"
+          },
+          {
+            d: [{ s: "Q9:", l: "What is special about these volcanoes?", q: true }],
+            opts: ["They are not so violent.", "They are located along the Ring of Fire.", "They contain a lot of gas.", "They contain thick lava."], ans: 2,
+            exp: "Characteristic — 'They contain a lot of gas.'"
+          },
+          {
+            d: [{ s: "Q10:", l: "What is Mauna Loa?", q: true }],
+            opts: ["A volcano on the Ring of Fire", "An island in Hawaii", "A long, low volcanic mountain", "An explosive volcano"], ans: 2,
+            exp: "Definition — 'A long, low volcanic mountain.'"
+          },
+          {
+            d: [{ s: "Topic for Q11-15:", l: "What is the topic for questions 11-15?", q: true }],
+            opts: ["An artist", "A tour guide", "An Indian", "Orville Wright"], ans: 3,
+            exp: "Clue words: 'Smithsonian', 'National Air and Space Museum', 'Wright Brothers', 'airplane' — topic is about Orville Wright and the Smithsonian."
+          },
+          {
+            d: [{ s: "Q12:", l: "How many visitors does the Smithsonian get?", q: true }],
+            opts: ["Several", "Sixty thousand", "Sixteen million", "Millions and millions"], ans: 2,
+            exp: "Number detail — 'Sixteen million.'"
+          },
+          {
+            d: [{ s: "Q13:", l: "Where is the Wright Brothers' plane kept?", q: true }],
+            opts: ["The National Air and Space Museum", "The Museum of Natural History", "The American History Museum", "The Smithsonian Arts and Industries Building"], ans: 0,
+            exp: "Location — 'The National Air and Space Museum.'"
+          },
+          {
+            d: [{ s: "Q14:", l: "Where was the plane originally displayed?", q: true }],
+            opts: ["The American History Museum", "The Smithsonian Arts and Industries Building", "The Washington Museum", "The National Air and Space Museum"], ans: 3,
+            exp: "Historical location — 'The National Air and Space Museum.'"
+          },
+          {
+            d: [{ s: "Q15:", l: "Where does the tour end?", q: true }],
+            opts: ["To the White House", "To the Smithsonian", "To the mall", "To various other museums"], ans: 1,
+            exp: "Destination — 'To the Smithsonian.'"
+          },
+        ]
+      },
+      ex24: {
+        label: "Exercise 24 — Long Talks: Anticipate Questions", type: "exercise",
+        note: "Study the answer choices and try to determine what the questions will be. Q1 is answered for you: 'When does the talk probably take place?'",
+        qs: [
+          {
+            d: [{ s: "Q1 (answered):", l: "When does the talk probably take place?", q: true }],
+            opts: ["During a biology laboratory session", "In a biology study group", "On the first day of class", "Just before the final exam"], ans: 2,
+            exp: "Q1 is answered for you: 'When does the talk probably take place?' — Answer: C, 'On the first day of class.'"
+          },
+          {
+            d: [{ s: "Q2:", l: "How often does the class meet?", q: true }],
+            opts: ["Once a week", "Two times a week", "Three times a week", "For fifteen hours"], ans: 1,
+            exp: "Schedule question — 'Two times a week.'"
+          },
+          {
+            d: [{ s: "Q3:", l: "What should students do before next class?", q: true }],
+            opts: ["To do the first laboratory assignment", "To take the first exam", "To study the laboratory manual", "To read one chapter of the text"], ans: 3,
+            exp: "Assignment question — 'To read one chapter of the text.'"
+          },
+          {
+            d: [{ s: "Q4:", l: "What will be discussed next?", q: true }],
+            opts: ["Room assignments", "Exam topics", "Reading assignments", "The first lecture"], ans: 2,
+            exp: "Next topic question — 'Reading assignments.'"
+          },
+          {
+            d: [{ s: "Q5:", l: "What counts toward grades?", q: true }],
+            opts: ["Exams and lab work", "Reading and writing assignments", "Class participation and grades on examinations", "Lecture and laboratory attendance"], ans: 0,
+            exp: "Grade components — 'Exams and lab work.'"
+          },
+          {
+            d: [{ s: "Q6:", l: "What is the topic?", q: true }],
+            opts: ["What caused the Ring of Fire", "The volcanoes of the Ring of Fire", "Hawaiian volcanoes", "Different types of volcanoes"], ans: 1,
+            exp: "Topic question — 'The volcanoes of the Ring of Fire.'"
+          },
+          {
+            d: [{ s: "Q7:", l: "What is discussed mainly?", q: true }],
+            opts: ["The Ring of Fire", "The characteristics of volcanoes in the Ring of Fire", "The volcanoes of Hawaii", "Mauna Loa"], ans: 1,
+            exp: "Main topic question — 'The characteristics of volcanoes in the Ring of Fire.'"
+          },
+          {
+            d: [{ s: "Q8:", l: "Where are they located?", q: true }],
+            opts: ["In Hawaii", "In the United States", "Along the Ring of Fire", "Within the Ring of Fire"], ans: 2,
+            exp: "Location question — 'Along the Ring of Fire.'"
+          },
+          {
+            d: [{ s: "Q9:", l: "What characteristic do they have?", q: true }],
+            opts: ["They are not so violent.", "They are located along the Ring of Fire.", "They contain a lot of gas.", "They contain thick lava."], ans: 2,
+            exp: "Characteristic question — 'They contain a lot of gas.'"
+          },
+          {
+            d: [{ s: "Q10:", l: "What is Mauna Loa?", q: true }],
+            opts: ["A volcano on the Ring of Fire", "An island in Hawaii", "A long, low volcanic mountain", "An explosive volcano"], ans: 2,
+            exp: "Definition question — 'A long, low volcanic mountain.'"
+          },
+          {
+            d: [{ s: "Q11:", l: "Who is this talk about?", q: true }],
+            opts: ["An artist", "A tour guide", "An Indian", "Orville Wright"], ans: 3,
+            exp: "Person question — 'Orville Wright.'"
+          },
+          {
+            d: [{ s: "Q12:", l: "How many people visit?", q: true }],
+            opts: ["Several", "Sixty thousand", "Sixteen million", "Millions and millions"], ans: 2,
+            exp: "Number question — 'Sixteen million.'"
+          },
+          {
+            d: [{ s: "Q13:", l: "Where is the famous plane?", q: true }],
+            opts: ["The National Air and Space Museum", "The Museum of Natural History", "The American History Museum", "The Smithsonian Arts and Industries Building"], ans: 0,
+            exp: "Museum question — 'The National Air and Space Museum.'"
+          },
+          {
+            d: [{ s: "Q14:", l: "Where was the plane originally kept?", q: true }],
+            opts: ["The American History Museum", "The Smithsonian Arts and Industries Building", "The Washington Museum", "The National Air and Space Museum"], ans: 3,
+            exp: "Historical location — 'The National Air and Space Museum.'"
+          },
+          {
+            d: [{ s: "Q15:", l: "Where does the tour go?", q: true }],
+            opts: ["To the White House", "To the Smithsonian", "To the mall", "To various other museums"], ans: 1,
+            exp: "Destination — 'To the Smithsonian.'"
+          },
+        ]
+      },
+      toefl_rev_skills23_27: {
+        label: "TOEFL Review Exercise (Skills 23–27)", type: "review",
+        note: "Audio-based. Long talks: determine topic, draw conclusions, listen for answers in order.",
+        qs: [
+          { d: [], opts: ["Other librarians", "Undergraduate students", "Students who are not in the business department", "Graduate business students"], ans: 3, exp: "Audience of talk — 'Graduate business students.'" },
+          { d: [], opts: ["It opens at 7:00 a.m.", "It closes at 7:00 p.m.", "It closes at midnight.", "It is always open."], ans: 2, exp: "Schedule detail — 'It closes at midnight.'" },
+          { d: [], opts: ["Computer area and business materials", "Magazines and newspapers", "Business department and library staff offices", "First and second floors of the library"], ans: 0, exp: "Location detail — 'Computer area and business materials.'" },
+          { d: [], opts: ["Go home", "Return to class", "Work on the computers", "Tour the library"], ans: 3, exp: "Suggested activity — 'Tour the library.'" },
+          { d: [], opts: ["A student in health services", "A drug abuse lecturer", "A dermatologist", "A representative of the tobacco industry"], ans: 2, exp: "Speaker — 'A dermatologist.'" },
+          { d: [], opts: ["How to reduce nicotine and other addictions", "How stress affects the skin", "The effects of alcohol on health", "How to achieve optimal health"], ans: 1, exp: "Topic — 'How stress affects the skin.'" },
+          { d: [], opts: ["Alcohol", "Nicotine", "Caffeine", "A reduced supply of blood"], ans: 3, exp: "Scientific detail — 'A reduced supply of blood.'" },
+          { d: [], opts: ["It increases the flow of blood to the skin.", "It causes increased consumption of alcohol.", "It prevents the skin from receiving enough nourishment.", "It causes stress."], ans: 2, exp: "Effect — 'It prevents the skin from receiving enough nourishment.'" },
+          { d: [], opts: ["Before the Civil War", "At the end of the Civil War", "At the beginning of the twentieth century", "Within the last decade"], ans: 0, exp: "Time period — 'Before the Civil War.'" },
+          { d: [], opts: ["The Civil War ended.", "The U.S. government issued a large amount of paper currency.", "The price of gold plummeted.", "The value of gold became inflated."], ans: 1, exp: "Historical event — 'The U.S. government issued a large amount of paper currency.'" },
+          { d: [], opts: ["The president", "The president's brother", "The president's brother-in-law", "The president's wife"], ans: 2, exp: "Person — 'The president's brother-in-law.'" },
+          { d: [], opts: ["Issue greenbacks", "Sell gold", "Corner the gold market", "Hold its gold reserves"], ans: 2, exp: "Action — 'Corner the gold market.'" },
+        ]
+      },
+
+      part_a: {
+        label: "★ Part A (Q1–30)", type: "toefl",
+        note: "TOEFL Part A — 30 soal percakapan pendek. Pilih jawaban terbaik berdasarkan percakapan yang didengar.",
+        qs: [
+          { d: [], opts: ["The coffee is much better this morning.", "The coffee tastes extremely good.", "The coffee isn't very good.", "This morning he definitely wants some coffee."], ans: 2, exp: "Ekspresi negatif: kopi tidak enak — Kunci: C." },
+          { d: [], opts: ["The two classes meet in an hour and a half.", "The class meets three hours per week.", "Each half of the class is an hour long.", "Two times a week the class meets for an hour."], ans: 1, exp: "Detail jadwal: kelas tiga jam per minggu — Kunci: B." },
+          { d: [], opts: ["A few minutes ago, the flight departed.", "The flight will start in a while.", "They are frightened about the departure.", "The plane is going to take off soon."], ans: 3, exp: "Sinonim 'take off soon' = pesawat segera berangkat — Kunci: D." },
+          { d: [], opts: ["He hasn't yet begun his project.", "He's supposed to do his science project next week.", "He needs to start working on changing the due date.", "He's been working steadily on his science project."], ans: 0, exp: "Implikasi: belum mulai proyek ilmiahnya — Kunci: A." },
+          { d: [], opts: ["At the post office", "In a florist shop", "In a restaurant", "In a hospital delivery room"], ans: 1, exp: "Konteks percakapan mengarah ke toko bunga — Kunci: B." },
+          { d: [], opts: ["The professor drowned the cells in a lab.", "The lecture was long and boring.", "The professor divided the lecture into parts.", "The biologist tried to sell the results of the experiment."], ans: 1, exp: "Implikasi: kuliah membosankan — Kunci: B." },
+          { d: [], opts: ["She needs to get a driver's license.", "Two pieces of identification are necessary.", "The man should check to see if he needs credit.", "A credit card can be used to get a driver's license."], ans: 1, exp: "Syarat: dua identitas diperlukan — Kunci: B." },
+          { d: [], opts: ["Housing within his budget is hard to locate.", "It's hard to find his house in New York.", "He can't afford to move his house to New York.", "Housing in New York is unavailable."], ans: 0, exp: "Sulit menemukan hunian sesuai anggaran — Kunci: A." },
+          { d: [], opts: ["The boss was working on the reports.", "He would have to finish the reports before the end of next month.", "He was directed to stay late and finish some work.", "He could finish the reports at home."], ans: 2, exp: "Diperintahkan lembur menyelesaikan pekerjaan — Kunci: C." },
+          { d: [], opts: ["The boisterous students made the teacher mad.", "The teacher angered the students with the exam results.", "The students were angry that the teacher was around.", "The angered students complained to the teacher."], ans: 0, exp: "Siswa ribut membuat guru marah — Kunci: A." },
+          { d: [], opts: ["The prices are reasonable.", "The store is too far out of town.", "He would like the woman to repeat what she said.", "He agrees with the woman."], ans: 3, exp: "Ekspresi persetujuan — Kunci: D." },
+          { d: [], opts: ["It's rained unusually hard this year.", "There hasn't been any rain for many years.", "It's been many years since it rained.", "He doesn't like rain."], ans: 0, exp: "Emphatik: hujan luar biasa deras tahun ini — Kunci: A." },
+          { d: [], opts: ["He needs to do a better job writing questions.", "He certainly must make his writing better.", "Without the questions, he cannot write the answers.", "He needs to understand the written questions better."], ans: 1, exp: "Harus memperbaiki tulisannya — Kunci: B." },
+          { d: [], opts: ["The agent was standing in line with his passport.", "The line to get new passports is very long.", "The woman must wait her turn to get her passport checked.", "He can check her passport instead of the agent."], ans: 2, exp: "Wanita harus menunggu giliran pemeriksaan paspor — Kunci: C." },
+          { d: [], opts: ["He couldn't finish closing the library book.", "He hadn't finished the library assignment, but he was close.", "He was working on the assignment when the library closed.", "His homework was incomplete because the library wasn't open."], ans: 3, exp: "PR tidak selesai karena perpustakaan tutup — Kunci: D." },
+          { d: [], opts: ["All the lawyer's preparation did no good.", "The lawyer prepared nothing for the case.", "It wasn't work for the lawyer to prepare for the case.", "The lawyer didn't work to prepare for the case."], ans: 0, exp: "Double negative: persiapan pengacara tidak berguna — Kunci: A." },
+          { d: [], opts: ["The history class begins next week.", "He thinks the papers should be turned in next week.", "He has already done the paper for next week.", "The papers are not due next week."], ans: 1, exp: "Menurutnya paper dikumpulkan minggu depan — Kunci: B." },
+          { d: [], opts: ["He's not really happy.", "The contractor's work was satisfactory.", "He would rather work with the contractor himself.", "He was already contacted about the work."], ans: 0, exp: "Ekspresi negatif: tidak benar-benar puas — Kunci: A." },
+          { d: [], opts: ["The man should try another type of paper.", "The man should locate a typist tomorrow morning.", "The man should make a tape in the morning.", "The man should complete the paper without help."], ans: 3, exp: "Saran: selesaikan paper sendiri — Kunci: D." },
+          { d: [], opts: ["She'd like some pie.", "It's easy to buy it.", "The task the man's working on isn't difficult.", "It's easier to prepare pie than do what the man is doing."], ans: 2, exp: "Idiom 'piece of cake' = mudah — Kunci: C." },
+          { d: [], opts: ["He reported that the time for the budget meeting had been set.", "He is always late in submitting his accounting figures.", "He never manages to budget his time well.", "He is never too late in turning in his reports."], ans: 1, exp: "Almost negative: selalu terlambat menyerahkan angka — Kunci: B." },
+          { d: [], opts: ["The repairs that the mechanic had indicated were already made.", "Betty will follow the instructions later.", "The mechanic extended the repair warranty.", "Betty worked exactly as instructed."], ans: 1, exp: "Perbaikan sudah dilakukan sesuai petunjuk montir — Kunci: B." },
+          { d: [], opts: ["Betty wrote the letter as directed.", "The directions were given to Betty in a letter.", "Betty completed the assignment differently.", "Betty worked exactly as instructed."], ans: 3, exp: "Betty bekerja persis sesuai instruksi — Kunci: D." },
+          { d: [], opts: ["Walter had a lack of success with his business.", "Walter failed in business.", "Walter's new company is doing rather well.", "Walter hoped to succeed in business."], ans: 2, exp: "Perusahaan baru Walter berjalan cukup baik — Kunci: C." },
+          { d: [], opts: ["He should put the organ in the closet.", "The closet has already been organized.", "He needs to rearrange the closet.", "He wishes the closet were closer."], ans: 2, exp: "Bunyi mirip 'organize/closet': perlu menata ulang lemari — Kunci: C." },
+          { d: [], opts: ["She didn't do the work.", "She gave the assignment her best effort.", "She finished the assignment even though it was difficult.", "She gave the man a signal."], ans: 0, exp: "Negatif: tidak mengerjakan tugasnya — Kunci: A." },
+          { d: [], opts: ["She said some terrible things.", "She didn't say anything nice.", "She didn't have any nice things.", "She said really wonderful things."], ans: 3, exp: "Double negative: mengatakan hal-hal luar biasa — Kunci: D." },
+          { d: [], opts: ["New employees are rarely initiated into the company.", "New workers don't generally undertake actions on their own.", "New employees are initially rated.", "It's rare for employees to make new suggestions."], ans: 1, exp: "Almost negative: karyawan baru tidak mengambil inisiatif sendiri — Kunci: B." },
+          { d: [], opts: ["The woman is more than a week late.", "The children would have wrecked the house later.", "The woman was so late that she was a wreck.", "He's glad that she was not any later."], ans: 3, exp: "Negatif + komparatif: bersyukur tidak lebih terlambat — Kunci: D." },
+          { d: [], opts: ["He had not gone to the store.", "He was still at the market.", "He was going to take care of the shopping.", "He always went to the market."], ans: 0, exp: "Kondisi tidak nyata: tidak pergi ke toko — Kunci: A." },
+        ]
+      },
+
+      part_b: {
+        label: "★ Part B (Q31–38)", type: "toefl",
+        note: "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi.",
+        qs: [
+          { d: [{ s: "Context:", l: "A male student runs into a senior student on campus and asks her for help." }], opts: ["She's a senior.", "She's a junior.", "She's a transfer student.", "She's a graduate student."], ans: 0, exp: "Dalam percakapan, wanita tersebut menyebutkan dirinya sebagai mahasiswa senior (tingkat akhir) — Kunci: A." },
+          { d: [{ s: "Context:", l: "The male student is asking for guidance about his major." }], opts: ["How to transfer to a junior college", "How to find his way around campus", "What courses are required for a literature major", "Who won the campus election"], ans: 2, exp: "Topik utama percakapan: mata kuliah apa saja yang diwajibkan untuk jurusan sastra (literature major) — Kunci: C." },
+          { d: [{ s: "Context:", l: "They discuss required courses for the literature major." }], opts: ["Three", "Five", "Eight", "Ten"], ans: 2, exp: "Disebutkan bahwa terdapat delapan mata kuliah wajib untuk jurusan tersebut — Kunci: C." },
+          { d: [{ s: "Context:", l: "The senior student describes one specific required course." }], opts: ["American literature", "World literature", "Literary analysis", "Surveying"], ans: 2, exp: "Mata kuliah yang dideskripsikan secara spesifik adalah literary analysis (analisis sastra) — Kunci: C." },
+          { d: [{ s: "Context:", l: "A lecture about dolphins and their abilities." }], opts: ["In a book", "From a television program", "During a trip that she took", "From a lecture"], ans: 3, exp: "Informasi tentang lumba-lumba diperoleh dari sebuah kuliah (lecture) — Kunci: D." },
+          { d: [{ s: "Context:", l: "The lecture continues about dolphin sonar abilities." }], opts: ["To communicate with other dolphins", "To recognize objects in the water", "To learn human language", "To express fear"], ans: 1, exp: "Lumba-lumba menggunakan sonar untuk mengenali objek di dalam air (echolocation) — Kunci: B." },
+          { d: [{ s: "Context:", l: "The lecturer discusses dolphin intelligence research." }], opts: ["Five", "Fifteen", "Fifty", "Five hundred"], ans: 2, exp: "Disebutkan angka lima puluh (fifty) dalam konteks penelitian kecerdasan lumba-lumba — Kunci: C." },
+          { d: [{ s: "Context:", l: "The lecture concludes with a summary about dolphin intelligence." }], opts: ["It is limited.", "It is greater than human intelligence.", "It is less than previously thought.", "We are beginning to learn how much they have."], ans: 3, exp: "Kesimpulan: kita baru mulai memahami seberapa besar kecerdasan lumba-lumba — Kunci: D." },
+        ]
+      },
+
+      part_c: {
+        label: "★ Part C (Q39–50)", type: "toefl",
+        note: "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara.",
+        qs: [
+          { d: [{ s: "Talk 1:", l: "A talk about the Sierra Club organization." }], opts: ["To protect its members", "To save the natural environment", "To honor the memory of John Muir", "To improve San Francisco's natural beauty"], ans: 1, exp: "Tujuan utama Sierra Club adalah melindungi lingkungan alam (natural environment) — Kunci: B." },
+          { d: [{ s: "Talk 1 (cont.):", l: "The speaker describes how long the Sierra Club has existed." }], opts: ["For less than a year", "Only for a decade", "For more than a century", "For at least two centuries"], ans: 2, exp: "Sierra Club telah berdiri lebih dari satu abad (more than a century) — Kunci: C." },
+          { d: [{ s: "Talk 1 (cont.):", l: "The speaker describes where the Sierra Club operates." }], opts: ["San Francisco", "All fifty states", "The Sierra Nevadas", "The eastern United States"], ans: 2, exp: "Sierra Club beroperasi di pegunungan Sierra Nevada — Kunci: C." },
+          { d: [{ s: "Talk 1 (cont.):", l: "The speaker describes the Sierra Club's reach." }], opts: ["All over the world", "In the entire United States", "Only in California", "Only in the Sierra Nevadas"], ans: 1, exp: "Sierra Club beroperasi di seluruh Amerika Serikat — Kunci: B." },
+          { d: [{ s: "Talk 2:", l: "A campus tour guide introduces facilities to new students." }], opts: ["Students signing up for athletic teams", "Students going on a tour of a university campus", "Students playing various sports", "Students attending a university dedication ceremony"], ans: 1, exp: "Situasinya adalah tur kampus universitas untuk mahasiswa baru — Kunci: B." },
+          { d: [{ s: "Talk 2 (cont.):", l: "The guide explains what is needed to use the athletic facilities." }], opts: ["Membership on an athletic team", "Enrollment in an exercise class", "A valid student identification card", "Permission from a faculty member"], ans: 2, exp: "Yang diperlukan untuk menggunakan fasilitas olahraga adalah kartu identitas mahasiswa yang berlaku — Kunci: C." },
+          { d: [{ s: "Talk 2 (cont.):", l: "A student asks about joining an intramural sport." }], opts: ["To the tennis courts", "To the arena", "To the gymnasium", "To the Athletic Department office"], ans: 3, exp: "Untuk mendaftar olahraga intramural, mahasiswa harus pergi ke kantor Athletic Department — Kunci: D." },
+          { d: [{ s: "Talk 2 (cont.):", l: "The guide describes one more facility on the tour." }], opts: ["Go to the Art Center", "Sign up for sports classes", "Visit the exercise room", "Watch a football game"], ans: 0, exp: "Langkah berikutnya dalam tur adalah mengunjungi Art Center — Kunci: A." },
+          { d: [{ s: "Talk 3:", l: "A lecture comparing two schools of literary thought." }], opts: ["Science", "Art", "Literature", "Music"], ans: 2, exp: "Kuliah ini membahas dua aliran pemikiran dalam bidang sastra (literature) — Kunci: C." },
+          { d: [{ s: "Talk 3 (cont.):", l: "The lecturer compares the two schools of thought." }], opts: ["They are completely different.", "They are somewhat similar but have an essential difference.", "They are exactly the same in all respects.", "They are unrelated."], ans: 1, exp: "Kedua aliran memiliki kesamaan namun berbeda secara esensial — Kunci: B." },
+          { d: [{ s: "Talk 3 (cont.):", l: "The lecturer describes the first school of thought." }], opts: ["Objective", "Idealistic", "Philosophical", "Environmental"], ans: 0, exp: "Aliran pertama bersifat objektif (berdasarkan fakta dan observasi nyata) — Kunci: A." },
+          { d: [{ s: "Talk 3 (cont.):", l: "The lecturer describes what the second school emphasizes." }], opts: ["Heredity", "Environment", "Idealism", "Natural laws"], ans: 2, exp: "Aliran kedua menekankan lingkungan/environment sebagai faktor utama — Kunci: C." },
+        ]
+      },
+
+      ex1_focus: {
+        label: "Exercise 1 — Last Line Focus", type: "toefl",
+        note: "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban.",
+        qs: [
+          { d: [{ s: "💡 Strategi:", l: "Dengarkan baris terakhir percakapan. Kata-kata di baris terakhir sering mengandung implikasi, idiom, atau ekspresi yang menjadi kunci jawaban." }], opts: ["She has strong ideas about movies.", "She prefers comedies over westerns and romances.", "She doesn't like today's matinee.", "She does not know."], ans: 3, exp: "Baris terakhir wanita: 'I have no idea.' = Dia tidak tahu — Kunci: D." },
+          { d: [{ s: "Dialogue:", l: "Was anyone at home at Barb's house? → 'I rang the bell, but no one answered.'" }], opts: ["Barb answered the bell.", "The house was probably empty.", "The bell wasn't in the house.", "The house doesn't have a bell."], ans: 1, exp: "'No one answered' mengimplikasikan rumah kemungkinan kosong — Kunci: B." },
+          { d: [{ s: "Dialogue:", l: "How do you think the interview went? → 'I think it's highly unlikely that I got the job.'" }], opts: ["It's unlikely that he'll go to the interview.", "He thinks he'll be recommended for a high-level job.", "The interview was apparently quite unsuccessful.", "He had an excellent interview."], ans: 2, exp: "'Highly unlikely that I got the job' = wawancara tampaknya tidak berhasil — Kunci: C." },
+          { d: [], opts: ["He is leaving now.", "He has to go out of his way.", "He will not be leaving soon.", "He will do it his own way."], ans: 0, exp: "Baris terakhir mengindikasikan dia akan segera pergi — Kunci: A." },
+          { d: [], opts: ["He locked the door.", "He tried unsuccessfully to get into the house.", "He was able to open the door.", "He left the house without locking the door."], ans: 2, exp: "Implikasi dari baris terakhir: dia berhasil membuka pintu — Kunci: C." },
+          { d: [], opts: ["She doesn't like to listen to turkeys.", "She thinks the dinner sounds special.", "She especially likes the roast turkey.", "She'd prefer a different dinner."], ans: 3, exp: "Nada baris terakhir mengindikasikan preferensi untuk makan malam yang berbeda — Kunci: D." },
+          { d: [], opts: ["He'll be busy with her homework tonight.", "He can't help her tonight.", "He's sorry he can't ever help her.", "He'll help her with her physics."], ans: 1, exp: "Baris terakhir menyiratkan dia tidak bisa membantu malam ini — Kunci: B." },
+          { d: [], opts: ["Her eyes hurt.", "She thought the lecture was great.", "The class was boring.", "She didn't want to watch Professor Martin."], ans: 2, exp: "Implikasi baris terakhir: kuliah membosankan — Kunci: C." },
+          { d: [], opts: ["Not all the bills have been paid.", "They don't have enough credit to pay the bills.", "What she said on the phone was not credible.", "He used a credit card to pay some of the bills."], ans: 0, exp: "Baris terakhir mengindikasikan belum semua tagihan dibayar — Kunci: A." },
+          { d: [], opts: ["She'll call back quickly.", "She'll definitely be back by 4:00.", "She'll give it back by 4:00.", "She'll try to return fast."], ans: 3, exp: "'Try to return fast' = mencoba kembali dengan cepat — Kunci: D." },
+          { d: [], opts: ["She hasn't seen Tim.", "Tim was there only for a moment.", "Tim was around a short time ago.", "Tim will return in a minute."], ans: 2, exp: "Baris terakhir: Tim ada di sini baru saja — Kunci: C." },
+          { d: [], opts: ["She doesn't like the place he chose.", "She doesn't want to get into the car.", "She's glad the spot is reserved.", "They can't park the car there."], ans: 3, exp: "Implikasi: tidak bisa parkir di sana — Kunci: D." },
+          { d: [], opts: ["There's plenty to eat.", "The refrigerator's broken.", "The food isn't in the refrigerator.", "He's not sure if there's enough food."], ans: 0, exp: "Baris terakhir mengindikasikan makanan cukup tersedia — Kunci: A." },
+        ]
+      },
+
+    };
+
+    const KEYS = ['part_a', 'part_b', 'part_c', 'ex1_focus', 'ex2', 'toefl_ex2', 'ex3', 'toefl_ex3', 'ex4', 'toefl_ex4', 'toefl_ex5', 'ex6', 'toefl_ex6', 'ex7', 'toefl_ex7', 'ex8', 'toefl_ex8', 'toefl_ex9', 'ex10', 'toefl_ex10', 'toefl_ex_skills7_10', 'toefl_ex11', 'ex12', 'toefl_ex12', 'toefl_ex_skills1_3', 'toefl_ex_skills4_6', 'toefl_rev_1_6', 'toefl_rev_1_10', 'ex13', 'toefl_ex13', 'toefl_ex_skills11_13', 'toefl_rev_1_13', 'ex14', 'toefl_ex14', 'ex15_untrue', 'toefl_ex15', 'toefl_ex_skills14_revised', 'toefl_rev_1_15', 'ex16_dialogue', 'ex17_idioms', 'toefl_ex17', 'toefl_ex16', 'toefl_ex_skills16_17', 'toefl_rev_1_17', 'ex18', 'ex19', 'toefl_ex_skills18_22', 'ex23', 'ex24', 'toefl_rev_skills23_27', 'toefl_ex22_long', 'toefl_ex27'];
+    let state = { section: 'part_a', idx: 0, answers: {}, mode: 'quiz' };
+
+    function render() {
+      const root = document.getElementById('root');
+      const sec = DATA[state.section];
+      const qs = sec.qs;
+      const total = qs.length;
+      const answered = Object.keys(state.answers).length;
+      const correct = Object.values(state.answers).filter(a => a.correct).length;
+      const testTabs = ['part_a', 'part_b', 'part_c', 'ex1_focus'];
+      const isTestTab = testTabs.includes(state.section);
+      const bc = sec.type === 'exercise' ? 'badge-ex' : isTestTab ? 'badge-parta' : sec.type === 'toefl' ? 'badge-toefl' : 'badge-rev';
+      const bl = sec.type === 'exercise' ? 'Exercise' : isTestTab ? '★ TOEFL Test' : sec.type === 'toefl' ? 'TOEFL Exercise' : 'TOEFL Review';
+
+      let h = `<div class="header"><h1>Longman TOEFL — Listening: Short Dialogues</h1><p>Section One: Listening (Paper and Computer)</p></div>`;
+      h += `<div class="tabs-wrap"><div class="tabs">`;
+      KEYS.forEach(k => {
+        const isTest = testTabs.includes(k);
+        const activeClass = state.section === k ? ' active' : '';
+        const testClass = isTest ? ' part-a' : '';
+        h += `<button class="tab${activeClass}${testClass}" onclick="chg('${k}')">${DATA[k].label}</button>`;
+      });
+      h += `</div></div>`;
+      h += `<div class="progress-bar"><div class="progress-fill" style="width:${total ? Math.round(answered / total * 100) : 0}%"></div></div>`;
+      h += `<div class="stats"><div class="stat"><div class="stat-num">${total}</div><div class="stat-lbl">Total</div></div><div class="stat"><div class="stat-num">${answered}</div><div class="stat-lbl">Answered</div></div><div class="stat"><div class="stat-num" style="color:#1a7a4a">${correct}</div><div class="stat-lbl">Correct</div></div><div class="stat"><div class="stat-num" style="color:#b91c1c">${answered - correct}</div><div class="stat-lbl">Wrong</div></div></div>`;
+
+      if (state.mode === 'result') {
+        const pct = answered > 0 ? Math.round(correct / answered * 100) : 0;
+        h += `<div class="score-screen"><div class="score-big">${pct}%</div><div class="score-label">${correct} of ${answered} correct — ${sec.label}</div><div class="score-grid"><div class="stat"><div class="stat-num" style="color:#1a7a4a">${correct}</div><div class="stat-lbl">Correct</div></div><div class="stat"><div class="stat-num" style="color:#b91c1c">${answered - correct}</div><div class="stat-lbl">Wrong</div></div><div class="stat"><div class="stat-num">${total - answered}</div><div class="stat-lbl">Skipped</div></div></div><button class="nav-btn primary" onclick="rst()">Try Again</button> <button class="nav-btn" onclick="rev()">Review</button></div>`;
+        root.innerHTML = h; return;
+      }
+
+      const q = qs[state.idx];
+      const ua = state.answers[state.idx];
+      const done = ua !== undefined;
+
+      h += `<div class="card"><div class="q-meta"><span class="badge ${bc}">${bl}</span><span>${sec.label}</span><span>Q${state.idx + 1} / ${total}</span></div>`;
+      const noteClass = isTestTab ? 'note note-parta' : 'note';
+      if (sec.note) h += `<div class="${noteClass}">${sec.note}</div>`;
+
+      if (q.d && q.d.length > 0) {
+        h += `<div class="dialogue">`;
+        q.d.forEach(line => {
+          if (line.q) { h += `<div class="narrator-line">${line.s} ${line.l}</div>`; }
+          else { h += `<div><span class="speaker">${line.s}</span><span class="line">${line.l}</span></div>`; }
+        });
+        h += `</div>`;
+      } else {
+        const audioMsg = isTestTab
+          ? '🎧 Dengarkan percakapan dari audio — pilih jawaban terbaik berdasarkan apa yang diucapkan.'
+          : '🎧 Audio-based question — select the best answer for this dialogue type.';
+        h += `<div class="audio-note">${audioMsg}</div>`;
+      }
+
+      h += `<div class="options">`;
+      q.opts.forEach((opt, i) => {
+        let cls = 'opt' + (done ? ' disabled' : '');
+        if (done) { if (i === q.ans) cls += ' correct'; else if (i === ua.idx && ua.idx !== q.ans) cls += ' wrong'; }
+        h += `<div class="${cls}" onclick="${done ? '' : 'sel(' + i + ')'}">`
+          + `<span class="opt-label">${String.fromCharCode(65 + i)}.</span><span>${opt}</span></div>`;
+      });
+      h += `</div>`;
+      if (done) { const ok = ua.idx === q.ans; h += `<div class="explanation"><strong>${ok ? '✓ Correct!' : '✗ Incorrect.'}</strong> ${q.exp}</div>`; }
+      h += `</div>`;
+      h += `<div class="nav"><button class="nav-btn" onclick="prv()" ${state.idx === 0 ? 'disabled' : ''}>← Prev</button><span class="q-counter">${state.idx + 1} / ${total}</span>`;
+      if (state.idx < total - 1) h += `<button class="nav-btn primary" onclick="nxt()">Next →</button>`;
+      else h += `<button class="nav-btn primary" onclick="showR()">See Results</button>`;
+      h += `</div>`;
+      root.innerHTML = h;
+    }
+
+    function sel(i) { const q = DATA[state.section].qs[state.idx]; state.answers[state.idx] = { idx: i, correct: i === q.ans }; render(); }
+    function nxt() { if (state.idx < DATA[state.section].qs.length - 1) { state.idx++; render(); } }
+    function prv() { if (state.idx > 0) { state.idx--; render(); } }
+    function chg(k) { state.section = k; state.idx = 0; state.answers = {}; state.mode = 'quiz'; render(); }
+    function showR() { state.mode = 'result'; render(); }
+    function rst() { state.idx = 0; state.answers = {}; state.mode = 'quiz'; render(); }
+    function rev() { state.idx = 0; state.mode = 'quiz'; render(); }
+    render();
+  </script>
+</body>
+
+</html>

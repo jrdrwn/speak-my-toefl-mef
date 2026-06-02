@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longman TOEFL — Structure & Written Expression</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f0;
+      color: #1a1a18;
+      min-height: 100vh
+    }
+
+    .app {
+      padding: 1.5rem 1rem;
+      max-width: 980px;
+      margin: 0 auto
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1.25rem
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a18
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #666;
+      margin-top: 3px
+    }
+
+    .tabs-wrap {
+      overflow-x: auto;
+      margin-bottom: .75rem;
+      padding-bottom: 4px
+    }
+
+    .tabs {
+      display: flex;
+      gap: 5px;
+      width: max-content
+    }
+
+    .tab {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #fff;
+      color: #555;
+      transition: all .15s;
+      white-space: nowrap
+    }
+
+    .tab.active {
+      background: #e8f0fe;
+      color: #1a56a8;
+      border-color: #1a56a8
+    }
+
+    .tab:hover:not(.active) {
+      background: #f0f0ec
+    }
+
+    .tab.test-tab {
+      background: #fdf4ff;
+      color: #7e22ce;
+      border-color: #a855f7;
+      font-weight: 700
+    }
+
+    .tab.test-tab.active {
+      background: #7e22ce;
+      color: #fff;
+      border-color: #7e22ce
+    }
+
+    .tab.we-tab {
+      background: #fff7ed;
+      color: #c2410c;
+      border-color: #fb923c;
+      font-weight: 600
+    }
+
+    .tab.we-tab.active {
+      background: #c2410c;
+      color: #fff;
+      border-color: #c2410c
+    }
+
+    .progress-bar {
+      background: #e8e8e4;
+      border-radius: 999px;
+      height: 5px;
+      margin-bottom: 1rem;
+      overflow: hidden
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width .3s
+    }
+
+    .progress-fill.struct {
+      background: #1a56a8
+    }
+
+    .progress-fill.written {
+      background: #c2410c
+    }
+
+    .progress-fill.test {
+      background: #7e22ce
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin-bottom: 1.25rem
+    }
+
+    .stat {
+      background: #fff;
+      border-radius: 8px;
+      padding: .65rem;
+      text-align: center;
+      border: 1px solid #e0e0d8
+    }
+
+    .stat-num {
+      font-size: 18px;
+      font-weight: 600
+    }
+
+    .stat-lbl {
+      font-size: 11px;
+      color: #888;
+      margin-top: 1px
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0d8;
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: .9rem
+    }
+
+    .q-meta {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: .6rem;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .badge {
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .badge-struct {
+      background: #e8f0fe;
+      color: #1a56a8
+    }
+
+    .badge-written {
+      background: #fff7ed;
+      color: #c2410c
+    }
+
+    .badge-test {
+      background: #fdf4ff;
+      color: #7e22ce
+    }
+
+    .skill-tag {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: #f0f0ec;
+      color: #555;
+      border: 1px solid #ddd
+    }
+
+    .note {
+      font-size: 12.5px;
+      padding: .6rem .85rem;
+      border-radius: 8px;
+      margin-bottom: .85rem;
+      line-height: 1.65
+    }
+
+    .note-struct {
+      background: #eef4ff;
+      border-left: 3px solid #1a56a8;
+      color: #1e3a6e
+    }
+
+    .note-written {
+      background: #fff7ed;
+      border-left: 3px solid #c2410c;
+      color: #7c2d12
+    }
+
+    .note-test {
+      background: #faf5ff;
+      border-left: 3px solid #7e22ce;
+      color: #4c1d95
+    }
+
+    /* ── STRUCTURE: sentence with blank ── */
+    .sentence-box {
+      background: #f8f7f2;
+      border: 1px solid #e0e0d8;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      font-size: 15px;
+      line-height: 2;
+      color: #1a1a18
+    }
+
+    .blank {
+      display: inline-block;
+      min-width: 140px;
+      border-bottom: 2.5px solid #1a56a8;
+      margin: 0 4px;
+      text-align: center;
+      font-weight: 600;
+      color: #1a56a8;
+      font-size: 14px
+    }
+
+    /* ── WRITTEN EXPRESSION: error sentence ── */
+    .we-sentence {
+      background: #f8f7f2;
+      border: 1px solid #e0e0d8;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      font-size: 14.5px;
+      line-height: 2.2;
+      color: #1a1a18
+    }
+
+    .we-part {
+      display: inline;
+      cursor: pointer;
+      padding: 2px 3px;
+      border-radius: 4px;
+      transition: all .15s
+    }
+
+    .we-part:hover {
+      background: #e8f0fe
+    }
+
+    .we-part.selected {
+      background: #fff3cd;
+      border-bottom: 2.5px solid #f59e0b
+    }
+
+    .we-part.correct-sel {
+      background: #d1fae5;
+      border-bottom: 2.5px solid #059669;
+      color: #065f46;
+      font-weight: 600
+    }
+
+    .we-part.wrong-sel {
+      background: #fee2e2;
+      border-bottom: 2.5px solid #dc2626;
+      color: #991b1b
+    }
+
+    .we-part.correct-reveal {
+      background: #d1fae5;
+      border-bottom: 2.5px solid #059669
+    }
+
+    .part-label {
+      font-size: 10px;
+      font-weight: 700;
+      vertical-align: super;
+      margin-right: 1px
+    }
+
+    /* ── EXERCISE: C/I type ── */
+    .ci-sentence {
+      background: #f8f7f2;
+      border: 1px solid #e0e0d8;
+      border-radius: 8px;
+      padding: .9rem 1.1rem;
+      margin-bottom: .85rem;
+      font-size: 13.5px;
+      line-height: 1.85;
+      color: #1a1a18
+    }
+
+    .ci-choices {
+      display: flex;
+      gap: 10px;
+      margin-bottom: .6rem
+    }
+
+    .ci-btn {
+      padding: 7px 22px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #fff;
+      transition: all .15s
+    }
+
+    .ci-btn:hover:not(.disabled) {
+      background: #f0f0ec
+    }
+
+    .ci-btn.correct {
+      background: #d1fae5;
+      border-color: #059669;
+      color: #065f46
+    }
+
+    .ci-btn.wrong {
+      background: #fee2e2;
+      border-color: #dc2626;
+      color: #991b1b
+    }
+
+    .ci-btn.reveal-correct {
+      background: #d1fae5;
+      border-color: #059669;
+      color: #065f46
+    }
+
+    /* ── OPTIONS (MCQ) ── */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid #e0e0d8;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      background: #fff;
+      transition: all .15s
+    }
+
+    .opt:hover:not(.disabled) {
+      background: #f5f5f0
+    }
+
+    .opt.correct {
+      border-color: #059669;
+      background: #d1fae5;
+      color: #065f46
+    }
+
+    .opt.wrong {
+      border-color: #dc2626;
+      background: #fee2e2;
+      color: #991b1b
+    }
+
+    .opt.disabled {
+      cursor: default
+    }
+
+    .opt-label {
+      font-weight: 700;
+      min-width: 20px;
+      flex-shrink: 0
+    }
+
+    .explanation {
+      margin-top: .7rem;
+      padding: .75rem;
+      background: #f8f7f2;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: #444;
+      line-height: 1.7;
+      border-left: 3px solid #1a56a8
+    }
+
+    .explanation.we {
+      border-left-color: #c2410c
+    }
+
+    .explanation strong {
+      color: #1a1a18
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      gap: 7px
+    }
+
+    .nav-btn {
+      padding: 7px 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #fff;
+      color: #1a1a18;
+      transition: all .15s
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: #f0f0ec
+    }
+
+    .nav-btn.primary {
+      background: #1a56a8;
+      color: #fff;
+      border-color: #1a56a8
+    }
+
+    .nav-btn.primary:hover:not(:disabled) {
+      background: #1240820
+    }
+
+    .nav-btn.we-primary {
+      background: #c2410c;
+      color: #fff;
+      border-color: #c2410c
+    }
+
+    .nav-btn.test-primary {
+      background: #7e22ce;
+      color: #fff;
+      border-color: #7e22ce
+    }
+
+    .nav-btn:disabled {
+      opacity: .4;
+      cursor: default
+    }
+
+    .q-counter {
+      font-size: 12px;
+      color: #888
+    }
+
+    .score-screen {
+      text-align: center;
+      padding: 2.5rem 1rem
+    }
+
+    .score-big {
+      font-size: 52px;
+      font-weight: 700
+    }
+
+    .score-struct {
+      color: #1a56a8
+    }
+
+    .score-we {
+      color: #c2410c
+    }
+
+    .score-test {
+      color: #7e22ce
+    }
+
+    .score-label {
+      font-size: 15px;
+      color: #666;
+      margin: 6px 0 1.5rem
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 340px;
+      margin: 0 auto 1.5rem
+    }
+
+    .tip-box {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: .7rem 1rem;
+      font-size: 12.5px;
+      color: #78350f;
+      margin-bottom: .85rem;
+      line-height: 1.65
+    }
+
+    .correction-tag {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 5px;
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #059669;
+      margin-left: 6px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app" id="root"></div>
+  <script>
+    // ─── DATA ────────────────────────────────────────────────────────────────────
+    const DATA = {
+
+      // ══════════════════════════════════════════════════════════════════════════════
+      // PRE-TEST
+      // ══════════════════════════════════════════════════════════════════════════════
+      pretest_struct: {
+        label: "★ Pre-Test: Structure (1–15)", type: "struct",
+        note: "Pilih kata/frasa yang paling tepat untuk melengkapi kalimat. Perhatikan struktur subjek, verba, klausa, dan parallelisme.",
+        qs: [
+          { s: "The North Pole ___ a latitude of 90 degrees north.", opts: ["it has", "is having", "which is having", "has"], ans: 3, exp: "Kalimat perlu SUBJEK + VERBA sederhana. 'The North Pole' adalah subjek → 'has' (simple present) adalah verba yang tepat. 'It has' double subject; 'is having' salah (state verb); 'which is having' membuat klausa tanpa main verb." },
+          { s: "The city of Beverly Hills is surrounded on ___ the city of Los Angeles.", opts: ["its sides", "the sides are", "it is the side of", "all sides by"], ans: 3, exp: "Frasa lengkap: 'surrounded on all sides by' = dikelilingi di semua sisi oleh. Ini adalah frasa preposisi yang tepat mengikuti 'surrounded.'" },
+          { s: "___ greyhound, can achieve speeds up to thirty-six miles per hour.", opts: ["The", "The fastest", "The fastest dog", "The fastest dog, the"], ans: 3, exp: "Struktur: APP, S V. 'The fastest dog, the greyhound' — 'the greyhound' adalah subjek, 'the fastest dog' adalah appositive yang mendeskripsikannya." },
+          { s: "Marmots spend their time foraging among meadow plants and flowers or ___ on rocky cliffs.", opts: ["gets sun", "sunning", "the sun", "sunny"], ans: 1, exp: "PARALLEL STRUCTURE: 'foraging ... or sunning' — kedua kata harus berupa gerund (-ing) untuk sejajar. 'Sunning' = berjemur." },
+          { s: "The greenhouse effect occurs ___ heat radiated from the Sun.", opts: ["when does the Earth's atmosphere trap", "does the Earth's atmosphere trap", "when the Earth's atmosphere traps", "the Earth's atmosphere traps"], ans: 2, exp: "Setelah 'occurs,' diperlukan klausa adverb waktu. 'When the Earth's atmosphere traps' memberikan koneksi yang tepat (bukan pertanyaan, jadi tidak dibalik)." },
+          { s: "The Rose Bowl, ___ place on New Year's Day, is the oldest postseason collegiate football game in the United States.", opts: ["takes", "it takes", "which takes", "took"], ans: 2, exp: "Diperlukan ADJECTIVE CLAUSE untuk memodifikasi 'The Rose Bowl': 'which takes place on New Year's Day' — 'which' adalah connector + subject, 'takes' adalah verba." },
+          { s: "Experiments ___ represent a giant step into the medicine of the future.", opts: ["using gene therapy", "use gene therapy", "they use", "gene therapy uses"], ans: 0, exp: "'Using gene therapy' adalah REDUCED ADJECTIVE CLAUSE (adjective) yang memodifikasi 'Experiments.' Main verb kalimat adalah 'represent.' Jika 'use gene therapy' dipilih, tidak ada main verb." },
+          { s: "___ off the Hawaiian coastline are living, others are dead.", opts: ["While some types of coral reefs", "Some types of coral reefs", "There are many types of coral reefs", "Coral reefs"], ans: 0, exp: "Diperlukan ADVERB CONNECTOR + S + V untuk klausa pertama: 'While some types of coral reefs [are living]' menciptakan kontras dengan 'others are dead.'" },
+          { s: "Nimbostratus clouds are thick, dark gray clouds ___ forebode rain.", opts: ["what", "which", "what they", "which they"], ans: 1, exp: "Diperlukan ADJECTIVE CLAUSE CONNECTOR: 'which' (untuk benda) → 'which forebode rain' = yang mempertanda hujan. 'What' digunakan untuk noun clause, bukan adjective clause." },
+          { s: "Some economists suggest that home equity loans are merely a new trap to push consumers beyond ___.", opts: ["they can afford", "they can afford it", "what is affordable", "able to afford"], ans: 2, exp: "Diperlukan NOUN CLAUSE sebagai objek preposisi 'beyond': 'what is affordable' = apa yang mampu dibeli. 'They can afford' perlu 'what' di depannya." },
+          { s: "People who reverse the letters of words ___ to read suffer from dyslexia.", opts: ["when trying", "if they tried", "when tried", "if he tries"], ans: 0, exp: "'When trying to read' adalah REDUCED ADVERB CLAUSE (when + adj participle) yang memodifikasi 'People who.' Subjek implied sama dengan subjek utama." },
+          { s: "Featured at the Henry Ford Museum ___ of antique cars dating from 1865.", opts: ["is an exhibit", "an exhibit", "an exhibit is", "which is an exhibit"], ans: 0, exp: "Kalimat dibalik karena dimulai dengan PLACE EXPRESSION 'Featured at the Henry Ford Museum' → V S: 'is an exhibit.' Subject = 'an exhibit,' verb = 'is.'" },
+          { s: "Rubber ___ from vulcanized silicones with a high molecular weight is difficult to distinguish from natural rubber.", opts: ["is produced", "producing", "that produces", "produced"], ans: 3, exp: "'Produced from vulcanized silicones' adalah REDUCED ADJECTIVE CLAUSE (past participle sebagai adjective) yang memodifikasi 'Rubber.' Main verb = 'is difficult.'" },
+          { s: "___ appears considerably larger at the horizon than it does overhead is merely an optical illusion.", opts: ["The Moon", "That the Moon", "When the Moon", "The Moon which"], ans: 1, exp: "Diperlukan NOUN CLAUSE sebagai subjek kalimat: 'That the Moon appears...' — 'That' memperkenalkan noun clause. Main verb = 'is merely an optical illusion.'" },
+          { s: "According to the World Health Organization, ___ any of the six most dangerous diseases to break out, it could be cause for quarantine.", opts: ["were", "they were", "there were", "were they"], ans: 0, exp: "INVERTED CONDITIONAL tanpa 'if': 'Were any of the six most dangerous diseases to break out' = If any of the six...were to break out. 'Were' digunakan, subjek setelah verba." }
+        ]
+      },
+
+      pretest_we: {
+        label: "★ Pre-Test: Written Expression (16–40)", type: "written",
+        note: "Identifikasi satu kata/frasa yang SALAH (A/B/C/D) dalam setiap kalimat dan harus diubah agar kalimat menjadi benar.",
+        qs: [
+          { s: "On the floor of the Pacific Ocean |A|is|B| hundreds of |C|flat-topped mountains|D| more than a mile beneath sea level.", parts: ["On the floor of the Pacific Ocean", "is", "hundreds of flat-topped mountains", "more than a mile beneath sea level"], ans: 1, fix: "are", exp: "Subjek = 'hundreds of flat-topped mountains' (jamak) → verba harus 'are,' bukan 'is.'" },
+          { s: "Because of |A|the flourish with which|B| John Hancock signed the Declaration of Independence, his name |C|become|D| synonymous with signature.", parts: ["the flourish with which", "John Hancock signed the Declaration of Independence, his name", "become", "synonymous with signature"], ans: 2, fix: "became", exp: "Kalimat dalam konteks masa lampau → 'become' harus menjadi 'became' (simple past)." },
+          { s: "Segregation in public schools |A|was declare|B| unconstitutional by the Supreme Court |C|in 1954|D|.", parts: ["Segregation in public schools", "was declare", "unconstitutional by the Supreme Court", "in 1954"], ans: 1, fix: "was declared", exp: "Kalimat pasif memerlukan PAST PARTICIPLE: 'was declared,' bukan 'was declare.'" },
+          { s: "Sirius, the Dog Star, is |A|the most brightest star|B| in the sky with |C|an absolute magnitude|D| about twenty-three times that of the Sun.", parts: ["the most brightest star", "in the sky with", "an absolute magnitude", "about twenty-three times that of the Sun"], ans: 0, fix: "the brightest star", exp: "Double superlative: 'most brightest' salah. Gunakan hanya satu bentuk: 'the brightest' (superlative) atau 'the most bright' — bukan keduanya." },
+          { s: "|A|Killer whales|B| tend to wander in family clusters that |C|hunt, play, and resting|D| together.", parts: ["Killer whales", "tend to wander in family clusters that", "hunt, play, and resting", "together"], ans: 2, fix: "hunt, play, and rest", exp: "PARALLEL STRUCTURE: 'hunt, play, and rest' — semua verba harus dalam bentuk dasar (base form), bukan 'resting.'" },
+          { s: "|A|Some of the|B| most useful resistor |C|material are|D| carbon, metals, and metallic alloys.", parts: ["Some of the", "most useful resistor", "material are", "carbon, metals, and metallic alloys"], ans: 2, fix: "materials are", exp: "'Material' seharusnya jamak 'materials' karena diikuti verba jamak 'are' dan contoh-contoh jamak (carbon, metals, alloys)." },
+          { s: "The community of Bethesda, Maryland, was |A|previous|B| known |C|as|D| Darcy's Store.", parts: ["The community of Bethesda, Maryland, was", "previous", "known", "as Darcy's Store"], ans: 1, fix: "previously", exp: "'Previous' adalah adjective; dibutuhkan ADVERB 'previously' untuk memodifikasi verba 'known.'" },
+          { s: "Alloys of gold and copper have been |A|widely|B| |C|using|D| in various types of coins.", parts: ["Alloys of gold and copper have been", "widely", "using", "in various types of coins"], ans: 2, fix: "used", exp: "'Have been using' = present perfect continuous (aktif). Tapi kalimat ini pasif → 'have been used' (past participle)." },
+          { s: "J. H. Pratt used group therapy early in this century when he brought tuberculosis patients together to discuss |A|its|B| disease.", parts: ["J. H. Pratt used group therapy early in this century when he brought tuberculosis patients together to discuss", "its", "disease", ""], ans: 1, fix: "their", exp: "Rujukan pronoun: 'its' merujuk ke satu benda, tapi 'tuberculosis patients' adalah jamak → 'their disease.'" },
+          { s: "The United States has |A|import|B| all carpet wools in recent years because domestic wools are |C|too fine|D| and soft for carpets.", parts: ["The United States has", "import", "all carpet wools in recent years because domestic wools are", "too fine and soft for carpets"], ans: 1, fix: "imported", exp: "'Has' dalam present perfect memerlukan PAST PARTICIPLE: 'has imported,' bukan 'has import.'" },
+          { s: "Irving Berlin wrote 'Oh How I Have to Get Up in the Morning' while serving in |A|a|B| U.S. Army during World War I.", parts: ["Irving Berlin wrote the song while serving in", "a", "U.S. Army during World War I", ""], ans: 1, fix: "the", exp: "'The U.S. Army' menggunakan artikel DEFINITE 'the' karena merujuk pada institusi militer spesifik (hanya ada satu)." },
+          { s: "Banks are rushing to merge because consolidations enable them to slash |A|theirs|B| costs and expand.", parts: ["Banks are rushing to merge because consolidations enable them to slash", "theirs", "costs and expand", ""], ans: 1, fix: "their", exp: "'Theirs' adalah pronoun posesif independen (tidak diikuti noun). Sebelum noun 'costs' digunakan 'their' (possessive adjective)." },
+          { s: "That water has a very high specific heat means that without a large temperature change water can add or lose a large |A|number|B| of heat.", parts: ["That water has a very high specific heat means that without a large temperature change water can add or lose a large", "number", "of heat", ""], ans: 0, fix: "amount", exp: "'Number' digunakan untuk hal yang bisa dihitung (countable). 'Heat' adalah uncountable noun → gunakan 'amount of heat.'" },
+          { s: "Benny Goodman was equally talented as both a jazz performer |A|as well as|B| a classical musician.", parts: ["Benny Goodman was equally talented as both a jazz performer", "as well as", "a classical musician", ""], ans: 0, fix: "and", exp: "PAIRED CONJUNCTION: 'both...and' harus digunakan bersama. 'both A as well as B' salah → 'both A and B.'" },
+          { s: "The state seal still used in Massachusetts |A|designed by|B| Paul Revere, who also designed the first Continental currency.", parts: ["The state seal still used in Massachusetts", "designed by", "Paul Revere, who also designed the first Continental currency", ""], ans: 1, fix: "was designed by", exp: "Kalimat tidak memiliki main verb. 'designed by' harus menjadi 'was designed by' (passive voice + main verb)." },
+          { s: "Quarter horses were developed in eighteenth-century Virginia to race on |A|courses short|B| of about a quarter of a mile in length.", parts: ["Quarter horses were developed in eighteenth-century Virginia to race on", "courses short", "of about a quarter of a mile in length", ""], ans: 0, fix: "short courses", exp: "Urutan ADJECTIVE + NOUN: adjective mendahului noun → 'short courses,' bukan 'courses short.'" },
+          { s: "No longer satisfied with the emphasis of the Denishawn School, Martha Graham |A|has moved|B| to the staff of the Eastman School in 1925.", parts: ["No longer satisfied with the emphasis of the Denishawn School, Martha Graham", "has moved", "to the staff of the Eastman School", "in 1925"], ans: 1, fix: "moved", exp: "'In 1925' menunjukkan waktu lampau yang spesifik → gunakan SIMPLE PAST 'moved,' bukan present perfect 'has moved.'" },
+          { s: "William Hart was an |A|act|B| best known for his roles as western heroes in silent films.", parts: ["William Hart was an", "act", "best known for his roles as western heroes in silent films", ""], ans: 0, fix: "actor", exp: "'Act' adalah verba atau noun (aksi). Yang dibutuhkan adalah NOUN 'actor' (aktor) sebagai profesi." },
+          { s: "Prior to an extermination program earlier this century, |A|alive|B| wolves roamed across nearly all of North America.", parts: ["Prior to an extermination program earlier this century,", "alive", "wolves roamed across nearly all of North America", ""], ans: 1, fix: "live", exp: "'Alive' adalah adjective predikatif (setelah linking verb). Sebelum noun 'wolves' digunakan 'live' (adjective attributif) = serigala yang masih hidup." },
+          { s: "During the 1960s the Berkeley campus came to national attention as a |A|result|B| its radical political activity.", parts: ["During the 1960s the Berkeley campus came to national attention as a", "result", "its radical political activity", ""], ans: 0, fix: "result of", exp: "Idiom: 'as a result of' = sebagai akibat dari. Preposisi 'of' tidak boleh dihilangkan." },
+          { s: "Artist Gutzon Borglum designed the Mount Rushmore Memorial and worked on |A|project|B| from 1925 until his death in 1941.", parts: ["Artist Gutzon Borglum designed the Mount Rushmore Memorial and worked on", "project", "from 1925 until his death in 1941", ""], ans: 0, fix: "the project", exp: "Merujuk pada proyek yang SUDAH DISEBUTKAN sebelumnya (Mount Rushmore Memorial) → artikel definite 'the' diperlukan: 'the project.'" },
+          { s: "It is proving less costly and more |A|profitably|B| for drugmakers to market directly to patients.", parts: ["It is proving less costly and more", "profitably", "for drugmakers to market directly to patients", ""], ans: 0, fix: "profitable", exp: "PARALLEL STRUCTURE: 'less costly and more profitable' — keduanya harus adjective, bukan adverb. 'Profitably' adalah adverb → 'profitable.'" },
+          { s: "Sapphires weighing as much as two pounds have on occasion |A|mined|B|.", parts: ["Sapphires weighing as much as two pounds have on occasion", "mined", "", ""], ans: 0, fix: "been mined", exp: "Present perfect passive: 'have been mined' — 'been' diperlukan untuk membentuk passive voice dengan 'have.'" },
+          { s: "Like snakes, lizard can be found on all |A|others|B| continents except Antarctica.", parts: ["Like snakes, lizard can be found on all", "others", "continents except Antarctica", ""], ans: 0, fix: "other", exp: "'Others' adalah pronoun (berdiri sendiri). Sebelum noun 'continents' digunakan 'other' (adjective) = benua lain." },
+          { s: "Banks, savings and loans, and finance companies have recently been |A|doing|B| home equity loans with greater frequency than ever before.", parts: ["Banks, savings and loans, and finance companies have recently been", "doing", "home equity loans with greater frequency than ever before", ""], ans: 0, fix: "making", exp: "Idiom yang tepat: 'make loans' (memberikan pinjaman), bukan 'do loans.' 'Make' adalah verba yang tepat untuk pinjaman." }
+        ]
+      },
+
+      // ══════════════════════════════════════════════════════════════════════════════
+      // EXERCISES (C/I Type)
+      // ══════════════════════════════════════════════════════════════════════════════
+      ex1: {
+        label: "Ex 1 — Subjects & Verbs", type: "ci", skill: "Skill 1",
+        note: "Setiap kalimat harus memiliki minimal SATU SUBJEK dan SATU VERBA. Identifikasi apakah kalimat Correct (C) atau Incorrect (I).",
+        tip: "Cari: missing subject, missing verb, double subject, double verb.",
+        qs: [
+          { s: "Last week went fishing for trout at the nearby mountain lake.", ans: "I", exp: "MISSING SUBJECT — 'went fishing' tidak memiliki subjek. Harusnya: 'Last week he/I went fishing...'" },
+          { s: "A schedule of the day's events can be obtained at the front desk.", ans: "C", exp: "S = 'A schedule'; V = 'can be obtained.' Frasa 'of the day's events' adalah prepositional phrase, bukan subjek." },
+          { s: "A job on the day shift or the night shift at the plant available.", ans: "I", exp: "MISSING VERB — tidak ada verba dalam kalimat. Harusnya: '...at the plant is available.'" },
+          { s: "The new computer program has provides a variety of helpful applications.", ans: "I", exp: "DOUBLE VERB — 'has' dan 'provides' tidak bisa berdiri bersamaan. Harusnya: 'has provided' ATAU 'provides.'" },
+          { s: "The box can be opened only with a special screwdriver.", ans: "C", exp: "S = 'The box'; V = 'can be opened.' Benar." },
+          { s: "The assigned text for history class it contains more than twenty chapters.", ans: "I", exp: "DOUBLE SUBJECT — 'text' dan 'it' sama-sama subjek. Hapus salah satu: 'The assigned text...contains...'" },
+          { s: "The papers in the wastebasket should be emptied into the trash can outside.", ans: "C", exp: "S = 'The papers'; V = 'should be emptied.' Frasa prepositional tidak mengganggu S-V." },
+          { s: "Departure before dawn on a boat in the middle of the harbor.", ans: "I", exp: "MISSING VERB — tidak ada verba. Harusnya: 'Departure...is scheduled at dawn' atau serupa." },
+          { s: "Yesterday found an interesting article on pollution.", ans: "I", exp: "MISSING SUBJECT — siapa yang menemukan? Harusnya: 'Yesterday I found...'" },
+          { s: "The new machine is processes 50 percent more than the previous machine.", ans: "I", exp: "DOUBLE VERB — 'is' dan 'processes' tidak dapat berdiri bersamaan. Harusnya: 'processes' ATAU 'is processing.'" }
+        ]
+      },
+
+      ex2: {
+        label: "Ex 2 — Objects of Prepositions", type: "ci", skill: "Skill 2",
+        note: "Objek preposisi bukan subjek kalimat. Frasa preposisi (of/in/at/on/by...) di antara subjek dan verba tidak mempengaruhi subjek.",
+        tip: "Identifikasi frasa preposisi terlebih dahulu, lalu temukan S dan V yang tersisa.",
+        qs: [
+          { s: "The interviews by radio broadcasters were carried live by the station.", ans: "C", exp: "S = 'The interviews'; V = 'were carried.' 'by radio broadcasters' dan 'by the station' adalah frasa preposisi." },
+          { s: "In the last possible moment before takeoff took his seat in the airplane.", ans: "I", exp: "MISSING SUBJECT — siapa yang duduk? Harusnya: 'In the last possible moment...he took his seat.'" },
+          { s: "At the neighborhood flower shop, flowers in quantities of a dozen or a half dozen can be delivered for free.", ans: "C", exp: "S = 'flowers'; V = 'can be delivered.' Semua frasa preposisi hanya memberikan informasi tambahan." },
+          { s: "The progressive reading methods at this school are given credit for the improved test scores.", ans: "C", exp: "S = 'The progressive reading methods'; V = 'are given.' Benar." },
+          { s: "For the last three years at various hospitals in the county has been practicing medicine.", ans: "I", exp: "MISSING SUBJECT — siapa yang berpraktik? Harusnya: '...the doctor has been practicing.'" },
+          { s: "In the past a career in politics was not considered acceptable in some circles.", ans: "C", exp: "S = 'a career'; V = 'was not considered.' Benar." },
+          { s: "Shopping in the downtown area of the city it has improved a lot in recent years.", ans: "I", exp: "DOUBLE SUBJECT — 'Shopping' dan 'it' adalah dua subjek. Hapus 'it': 'Shopping...has improved...'" },
+          { s: "At the building site the carpenters with the most experience were given the most intricate work.", ans: "C", exp: "S = 'the carpenters'; V = 'were given.' Benar." },
+          { s: "For the fever and headache took two aspirin tablets.", ans: "I", exp: "MISSING SUBJECT — siapa yang minum aspirin? Harusnya: 'For the fever...she took two aspirin...'" },
+          { s: "The report with complete documentation was delivered at the conference.", ans: "C", exp: "S = 'The report'; V = 'was delivered.' Benar." }
+        ]
+      },
+
+      ex3: {
+        label: "Ex 3 — Appositives", type: "ci", skill: "Skill 3",
+        note: "APPOSITIVE adalah noun yang mendeskripsikan noun lain dan dipisahkan dengan koma. Appositive bukan subjek kalimat.",
+        tip: "Appositive: Tom, a good mechanic, fixed the car. Hati-hati jangan anggap appositive sebagai subjek.",
+        qs: [
+          { s: "The son of the previous owner, the new owner is undertaking some fairly broad changes in management policy.", ans: "C", exp: "S = 'the new owner'; APP = 'The son of the previous owner'; V = 'is undertaking.' Benar." },
+          { s: "Last semester, a friend, graduated cum laude from the university.", ans: "I", exp: "MISSING SUBJECT — 'a friend' adalah appositive. Harusnya: 'Last semester, Bob, a friend, graduated...'" },
+          { s: "Valentine's Day, February 14, is a special holiday for sweethearts.", ans: "C", exp: "S = 'Valentine's Day'; APP = 'February 14'; V = 'is.' Benar." },
+          { s: "At long last, the chief executive officer, has decided to step down.", ans: "I", exp: "MISSING SUBJECT — 'the chief executive officer' tampak sebagai appositive (ada koma di sekitarnya). Harusnya: 'Mr. Smith, the chief executive officer, has decided...'" },
+          { s: "Tonight's supper, leftovers from last night, did not taste any better tonight than last night.", ans: "C", exp: "S = 'Tonight's supper'; APP = 'leftovers from last night'; V = 'did not taste.' Benar." },
+          { s: "The only entrance to the closet, the door was kept locked at all times.", ans: "C", exp: "APP = 'The only entrance to the closet'; S = 'the door'; V = 'was kept.' Benar." },
+          { s: "In the cold of winter, a wall heating unit, would not turn on.", ans: "I", exp: "MISSING SUBJECT — 'a wall heating unit' adalah appositive. Harusnya: 'the electric heater, a wall heating unit, would not turn on.'" },
+          { s: "The new tile pattern, yellow flowers on a white background, really brightens up the room.", ans: "C", exp: "S = 'The new tile pattern'; APP = 'yellow flowers on a white background'; V = 'brightens.' Benar." },
+          { s: "The high-powered computer the most powerful machine of its type, was finally readied for use.", ans: "I", exp: "MISSING COMMA — appositive harus dipisahkan dengan koma: 'The high-powered computer, the most powerful machine...'" },
+          { s: "A longtime friend and confidant, the psychologist was often invited over for Sunday dinner.", ans: "C", exp: "APP = 'A longtime friend and confidant'; S = 'the psychologist'; V = 'was often invited.' Benar." }
+        ]
+      },
+
+      ex4: {
+        label: "Ex 4 — Present Participles", type: "ci", skill: "Skill 4",
+        note: "Present participle (-ing) bisa menjadi BAGIAN DARI VERBA (dengan 'be') atau ADJECTIVE (tanpa 'be'). Hati-hati double verb.",
+        tip: "'The boy standing' = adjective; 'The boy is standing' = verb. Jika ada dua verba dalam satu klausa → double verb (salah).",
+        qs: [
+          { s: "The companies offering the lowest prices will have the most customers.", ans: "C", exp: "'offering' = adjective (reduced adjective clause) memodifikasi 'companies.' Main verb = 'will have.' Benar." },
+          { s: "Those travelers are completing their trip on Delta should report to Gate Three.", ans: "I", exp: "DOUBLE VERB — 'are completing' (verb) dan 'should report' (verb) dalam satu klausa. Harusnya: 'completing their trip' (adjective)." },
+          { s: "The artisans were demonstrating various handicrafts at booths throughout the fair.", ans: "C", exp: "'were demonstrating' = verb (past continuous). Satu verba. Benar." },
+          { s: "The fraternities are giving the wildest parties attract the most new pledges.", ans: "I", exp: "DOUBLE VERB — 'are giving' dan 'attract.' Harusnya: 'giving the wildest parties' (adjective) + 'attract.'" },
+          { s: "The first team winning four games is awarded the championship.", ans: "C", exp: "'winning' = adjective memodifikasi 'team.' Main verb = 'is awarded.' Benar." },
+          { s: "The speaker was trying to make his point was often interrupted vociferously.", ans: "I", exp: "DOUBLE VERB — 'was trying' dan 'was interrupted.' Harusnya: 'trying to make his point' (adjective)." },
+          { s: "The fruits were rotting because of the moisture in the crates carrying them to market.", ans: "C", exp: "'were rotting' = main verb; 'carrying' = adjective memodifikasi 'crates.' Benar." },
+          { s: "Any students desiring official transcripts should complete the appropriate form.", ans: "C", exp: "'desiring' = adjective memodifikasi 'students.' Main verb = 'should complete.' Benar." },
+          { s: "The advertisements were announcing the half-day sale received a lot of attention.", ans: "I", exp: "DOUBLE VERB — 'were announcing' dan 'received.' Harusnya: 'announcing the half-day sale' (adjective)." },
+          { s: "The spices flavoring the meal were quite distinctive.", ans: "C", exp: "'flavoring' = adjective memodifikasi 'spices.' Main verb = 'were.' Benar." }
+        ]
+      },
+
+      ex5: {
+        label: "Ex 5 — Past Participles", type: "ci", skill: "Skill 5",
+        note: "Past participle (-ed/irregular) bisa menjadi BAGIAN DARI VERBA atau ADJECTIVE. Waspadai double verb saat past participle bertindak sebagai adjective.",
+        tip: "'The money offered' (adjective) vs 'The money was offered' (verb). Dua verba dalam satu klausa = salah.",
+        qs: [
+          { s: "The money was offered by the client was not accepted.", ans: "I", exp: "DOUBLE VERB — 'was offered' dan 'was not accepted.' Harusnya: 'offered by the client' (adjective)." },
+          { s: "The car listed in the advertisement had already stalled.", ans: "C", exp: "'listed' = adjective memodifikasi 'car.' Main verb = 'had stalled.' Benar." },
+          { s: "The chapters were taught by the professor this morning will be on next week's exam.", ans: "I", exp: "DOUBLE VERB — 'were taught' dan 'will be.' Harusnya: 'taught by the professor' (adjective)." },
+          { s: "The loaves of bread were baked in a brick oven at a low temperature for many hours.", ans: "C", exp: "'were baked' = main verb (passive). Benar." },
+          { s: "The ports were reached by the sailors were under the control of a foreign nation.", ans: "I", exp: "DOUBLE VERB — 'were reached' dan 'were.' Harusnya: 'reached by the sailors' (adjective)." },
+          { s: "Those suspected in the string of robberies were arrested by the police.", ans: "C", exp: "'suspected' = adjective memodifikasi 'Those.' Main verb = 'were arrested.' Benar." },
+          { s: "The pizza is served in this restaurant is the tastiest in the county.", ans: "I", exp: "DOUBLE VERB — 'is served' dan 'is.' Harusnya: 'served in this restaurant' (adjective)." },
+          { s: "The courses are listed on the second page of the brochure have several prerequisites.", ans: "I", exp: "DOUBLE VERB — 'are listed' dan 'have.' Harusnya: 'listed on the second page' (adjective)." },
+          { s: "All the tenants were invited to the Independence Day barbecue at the apartment complex.", ans: "C", exp: "'were invited' = main verb (passive). Benar." },
+          { s: "Any bills paid by the first of the month will be credited to your account by the next day.", ans: "C", exp: "'paid' = adjective memodifikasi 'bills.' Main verb = 'will be credited.' Benar." }
+        ]
+      },
+
+      ex6: {
+        label: "Ex 6 — Coordinate Connectors", type: "ci", skill: "Skill 6",
+        note: "COORDINATE CONNECTORS: and, but, or, so, yet. Setiap klausa yang dihubungkan harus punya S dan V. Perhatikan posisi connector.",
+        tip: "S V, connector S V. Connector tidak boleh di awal kalimat (kecuali So di awal itu salah) dan setiap klausa butuh S+V.",
+        qs: [
+          { s: "The software should be used on a laptop computer, and this computer is a laptop.", ans: "C", exp: "S1 V1, and S2 V2. Benar." },
+          { s: "The rain clouds can be seen in the distance, but no has fallen.", ans: "I", exp: "MISSING SUBJECT setelah 'but.' Harusnya: 'but no rain has fallen.'" },
+          { s: "They are trying to sell their house, it has been on the market for two months.", ans: "I", exp: "MISSING CONNECTOR antara dua klausa. Harusnya: '...their house, and it has been...'" },
+          { s: "So the quality of the print was not good, I changed the typewriter ribbon.", ans: "I", exp: "MISPLACED CONNECTOR: 'so' seharusnya di tengah, bukan di awal. Harusnya: 'The quality...was not good, so I changed...'" },
+          { s: "The lifeguard will warn you about the riptides, or she may require you to get out of the water.", ans: "C", exp: "S1 V1, or S2 V2. Benar." },
+          { s: "You should have finished the work yesterday, yet is not close to being finished today.", ans: "I", exp: "MISSING SUBJECT setelah 'yet.' Harusnya: 'yet it is not close...'" },
+          { s: "The phone rang again and again, so the receptionist was not able to get much work done.", ans: "C", exp: "S1 V1, so S2 V2. Benar." },
+          { s: "The missing wallet was found, but the cash and credit cards had been removed.", ans: "C", exp: "S1 V1, but S2 V2. Benar." },
+          { s: "Or you can drive your car for another 2,000 miles, you can get it fixed.", ans: "I", exp: "MISPLACED CONNECTOR. Harusnya: 'You can drive...or you can get it fixed.'" },
+          { s: "The chemist was awarded the Nobel Prize, he flew to Europe to accept it.", ans: "I", exp: "MISSING CONNECTOR antara dua klausa. Harusnya: '...the Nobel Prize, so he flew...'" }
+        ]
+      },
+
+      ex7: {
+        label: "Ex 7 — Adverb Time & Cause", type: "ci", skill: "Skill 7",
+        note: "ADVERB TIME connectors: after, before, when, while, since, until, as, once... CAUSE connectors: because, since, inasmuch as, now that.",
+        tip: "Setelah connector adverb, pastikan ada S + V. Jangan lupa koma jika klausa adverb di depan.",
+        qs: [
+          { s: "Since the bank closes in less than an hour, the deposits need to be tallied immediately.", ans: "C", exp: "Since S1 V1, S2 V2. Benar." },
+          { s: "Their backgrounds are thoroughly investigated before are admitted to the organization.", ans: "I", exp: "MISSING SUBJECT setelah 'before.' Harusnya: 'before they are admitted.'" },
+          { s: "The citizens are becoming more and more incensed about traffic accidents whenever the accidents occur at that intersection.", ans: "C", exp: "S1 V1 whenever S2 V2. Benar." },
+          { s: "The ground had been prepared, the seedlings were carefully planted.", ans: "I", exp: "MISSING CONNECTOR. Harusnya: 'After the ground had been prepared, the seedlings were...'" },
+          { s: "We can start the conference now that all the participants have arrived.", ans: "C", exp: "S1 V1 now that S2 V2. Benar." },
+          { s: "The building quite vulnerable to damage until the storm windows are installed.", ans: "I", exp: "MISSING VERB di klausa utama. Harusnya: 'The building is quite vulnerable...'" },
+          { s: "Once the address label for the package is typed, can be sent to the mail room.", ans: "I", exp: "MISSING SUBJECT setelah koma. Harusnya: '...it can be sent to the mail room.'" },
+          { s: "Because the recent change in work shifts was not posted, several workers missed their shifts.", ans: "C", exp: "Because S1 V1, S2 V2. Benar." },
+          { s: "The mother is going to be quite upset with her son as long as he misbehaves so much.", ans: "C", exp: "S1 V1 as long as S2 V2. Benar." },
+          { s: "Inasmuch as all the votes have not yet been counted the outcome of the election cannot be announced.", ans: "I", exp: "MISSING COMMA setelah klausa depan. Harusnya: '...been counted, the outcome...'" }
+        ]
+      },
+
+      ex8: {
+        label: "Ex 8 — Other Adverb Connectors", type: "ci", skill: "Skill 8",
+        note: "CONDITION: if, unless, provided, whether. CONTRAST: although, even though, while, whereas. PLACE: where, wherever. MANNER: as, in that.",
+        tip: "Setelah setiap connector, pastikan ada S + V lengkap. Jangan lupa koma jika klausa adverb di depan.",
+        qs: [
+          { s: "It is impossible to enter that program if you lack experience as a teacher.", ans: "C", exp: "S1 V1 if S2 V2. Benar." },
+          { s: "The commandant left strict orders about the passes, several soldiers left the post anyway.", ans: "I", exp: "MISSING CONNECTOR. Harusnya: 'Although/Even though the commandant left strict orders...'" },
+          { s: "No one is admitted to the academy unless he or she the education requirements.", ans: "I", exp: "MISSING VERB setelah subjek. Harusnya: 'unless he or she meets the education requirements.'" },
+          { s: "While most students turned the assignment in on time, a few asked for an extension.", ans: "C", exp: "While S1 V1, S2 V2. Benar." },
+          { s: "I will take you wherever need to go to complete the registration procedures.", ans: "I", exp: "MISSING SUBJECT setelah 'wherever.' Harusnya: 'wherever you need to go.'" },
+          { s: "I will wait here in the airport with you whether the plane leaves on time or not.", ans: "C", exp: "S1 V1 whether S2 V2 or not. Benar." },
+          { s: "Providing the envelope is postmarked by this Friday, your application still acceptable.", ans: "I", exp: "MISSING VERB di klausa utama. Harusnya: 'your application is still acceptable.'" },
+          { s: "As the nurse already explained all visitors must leave the hospital room now.", ans: "I", exp: "MISSING COMMA setelah klausa depan. Harusnya: 'As the nurse already explained, all visitors must leave...'" },
+          { s: "This exam will be more difficult than usual in that it covers two chapters instead of one.", ans: "C", exp: "S1 V1 in that S2 V2. Benar." },
+          { s: "Though snow had been falling all day long, everyone got to the church on time for the wedding.", ans: "C", exp: "Though S1 V1, S2 V2. Benar." }
+        ]
+      },
+
+      ex9: {
+        label: "Ex 9 — Noun Clause Connectors", type: "ci", skill: "Skill 9",
+        note: "NOUN CLAUSE connectors: what, when, where, why, how, whatever, whenever, whether, if, that. Noun clause berfungsi sebagai S atau O kalimat.",
+        tip: "Jika connector noun clause digunakan, S+V setelahnya tidak dibalik. 'I know what they did.' ← tidak dibalik.",
+        qs: [
+          { s: "When the season starts is determined by the weather.", ans: "C", exp: "'When the season starts' = noun clause sebagai subjek. V = 'is determined.' Benar." },
+          { s: "The manual how the device should be built.", ans: "I", exp: "MISSING VERB di klausa utama. Harusnya: 'The manual explains/shows how the device should be built.'" },
+          { s: "The schedule indicated if the teams would be playing in the final game.", ans: "C", exp: "'if...playing' = noun clause sebagai objek 'indicated.' Benar." },
+          { s: "He refused to enter a plea could not be determined by the lawyer.", ans: "I", exp: "MISSING CONNECTOR noun clause. Harusnya: 'Why he refused to enter a plea could not be determined...'" },
+          { s: "Talked about where we should go for lunch.", ans: "I", exp: "MISSING SUBJECT di klausa utama. Harusnya: 'We talked about where we should go...'" },
+          { s: "Why the condition of the patient deteriorated so rapidly it was not explained.", ans: "I", exp: "DOUBLE SUBJECT — 'Why the condition...' adalah noun clause (subjek), tapi 'it' juga ditambahkan. Hapus 'it.'" },
+          { s: "Whether or not the new office would be built was to be determined at the meeting.", ans: "C", exp: "'Whether or not...would be built' = noun clause sebagai S. V = 'was to be determined.' Benar." },
+          { s: "That the professor has not yet decided when the paper is due.", ans: "I", exp: "MISSING MAIN VERB. 'That...' adalah noun clause (S) tapi tidak ada main verb. Harusnya: 'That...is/remains certain.'" },
+          { s: "The contract will be awarded is the question to be answered at the meeting.", ans: "I", exp: "MISSING CONNECTOR. Harusnya: 'When the contract will be awarded is the question...'" },
+          { s: "He always talked with whomever he pleased and did whatever he wanted.", ans: "C", exp: "'whomever he pleased' dan 'whatever he wanted' = noun clauses. Benar." }
+        ]
+      },
+
+      ex10: {
+        label: "Ex 10 — Noun Clause Connector/Subjects", type: "ci", skill: "Skill 10",
+        note: "who, what, which, whoever, whatever, whichever = connector SEKALIGUS SUBJEK noun clause. Setelah connector ini, langsung VERBA (bukan S lagi).",
+        tip: "'I know what happened.' ← 'what' = connector + subject, langsung diikuti verb 'happened.'",
+        qs: [
+          { s: "The game show contestant was able to respond to whatever was asked.", ans: "C", exp: "'whatever was asked' = noun clause; 'whatever' = connector + subject. Benar." },
+          { s: "You should find out which the best physics department.", ans: "I", exp: "MISSING VERB setelah 'which.' Harusnya: 'which is the best physics department.'" },
+          { s: "The employee was unhappy about what was added to his job description.", ans: "C", exp: "'what was added' = noun clause. 'what' = connector + subject. Benar." },
+          { s: "Whoever wants to take the desert tour during spring break signing up at the office.", ans: "I", exp: "MISSING MAIN VERB. 'Whoever wants...' = noun clause sebagai S, tapi tidak ada main verb. Harusnya: '...should sign up.'" },
+          { s: "The motorist was unable to discover who he had struck his car.", ans: "I", exp: "DOUBLE SUBJECT — 'who' sudah sebagai connector, 'he' adalah subjek ekstra. Hapus 'he': '...who had struck his car.'" },
+          { s: "The voters should elect whichever of the candidates seems best to them.", ans: "C", exp: "'whichever...seems best' = noun clause sebagai objek. Benar." },
+          { s: "It was difficult to distinguish between what was on sale and what was merely on display.", ans: "C", exp: "Dua noun clause paralel. Benar." },
+          { s: "You should buy whatever the cheapest and most durable.", ans: "I", exp: "MISSING VERB. Harusnya: 'whatever is the cheapest and most durable.'" },
+          { s: "What was written in the letter angered him beyond belief.", ans: "C", exp: "'What was written' = noun clause sebagai subjek. V = 'angered.' Benar." },
+          { s: "You can spend your time with whoever important to you.", ans: "I", exp: "MISSING VERB. Harusnya: 'whoever is important to you.'" }
+        ]
+      },
+
+      ex11: {
+        label: "Ex 11 — Adjective Clause Connectors", type: "ci", skill: "Skill 11",
+        note: "ADJECTIVE CLAUSE connectors: who/whom (orang), which (benda), that (orang/benda). Adjective clause memodifikasi noun yang mendahuluinya.",
+        tip: "'whom' = objek; 'who' = subjek; 'which' untuk benda. Jangan gunakan 'what' untuk adjective clause.",
+        qs: [
+          { s: "It is important to fill out the form in the way that you have been instructed.", ans: "C", exp: "'that you have been instructed' = adjective clause memodifikasi 'the way.' Benar." },
+          { s: "The car which I have been driving for five years for sale at a really good price.", ans: "I", exp: "MISSING MAIN VERB. 'which I have been driving' = adjective clause, tapi tidak ada main verb. Harusnya: 'The car...is for sale.'" },
+          { s: "I just finished reading the novel whom the professor suggested for my book report.", ans: "I", exp: "WRONG CONNECTOR — 'whom' untuk orang, bukan benda. 'Novel' adalah benda → gunakan 'which' atau 'that.'" },
+          { s: "The plane that he was scheduled to take to Hawaii was delayed.", ans: "C", exp: "'that he was scheduled to take' = adjective clause. Main verb = 'was delayed.' Benar." },
+          { s: "The movie which we watched on cable last night it was really frightening.", ans: "I", exp: "DOUBLE SUBJECT — 'the movie' dan 'it.' Hapus 'it': 'The movie which we watched...was really frightening.'" },
+          { s: "I made an appointment with the doctor whom you recommended.", ans: "C", exp: "'whom you recommended' = adjective clause. 'whom' = objek (you recommended whom). Benar." },
+          { s: "The enthusiasm with which he greeted me made me feel welcome.", ans: "C", exp: "'with which he greeted me' = adjective clause (preposisi + which). Benar." },
+          { s: "The story that you told me about Bob.", ans: "I", exp: "MISSING MAIN VERB. 'that you told me about Bob' = adjective clause, tapi tidak ada main verb. Harusnya: 'The story...was funny.'" },
+          { s: "The men with whom were having the discussion did not seem very friendly.", ans: "I", exp: "MISSING SUBJECT di dalam adjective clause. Harusnya: 'with whom we were having the discussion.'" },
+          { s: "I'm not really sure about taking part in the plans that we made last night.", ans: "C", exp: "'that we made last night' = adjective clause memodifikasi 'plans.' Benar." }
+        ]
+      },
+
+      ex12: {
+        label: "Ex 12 — Adjective Clause Connector/Subjects", type: "ci", skill: "Skill 12",
+        note: "who, which, that sebagai CONNECTOR SEKALIGUS SUBJEK adjective clause. Setelah connector ini langsung diikuti VERBA.",
+        tip: "'I need a secretary WHO TYPES fast.' ← 'who' = connector + subject, langsung diikuti verb 'types.'",
+        qs: [
+          { s: "The ice cream that is served in the restaurant has a smooth, creamy texture.", ans: "C", exp: "'that is served' = adjective clause; 'that' = connector/subject. Benar." },
+          { s: "The cars are trying to enter the freeway system are lined up for blocks.", ans: "I", exp: "MISSING CONNECTOR/SUBJECT. Harusnya: 'The cars which/that are trying to enter...'" },
+          { s: "I have great respect for everyone who on the Dean's List.", ans: "I", exp: "MISSING VERB. Harusnya: 'everyone who is on the Dean's List.'" },
+          { s: "It is going to be very difficult to work with the man which just began working here.", ans: "I", exp: "WRONG CONNECTOR — 'which' untuk benda, tapi 'man' adalah orang → gunakan 'who.'" },
+          { s: "The door that leads to the vault it was tightly locked.", ans: "I", exp: "DOUBLE SUBJECT — 'The door' dan 'it.' Hapus 'it': 'The door that leads to the vault was tightly locked.'" },
+          { s: "The neighbors reported the man who was trying to break into the car to the police.", ans: "C", exp: "'who was trying' = adjective clause. Benar." },
+          { s: "These plants can only survive in an environment is extremely humid.", ans: "I", exp: "MISSING CONNECTOR/SUBJECT. Harusnya: 'in an environment which/that is extremely humid.'" },
+          { s: "The boss meets with any production workers who they have surpassed their quotas.", ans: "I", exp: "DOUBLE SUBJECT — 'who' sudah sebagai connector/subject, 'they' adalah ekstra. Hapus 'they.'" },
+          { s: "The salesclerk ran after the woman who had left her credit card in the store.", ans: "C", exp: "'who had left' = adjective clause. Benar." },
+          { s: "The shoes which matched the dress that was on sale.", ans: "I", exp: "MISSING MAIN VERB. 'which matched the dress' = adjective clause, tapi tidak ada main verb. Harusnya: 'The shoes...are also on sale.'" }
+        ]
+      },
+
+      ex13: {
+        label: "Ex 13 — Reduced Adjective Clauses", type: "ci", skill: "Skill 13",
+        note: "REDUCED ADJECTIVE CLAUSE: hilangkan connector/subject + be-verb. Jika tidak ada be-verb, ganti V utama menjadi -ing.",
+        tip: "'the man who is standing' → 'the man standing.' 'the book which was written' → 'the book written.'",
+        qs: [
+          { s: "We will have to return the merchandise purchased yesterday at the Broadway.", ans: "C", exp: "'purchased yesterday' = reduced adjective clause (dari 'which was purchased'). Benar." },
+          { s: "The children sat in the fancy restaurant found it difficult to behave.", ans: "I", exp: "'sat in the fancy restaurant' = reduced clause yang logikanya rancu. Harusnya: 'The children who sat in the fancy restaurant found it difficult...' — tidak bisa dikurangi tanpa ambiguitas." },
+          { s: "Serving a term of four years, the mayor of the town will face reelection next year.", ans: "C", exp: "'Serving a term of four years' = reduced adjective clause di depan, memodifikasi 'the mayor.' Benar." },
+          { s: "The brand new Cadillac, purchasing less than two weeks ago, was destroyed in the accident.", ans: "I", exp: "WRONG FORM — 'purchasing' seharusnya 'purchased' (passive/past participle) karena mobil dibeli, bukan membeli." },
+          { s: "The fans who supporting their team always come out to the games in large numbers.", ans: "I", exp: "INCOMPLETE REDUCTION — 'who supporting' salah. Harusnya: 'supporting their team' (fully reduced) ATAU 'who support their team' (full clause)." },
+          { s: "The suspect can be seen in the photographs were just released by the police.", ans: "I", exp: "MISSING CONNECTOR untuk reduced clause. Harusnya: 'in the photographs just released by the police' (fully reduced) ATAU 'which were just released.'" },
+          { s: "The food placing on the picnic table attracted a large number of flies.", ans: "I", exp: "WRONG FORM — 'placing' seharusnya 'placed' (passive) karena makanan diletakkan, bukan meletakkan." },
+          { s: "Impressed with everything she had heard about the course, Marie signed her children up for it.", ans: "C", exp: "'Impressed with everything...' = reduced adjective clause memodifikasi 'Marie.' Benar." },
+          { s: "The passengers in the airport waiting room, heard the announcement of the canceled flight, groaned audibly.", ans: "I", exp: "'heard' seharusnya 'hearing' (aktif, dalam posisi reduced clause): 'hearing the announcement...groaned.'" },
+          { s: "Dissatisfied with the service at the restaurant, the meal really was not enjoyable.", ans: "I", exp: "ILLOGICAL REDUCTION — 'Dissatisfied' harus merujuk ke subjek kalimat utama. 'The meal' tidak bisa dissatisfied. Harusnya subjek orang: 'Dissatisfied with the service, we really did not enjoy the meal.'" }
+        ]
+      },
+
+      ex14: {
+        label: "Ex 14 — Reduced Adverb Clauses", type: "ci", skill: "Skill 14",
+        note: "REDUCED ADVERB CLAUSE: connector tetap ada, S dihilangkan (harus sama dengan S klausa utama), V menjadi -ing atau past participle.",
+        tip: "'While she was waiting' → 'While waiting.' Subjek reduced clause = subjek klausa utama. Jika berbeda = illogical.",
+        qs: [
+          { s: "If not completely satisfied, you can return the product to the manufacturer.", ans: "C", exp: "'If not completely satisfied' = reduced adverb clause (dari 'If you are not completely satisfied'). Benar." },
+          { s: "Steve has had to learn how to cook and clean since left home.", ans: "I", exp: "WRONG FORM — 'left' seharusnya 'leaving' (gerund setelah connector): 'since leaving home.'" },
+          { s: "The ointment can be applied where needed.", ans: "C", exp: "'where needed' = reduced adverb clause. Benar." },
+          { s: "Tom began to look for a job after completing his master's degree in engineering.", ans: "C", exp: "'after completing' = reduced adverb clause. Benar." },
+          { s: "Although not selecting for the team, he attends all of the games as a fan.", ans: "I", exp: "WRONG FORM — 'selecting' seharusnya 'selected' (passive: dia dipilih/tidak dipilih): 'Although not selected for the team.'" },
+          { s: "When purchased at this store, the buyer gets a guarantee on all items.", ans: "I", exp: "ILLOGICAL REDUCTION — 'the buyer' tidak bisa 'purchased.' Subjek kedua klausa harus sama." },
+          { s: "The medicine is not effective unless taken as directed.", ans: "C", exp: "'unless taken as directed' = reduced adverb clause (passive). Benar." },
+          { s: "You should negotiate a lot before buy a new car.", ans: "I", exp: "WRONG FORM — setelah connector 'before' harus gerund: 'before buying a new car.'" },
+          { s: "Once purchased, the swimsuits cannot be returned.", ans: "C", exp: "'Once purchased' = reduced adverb clause (passive). Benar." },
+          { s: "Though located near the coast, the town does not get much of an ocean breeze.", ans: "C", exp: "'Though located near the coast' = reduced adverb clause (passive). Benar." }
+        ]
+      },
+
+      ex15: {
+        label: "Ex 15 — Inverted Subjects/Verbs (Question Words)", type: "ci", skill: "Skill 15",
+        note: "QUESTION WORDS memperkenalkan pertanyaan → S dan V DIBALIK. Tapi jika menghubungkan dua klausa (indirect question) → S dan V TIDAK dibalik.",
+        tip: "Direct: 'What ARE they?' (dibalik). Indirect: 'I know what they ARE.' (tidak dibalik).",
+        qs: [
+          { s: "The phone company is not certain when will the new directories be ready.", ans: "I", exp: "INDIRECT QUESTION → tidak dibalik. Harusnya: 'when the new directories will be ready.'" },
+          { s: "The professor does not understand why so many students did poorly on the exam.", ans: "C", exp: "Indirect question → S V tidak dibalik: 'why so many students did poorly.' Benar." },
+          { s: "How new students can get information about parking?", ans: "I", exp: "DIRECT QUESTION → harus dibalik: 'How can new students get information about parking?'" },
+          { s: "Where is it cheapest to get typeset copies printed?", ans: "C", exp: "Direct question → dibalik: 'Where is it...' Benar." },
+          { s: "Only the pilot can tell you how far can the plane go on one tank of fuel.", ans: "I", exp: "Indirect question → tidak dibalik. Harusnya: 'how far the plane can go...'" },
+          { s: "What type of security does he prefer for his investments?", ans: "C", exp: "Direct question → dibalik: 'does he prefer.' Benar." },
+          { s: "Not even the bank president knows when the vault will be opened.", ans: "C", exp: "Indirect question → tidak dibalik: 'when the vault will be opened.' Benar." },
+          { s: "How long it has been since you arrived in the United States?", ans: "I", exp: "DIRECT QUESTION → harus dibalik: 'How long has it been since you arrived?'" },
+          { s: "The jury doubts what the witness said under cross-examination.", ans: "C", exp: "Indirect question → tidak dibalik: 'what the witness said.' Benar." },
+          { s: "Do you know why he wants to take an extended leave of absence?", ans: "C", exp: "Indirect question ('why he wants') di dalam direct question ('Do you know'). Benar." }
+        ]
+      },
+
+      ex16: {
+        label: "Ex 16 — Inverted S/V (Place Expressions)", type: "ci", skill: "Skill 16",
+        note: "Place expression WAJIB (necessary to complete the sentence) di awal → S V DIBALIK. Place expression tambahan (extra info) → S V tidak dibalik.",
+        tip: "'In the room were students.' (necessary, dibalik) vs 'In the room, I studied.' (extra, tidak dibalik).",
+        qs: [
+          { s: "In front of the house were some giant trees.", ans: "C", exp: "Place expression wajib → dibalik: V S. Benar." },
+          { s: "There a big house is on the corner.", ans: "I", exp: "'There' + place expression wajib → dibalik: 'There is a big house on the corner.'" },
+          { s: "In the cave was a vast treasure of gems and jewels.", ans: "C", exp: "Place expression wajib → dibalik: V S. Benar." },
+          { s: "To the north the stream is that the settlers will have to cross.", ans: "I", exp: "Place expression wajib → dibalik: 'To the north is the stream that...'" },
+          { s: "Around the corner are the offices that you are trying to find.", ans: "C", exp: "Place expression wajib → dibalik: V S. Benar." },
+          { s: "At the Italian restaurant was the food too spicy for my taste.", ans: "I", exp: "Tidak benar dibalik di sini. Harusnya: 'At the Italian restaurant, the food was too spicy.'" },
+          { s: "Nowhere in the world farmers can grow such delicious food.", ans: "I", exp: "Negative expression 'Nowhere' → dibalik: 'Nowhere in the world can farmers grow...'" },
+          { s: "In the backyard the two trees are that need to be pruned.", ans: "I", exp: "Place expression wajib → dibalik: 'In the backyard are the two trees that need to be pruned.'" },
+          { s: "Around the recreation hall and down the path are the tents where we will be staying this week.", ans: "C", exp: "Place expression wajib → dibalik: V S. Benar." },
+          { s: "In the apartment next to mine a man and a woman were having a heated discussion.", ans: "I", exp: "Place expression ekstra → tidak dibalik, tapi urutan benar. Harusnya: 'In the apartment...were a man and a woman' (karena ini identifikasi lokasi, bukan penambahan info)." }
+        ]
+      },
+
+      ex17: {
+        label: "Ex 17 — Inverted S/V (Negatives)", type: "ci", skill: "Skill 17",
+        note: "Negative expressions di awal kalimat → S V DIBALIK. Negatives: never, no, not, neither, nor, barely, hardly, only, rarely, scarcely, seldom.",
+        tip: "'Never did he write.' 'Seldom has she made...' Auxiliary verb datang sebelum subjek.",
+        qs: [
+          { s: "Never the boy wrote to his sisters.", ans: "I", exp: "'Never' di awal → dibalik: 'Never did the boy write to his sisters.'" },
+          { s: "On no occasion did they say that to me.", ans: "C", exp: "'On no occasion' (negative) → dibalik: 'did they say.' Benar." },
+          { s: "Steve did not win the prize, nor did he expect to do so.", ans: "C", exp: "'nor' di tengah kalimat → dibalik di klausa kedua: 'did he expect.' Benar." },
+          { s: "Only once in my life gone I have to New York City.", ans: "I", exp: "'Only' → dibalik dengan auxiliary: 'Only once in my life have I gone to New York City.'" },
+          { s: "Did he go out of the house at no time.", ans: "I", exp: "'At no time' seharusnya di awal: 'At no time did he go out of the house.'" },
+          { s: "Seldom their secretary has made such mistakes.", ans: "I", exp: "'Seldom' → dibalik: 'Seldom has their secretary made such mistakes.'" },
+          { s: "No sooner had she hung up the phone than it rang again.", ans: "C", exp: "'No sooner' → dibalik: 'had she hung up.' Benar." },
+          { s: "Sheila did not arrive late for work, nor she left early.", ans: "I", exp: "'nor' → dibalik di klausa kedua: 'nor did she leave early.'" },
+          { s: "Barely had he finished the exam when the graduate assistant collected the papers.", ans: "C", exp: "'Barely' → dibalik: 'had he finished.' Benar." },
+          { s: "The police did not arrive in time to save the girl, and neither did the paramedics.", ans: "C", exp: "'neither' → dibalik: 'did the paramedics.' Benar." }
+        ]
+      },
+
+      ex18: {
+        label: "Ex 18 — Inverted S/V (Conditionals)", type: "ci", skill: "Skill 18",
+        note: "Jika conditional menggunakan HAD, SHOULD, atau WERE, 'if' bisa dihilangkan dan S V DIBALIK.",
+        tip: "'If he were here' → 'Were he here.' 'If they had known' → 'Had they known.' 'If you should need' → 'Should you need.'",
+        qs: [
+          { s: "Were our neighbors a bit more friendly, it would be somewhat easier to get to know them.", ans: "C", exp: "Conditional inverted: 'Were + S' = 'If...were.' Benar." },
+          { s: "There are plenty of blankets in the closet if should you get cold during the night.", ans: "I", exp: "Tidak bisa gunakan 'if' DAN invert bersamaan. Harusnya: 'if you should get cold' ATAU 'should you get cold.'" },
+          { s: "Has he enough vacation days left this year, he will take two full weeks off in December.", ans: "I", exp: "'Has' tidak bisa diinversi untuk conditional. Harusnya: 'If he has enough...' ATAU pakai 'should/were/had.'" },
+          { s: "Had we been informed of the decision, we might have had something to say about it.", ans: "C", exp: "'Had + S' = 'If we had been informed.' Benar." },
+          { s: "I would like to know could you help me pack these boxes.", ans: "I", exp: "Indirect question → tidak dibalik. Harusnya: 'I would like to know if you could help me...'" },
+          { s: "He would have been in big trouble had not he remembered the assignment at the last minute.", ans: "I", exp: "Posisi 'not' salah. Harusnya: 'had he not remembered' — 'not' setelah subjek." },
+          { s: "If your friends come to visit, will they stay in a hotel or at your house?", ans: "C", exp: "'If + S V' (tidak dibalik di klausa kondisi). Benar." },
+          { s: "He might be a little more successful today were he a little more willing to do some hard work.", ans: "C", exp: "'Were + S' = 'If he were.' Benar." },
+          { s: "Should you ever visit this town again, I would be delighted to show you around.", ans: "C", exp: "'Should + S' = 'If you should ever visit.' Benar." },
+          { s: "Do you think that she would give the speech were she asked to do so?", ans: "C", exp: "'Were + S' dalam indirect conditional. Benar." }
+        ]
+      },
+
+      ex19: {
+        label: "Ex 19 — Inverted S/V (Comparisons)", type: "ci", skill: "Skill 19",
+        note: "Setelah ekspresi PERBANDINGAN (than, as...as), subjek dan verba boleh dibalik (opsional).",
+        tip: "'We were more prepared than the others were.' = 'We were more prepared than were the others.' Keduanya benar.",
+        qs: [
+          { s: "This candidate has received more votes than has any other candidate in previous years.", ans: "C", exp: "Inverted setelah 'than': 'than has any other candidate.' Benar." },
+          { s: "Obviously we were much more impressed with the performance than did the other members of the audience.", ans: "I", exp: "WRONG AUXILIARY — seharusnya 'were' (bukan 'did') karena klausa utama menggunakan 'were': 'than were the other members.'" },
+          { s: "The film that we saw last night at the festival was far better than any of the other films.", ans: "C", exp: "Tidak ada S V setelah 'than' → tidak perlu inversion. Benar." },
+          { s: "The vegetables at the market this morning were far fresher than were those at the market yesterday.", ans: "C", exp: "Inverted setelah 'than': 'than were those.' Benar." },
+          { s: "I am afraid that is the condition of these tires as bad as the condition of the others.", ans: "I", exp: "WRONG STRUCTURE — noun clause salah. Harusnya: 'I am afraid that the condition of these tires is as bad as...'" },
+          { s: "We firmly believed that our team could achieve a much faster time than any of the others.", ans: "C", exp: "Tidak ada S V setelah 'than' → tidak perlu inversion. Benar." },
+          { s: "This apple pie is not as good as the last one that you made.", ans: "C", exp: "Perbandingan standar. Benar." },
+          { s: "On the fishing trip, Bobby caught twice as many fish as anyone else did.", ans: "C", exp: "Perbandingan dengan S V di akhir: 'as anyone else did.' Benar." },
+          { s: "The final speaker gave us more details than had any of the previous speakers.", ans: "C", exp: "Inverted setelah 'than': 'than had any of the previous speakers.' Benar." },
+          { s: "Do you know why does he need to sleep so many more hours than do the others?", ans: "I", exp: "Indirect question → 'why' tidak dibalik. Harusnya: 'why he needs...than do the others.'" }
+        ]
+      },
+
+      ex20: {
+        label: "Ex 20 — S/V Agreement (Prep Phrases)", type: "ci", skill: "Skill 20",
+        note: "Frasa preposisi di antara S dan V tidak mempengaruhi S. Verba harus sepakat dengan SUBJEK UTAMA, bukan dengan noun terdekat.",
+        tip: "'The box OF CHOCOLATES is...' (bukan 'are') — 'box' = subjek, bukan 'chocolates.'",
+        qs: [
+          { s: "The climbers on the sheer face of the mountain need to be rescued.", ans: "C", exp: "S = 'climbers' (jamak); V = 'need.' Benar." },
+          { s: "The interrogation, conducted by three police officers, have lasted for several hours.", ans: "I", exp: "S = 'The interrogation' (tunggal) → V harus 'has lasted,' bukan 'have lasted.'" },
+          { s: "The tenants in the apartment next to mine is giving a party this evening.", ans: "I", exp: "S = 'The tenants' (jamak) → V harus 'are giving,' bukan 'is giving.'" },
+          { s: "The president, surrounded by secret service agents, is trying to make his way to the podium.", ans: "C", exp: "S = 'The president' (tunggal); V = 'is trying.' Benar." },
+          { s: "The buildings destroyed during the fire are being rebuilt at the taxpayers' expense.", ans: "C", exp: "S = 'buildings' (jamak); V = 'are being rebuilt.' Benar." },
+          { s: "Because of the seriousness of the company's financial problems, the board of directors have called an emergency meeting.", ans: "I", exp: "S = 'the board' (tunggal sebagai unit) → V harus 'has called.'" },
+          { s: "Manufacture of the items that you requested have been discontinued because of lack of profit on those items.", ans: "I", exp: "S = 'Manufacture' (tunggal) → V harus 'has been discontinued.'" },
+          { s: "Further development of any new ideas for future products has to be approved in advance.", ans: "C", exp: "S = 'development' (tunggal); V = 'has.' Benar." },
+          { s: "The scheduled departure time of the trains, posted on panels throughout the terminal buildings, are going to be updated.", ans: "I", exp: "S = 'The scheduled departure time' (tunggal) → V harus 'is going to be updated.'" },
+          { s: "Any houses built in that development before 1970 have to be upgraded to meet current standards.", ans: "C", exp: "S = 'houses' (jamak); V = 'have.' Benar." }
+        ]
+      },
+
+      ex21: {
+        label: "Ex 21 — S/V Agreement (Quantity Expressions)", type: "ci", skill: "Skill 21",
+        note: "'all/most/some/half OF THE [object]' → V sepakat dengan OBJEK setelah 'of the,' bukan dengan 'all/most/some/half.'",
+        tip: "'Most of the WATER is...' (water = uncountable/tunggal). 'Most of the STUDENTS are...' (students = jamak).",
+        qs: [
+          { s: "The witnesses saw that most of the fire in the hills was extinguished.", ans: "C", exp: "'most of the fire' → 'fire' tunggal → 'was.' Benar." },
+          { s: "Some of the animals from the zoo was released into the animal preserve.", ans: "I", exp: "'some of the animals' → 'animals' jamak → 'were released,' bukan 'was released.'" },
+          { s: "All of the students in the class taught by Professor Roberts is required to turn in their term papers next Monday.", ans: "I", exp: "'all of the students' → 'students' jamak → 'are required,' bukan 'is required.'" },
+          { s: "Half of the food that we are serving to the guests are still in the refrigerator.", ans: "I", exp: "'half of the food' → 'food' uncountable/tunggal → 'is still,' bukan 'are still.'" },
+          { s: "We believe that some of the time of the employees is going to be devoted to quality control.", ans: "C", exp: "'some of the time' → 'time' tunggal → 'is going.' Benar." },
+          { s: "All of the witnesses in the jury trial, which lasted more than two weeks, have indicated that they believed that the defendant was guilty.", ans: "C", exp: "'all of the witnesses' → 'witnesses' jamak → 'have.' Benar." },
+          { s: "She did not know where most of the people in the room was from.", ans: "I", exp: "'most of the people' → 'people' jamak → 'were from,' bukan 'was from.'" },
+          { s: "In spite of what was decided at the meeting, half of the procedures was not changed.", ans: "I", exp: "'half of the procedures' → 'procedures' jamak → 'were not changed.'" },
+          { s: "I was sure that all of the questions on the test were correct.", ans: "C", exp: "'all of the questions' → 'questions' jamak → 'were.' Benar." },
+          { s: "Most of the trouble that the employees discussed at the series of meetings was resolved within a few weeks.", ans: "C", exp: "'most of the trouble' → 'trouble' tunggal/uncountable → 'was resolved.' Benar." }
+        ]
+      },
+
+      ex22: {
+        label: "Ex 22 — S/V Agreement (Inverted Verbs)", type: "ci", skill: "Skill 22",
+        note: "Setelah INVERSION (question words, negatives, place, conditionals, comparisons), V tetap sepakat dengan S yang mungkin ada SETELAH V.",
+        tip: "'Seldom have THE STUDENTS...' — V = 'have' sepakat dengan 'students' (jamak), bukan kata yang menyebabkan inversion.",
+        qs: [
+          { s: "Only once this morning were the letters delivered by the campus mail service.", ans: "C", exp: "S = 'letters' (jamak); V = 'were.' Benar." },
+          { s: "Around the corner and to the right is the rooms that have been assigned to that program.", ans: "I", exp: "S = 'the rooms' (jamak) → V harus 'are,' bukan 'is.'" },
+          { s: "What in the world is the children trying to do?", ans: "I", exp: "S = 'the children' (jamak) → V harus 'are,' bukan 'is.'" },
+          { s: "John would be studying the chapters were he able to get hold of the book.", ans: "C", exp: "Conditional inverted: S = 'he' (tunggal); V = 'were.' Benar." },
+          { s: "This chapter has many more exercises than do the next one.", ans: "I", exp: "S = 'the next one' (tunggal) → V harus 'does,' bukan 'do.'" },
+          { s: "The computer programmer was unaware that there was so many mistakes in the program he had written.", ans: "I", exp: "S = 'mistakes' (jamak) → 'were so many mistakes,' bukan 'was so many.'" },
+          { s: "Seldom in the history of television has two new comedies been so successful in one season.", ans: "I", exp: "S = 'two new comedies' (jamak) → 'have...been,' bukan 'has.'" },
+          { s: "How many huge mistakes have the teacher actually found in the research paper?", ans: "I", exp: "S = 'the teacher' (tunggal) → 'has the teacher found,' bukan 'have.'" },
+          { s: "The new phone system is able to hold far more messages than was the phone system that had previously been used.", ans: "C", exp: "S = 'the phone system' (tunggal); V = 'was.' Benar." },
+          { s: "In the parking lot south of the stadium was the cars that were about to be towed.", ans: "I", exp: "S = 'the cars' (jamak) → 'were the cars,' bukan 'was the cars.'" }
+        ]
+      },
+
+      ex23: {
+        label: "Ex 23 — S/V Agreement (Singular Words)", type: "ci", skill: "Skill 23",
+        note: "Kata-kata berikut selalu TUNGGAL meski berkonotasi jamak: everybody, anyone, someone, nobody, each, every, anything, nothing, everything.",
+        tip: "'Everyone IS here.' 'Each of the students HAS...' 'Somebody NEEDS help.' — selalu singular!",
+        qs: [
+          { s: "It is impossible to believe that somebody actually admire that man.", ans: "I", exp: "'somebody' = tunggal → 'admires,' bukan 'admire.'" },
+          { s: "Each of the doctors in the building needs to have a separate reception area.", ans: "C", exp: "'Each' = tunggal → 'needs.' Benar." },
+          { s: "The president felt that no one were better suited for the position of chief staff advisor.", ans: "I", exp: "'no one' = tunggal → 'was better suited,' bukan 'were.'" },
+          { s: "Everybody participating in the fund-raiser are to turn in the tickets by 8:00.", ans: "I", exp: "'Everybody' = tunggal → 'is to turn in,' bukan 'are.'" },
+          { s: "Because of the low number of orders, nothing has to be done now.", ans: "C", exp: "'nothing' = tunggal → 'has.' Benar." },
+          { s: "Every time someone take unnecessary breaks, precious moments of production time are lost.", ans: "I", exp: "'someone' = tunggal → 'takes,' bukan 'take.'" },
+          { s: "Anybody who goes to the top of the Empire State Building is impressed with the view.", ans: "C", exp: "'Anybody' = tunggal → 'goes' dan 'is.' Benar." },
+          { s: "Every man, woman, and child in this line are required to sign the forms in order to complete the registration process.", ans: "I", exp: "'Every...man, woman, and child' = tunggal (Every + noun) → 'is required.'" },
+          { s: "It is nice to believe that anything is possible if a person tries hard enough.", ans: "C", exp: "'anything' = tunggal → 'is.' Benar." },
+          { s: "The company reiterated to reporters that nobody have been dismissed because of the incident.", ans: "I", exp: "'nobody' = tunggal → 'has been dismissed,' bukan 'have.'" }
+        ]
+      },
+
+      ex24: {
+        label: "Ex 24 — Parallel Structure (Coordinate Conjunctions)", type: "ci", skill: "Skill 24",
+        note: "Dengan AND, BUT, OR → kedua sisi harus dalam bentuk GRAMATIKAL YANG SAMA (noun+noun, verb+verb, phrase+phrase, dll.).",
+        tip: "'She likes swimming AND to run.' ← salah. Harusnya: 'swimming AND running' ATAU 'to swim AND to run.'",
+        qs: [
+          { s: "She held jobs as a typist, a housekeeper, and in a restaurant.", ans: "I", exp: "TIDAK PARALLEL: 'typist, housekeeper, [in a restaurant].' 'In a restaurant' bukan noun. Harusnya: 'a typist, a housekeeper, and a server.'" },
+          { s: "The report you are looking for could be in the file or on the desk.", ans: "C", exp: "PARALLEL: 'in the file' or 'on the desk' — dua frasa preposisi. Benar." },
+          { s: "She works very hard but usually gets below-average grades.", ans: "C", exp: "PARALLEL: '[She] works' but '[She] gets' — dua verba frase. Benar." },
+          { s: "The speaker introduced himself, told several interesting anecdotes, and finishing with an emotional plea.", ans: "I", exp: "TIDAK PARALLEL: 'introduced, told, and finishing.' Harusnya: 'introduced, told, and finished.'" },
+          { s: "You should know when the program starts and how many units you must complete.", ans: "C", exp: "PARALLEL: dua noun clauses ('when...' and 'how many...'). Benar." },
+          { s: "The term paper he wrote was rather short but very impressive.", ans: "C", exp: "PARALLEL: 'short' but 'impressive' — dua adjective. Benar." },
+          { s: "She suggested taking the plane this evening or that we go by train tomorrow.", ans: "I", exp: "TIDAK PARALLEL: 'taking the plane' (gerund) or 'that we go' (clause). Harusnya: 'taking the plane...or taking the train.'" },
+          { s: "The dean or the assistant dean will inform you of when and where you should apply for your diploma.", ans: "C", exp: "PARALLEL: 'when' and 'where' — dua kata tanya. Benar." },
+          { s: "There are papers to file, reports to type, and those letters should be answered.", ans: "I", exp: "TIDAK PARALLEL: 'papers to file, reports to type, and [those letters should be answered].' Harusnya: 'letters to answer.'" },
+          { s: "The manager needed a quick but thorough response.", ans: "C", exp: "PARALLEL: 'quick' but 'thorough' — dua adjective. Benar." }
+        ]
+      },
+
+      ex25: {
+        label: "Ex 25 — Parallel Structure (Paired Conjunctions)", type: "ci", skill: "Skill 25",
+        note: "PAIRED CONJUNCTIONS: both...and / either...or / neither...nor / not only...but also. Kedua sisi harus PARALLEL.",
+        tip: "'both A and B' — A dan B harus bentuk gramatikal yang sama. 'either...or,' 'neither...nor,' 'not only...but also' — sama.",
+        qs: [
+          { s: "According to the syllabus, you can either write a paper or you can take an exam.", ans: "I", exp: "TIDAK PARALLEL: 'either write a paper' (VP) or 'you can take' (S+V). Hapus 'you can': 'either write a paper or take an exam.'" },
+          { s: "It would be both noticed and appreciated if you could finish the work before you leave.", ans: "C", exp: "PARALLEL: 'both noticed and appreciated' — dua past participle. Benar." },
+          { s: "She would like neither to see a movie or to go bowling.", ans: "I", exp: "WRONG PAIR: 'neither...or' salah. Harusnya: 'neither...nor': 'neither to see a movie nor to go bowling.'" },
+          { s: "Either the manager or her assistant can help you with your refund.", ans: "C", exp: "PARALLEL: 'Either [the manager] or [her assistant]' — dua noun phrase. Benar." },
+          { s: "She wants not only to take a trip to Europe but she also would like to travel to Asia.", ans: "I", exp: "TIDAK PARALLEL: 'not only to take a trip' (infinitive) but 'she also would like to travel' (S+V). Harusnya: 'not only to take a trip...but also to travel to Asia.'" },
+          { s: "He could correct neither what you said nor you wrote.", ans: "I", exp: "TIDAK PARALLEL: 'neither what you said' (noun clause) nor 'you wrote' (S+V). Harusnya: 'neither what you said nor what you wrote.'" },
+          { s: "Both the tailor or the laundress could fix the damage to the dress.", ans: "I", exp: "WRONG PAIR: 'both...or' salah. Harusnya: 'both...and': 'Both the tailor and the laundress.'" },
+          { s: "He not only called the police department but also called the fire department.", ans: "C", exp: "PARALLEL: 'not only called...but also called' — dua verba. Benar." },
+          { s: "You can graduate either at the end of the fall semester or you can graduate at the end of the spring semester.", ans: "I", exp: "TIDAK PARALLEL — 'you can graduate' diulang. Harusnya: 'either at the end of the fall semester or at the end of the spring semester.'" },
+          { s: "The movie was neither amusing nor was it interesting.", ans: "I", exp: "TIDAK PARALLEL: 'neither amusing' (adjective) nor 'was it interesting' (S+V). Hapus 'was it': 'neither amusing nor interesting.'" }
+        ]
+      }
+
+    };
+
+    // ─── KEYS ────────────────────────────────────────────────────────────────────
+    const KEYS_STRUCT = ['pretest_struct', 'ex1', 'ex2', 'ex3', 'ex4', 'ex5', 'ex6', 'ex7', 'ex8', 'ex9', 'ex10'];
+    const KEYS_WE = ['pretest_we', 'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex16', 'ex17', 'ex18', 'ex19', 'ex20', 'ex21', 'ex22', 'ex23', 'ex24', 'ex25'];
+    const ALL_KEYS = [...KEYS_STRUCT, ...KEYS_WE];
+
+    // ─── STATE ───────────────────────────────────────────────────────────────────
+    let state = { section: 'pretest_struct', idx: 0, answers: {}, mode: 'quiz' };
+
+    // ─── HELPERS ─────────────────────────────────────────────────────────────────
+    function sec() { return DATA[state.section]; }
+    function total() { return sec().qs.length; }
+    function answered() {
+      const k = state.section;
+      return sec().qs.filter((_, i) => state.answers[k + '-' + i] !== undefined).length;
+    }
+    function correct() {
+      const k = state.section; const s = sec();
+      return s.qs.filter((q, i) => {
+        const a = state.answers[k + '-' + i];
+        if (a === undefined) return false;
+        if (s.type === 'ci') return a === q.ans;
+        return a === q.ans;
+      }).length;
+    }
+    function getType() { return sec().type; }
+    function progressClass() {
+      const t = getType();
+      if (t === 'struct') return 'struct';
+      if (t === 'written') return 'written';
+      return 'test';
+    }
+    function badgeClass() {
+      const t = getType();
+      if (t === 'struct') return 'badge-struct';
+      if (t === 'written') return 'badge-written';
+      return 'badge-test';
+    }
+    function badgeLabel() {
+      const t = getType();
+      if (t === 'struct') return 'Structure';
+      if (t === 'written') return 'Written Expression';
+      return 'Pre-Test';
+    }
+    function noteClass() {
+      const t = getType();
+      if (t === 'struct') return 'note-struct';
+      if (t === 'written') return 'note-written';
+      return 'note-test';
+    }
+
+    // ─── RENDER ──────────────────────────────────────────────────────────────────
+    function render() {
+      const root = document.getElementById('root');
+      const s = sec();
+      const tot = total();
+      const ans = answered();
+      const cor = correct();
+      const qIdx = state.idx;
+      const secKey = state.section;
+      const aKey = secKey + '-' + qIdx;
+      const ua = state.answers[aKey];
+      const done = ua !== undefined;
+      const q = s.qs[qIdx];
+
+      // Header
+      let h = `<div class="header">
+    <h1>Longman TOEFL — Structure &amp; Written Expression</h1>
+    <p>Section Two: Structure and Written Expression</p>
+  </div>`;
+
+      // Tabs — two rows
+      h += `<div class="tabs-wrap"><div class="tabs">`;
+      ALL_KEYS.forEach(k => {
+        const d = DATA[k];
+        const isTest = k.startsWith('pretest');
+        const isWe = d.type === 'written';
+        let cls = `tab${state.section === k ? ' active' : ''}`;
+        if (isTest) cls += ' test-tab';
+        else if (isWe) cls += ' we-tab';
+        h += `<button class="${cls}" onclick="chg('${k}')">${d.label}</button>`;
+      });
+      h += `</div></div>`;
+
+      // Progress
+      h += `<div class="progress-bar"><div class="progress-fill ${progressClass()}" style="width:${tot ? Math.round(ans / tot * 100) : 0}%"></div></div>`;
+
+      // Stats
+      h += `<div class="stats">
+    <div class="stat"><div class="stat-num">${tot}</div><div class="stat-lbl">Total</div></div>
+    <div class="stat"><div class="stat-num">${ans}</div><div class="stat-lbl">Answered</div></div>
+    <div class="stat"><div class="stat-num" style="color:#059669">${cor}</div><div class="stat-lbl">Correct</div></div>
+    <div class="stat"><div class="stat-num" style="color:#dc2626">${ans - cor}</div><div class="stat-lbl">Wrong</div></div>
+  </div>`;
+
+      // Score screen
+      if (state.mode === 'result') {
+        const pct = ans > 0 ? Math.round(cor / ans * 100) : 0;
+        const sc = progressClass();
+        h += `<div class="score-screen">
+      <div class="score-big score-${sc}">${pct}%</div>
+      <div class="score-label">${cor} of ${ans} correct — ${s.label}</div>
+      <div class="score-grid">
+        <div class="stat"><div class="stat-num" style="color:#059669">${cor}</div><div class="stat-lbl">Correct</div></div>
+        <div class="stat"><div class="stat-num" style="color:#dc2626">${ans - cor}</div><div class="stat-lbl">Wrong</div></div>
+        <div class="stat"><div class="stat-num">${tot - ans}</div><div class="stat-lbl">Skipped</div></div>
+      </div>
+      <button class="nav-btn" style="background:#059669;color:#fff;border-color:#059669" onclick="rst()">Try Again</button>
+      <button class="nav-btn" style="margin-left:8px" onclick="rev()">Review Answers</button>
+    </div>`;
+        root.innerHTML = h; return;
+      }
+
+      // Note + tip
+      h += `<div class="note ${noteClass()}">${s.note}</div>`;
+      if (s.tip) h += `<div class="tip-box">💡 <strong>Tips:</strong> ${s.tip}</div>`;
+
+      // ── CARD ──
+      h += `<div class="card">`;
+      h += `<div class="q-meta">
+    <span class="badge ${badgeClass()}">${badgeLabel()}</span>
+    <span class="skill-tag">${s.skill || s.label}</span>
+    <span>Q${qIdx + 1} / ${tot}</span>
+  </div>`;
+
+      // ─ STRUCTURE (MCQ with blank) ─
+      if (s.type === 'struct') {
+        h += `<div class="sentence-box">${q.s.replace('___', '<span class="blank">' + (done ? q.opts[q.ans] : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') + '</span>')}</div>`;
+        h += `<div class="options">`;
+        q.opts.forEach((opt, i) => {
+          let cls = 'opt' + (done ? ' disabled' : '');
+          if (done) {
+            if (i === q.ans) cls += ' correct';
+            else if (ua === i && i !== q.ans) cls += ' wrong';
+          }
+          h += `<div class="${cls}" onclick="${done ? '' : 'selMCQ(' + i + ')'}">
+        <span class="opt-label">(${String.fromCharCode(65 + i)})</span><span>${opt}</span>
+      </div>`;
+        });
+        h += `</div>`;
+        if (done) {
+          const ok = ua === q.ans;
+          h += `<div class="explanation"><strong>${ok ? '✓ Correct!' : '✗ Incorrect.'}</strong> ${q.exp}</div>`;
+        }
+      }
+
+      // ─ WRITTEN EXPRESSION (error identification) ─
+      else if (s.type === 'written') {
+        // Build sentence with clickable parts A B C D
+        const labels = ['A', 'B', 'C', 'D'];
+        h += `<div class="we-sentence">`;
+        // Split sentence by | markers
+        const raw = q.s;
+        const parts = q.parts;
+        // Reconstruct sentence with underlined parts
+        let sHtml = raw;
+        // Replace |A|text|, |B|text|, etc. pattern
+        parts.forEach((part, i) => {
+          if (!part) return;
+          let cls = 'we-part';
+          if (done) {
+            if (i === q.ans) cls += ua === i ? ' correct-sel' : ' correct-reveal';
+            else if (ua === i) cls += ' wrong-sel';
+          } else {
+            if (ua === i) cls += ' selected';
+          }
+          const onclick = done ? '' : `onclick="selWE(${i})"`;
+        });
+        // Rebuild display manually
+        h += buildWESentence(q, done, ua);
+        h += `</div>`;
+        // Letter buttons
+        h += `<div class="ci-choices">`;
+        parts.forEach((part, i) => {
+          if (!part) return;
+          let cls = 'ci-btn';
+          if (done) {
+            if (i === q.ans) cls += ua === i ? ' correct' : ' reveal-correct';
+            else if (ua === i) cls += ' wrong';
+          }
+          h += `<button class="${cls}"${done ? '' : ` onclick="selWE(${i})"`}>(${String.fromCharCode(65 + i)})</button>`;
+        });
+        h += `</div>`;
+        if (done) {
+          const ok = ua === q.ans;
+          h += `<div class="explanation we"><strong>${ok ? '✓ Correct!' : '✗ Incorrect.'}</strong>
+        Jawaban yang salah: <strong>(${String.fromCharCode(65 + q.ans)}) "${q.parts[q.ans]}"</strong>
+        → seharusnya <span class="correction-tag">${q.fix}</span><br><br>${q.exp}
+      </div>`;
+        }
+      }
+
+      // ─ C/I EXERCISE ─
+      else if (s.type === 'ci') {
+        h += `<div class="ci-sentence">${q.s}</div>`;
+        h += `<div class="ci-choices">`;
+        ['C', 'I'].forEach(choice => {
+          let cls = 'ci-btn';
+          if (done) {
+            if (choice === q.ans) cls += ua === choice ? ' correct' : ' reveal-correct';
+            else if (ua === choice) cls += ' wrong';
+          }
+          h += `<button class="${cls}"${done ? '' : ` onclick="selCI('${choice}')"`}>${choice === 'C' ? '✓ Correct' : '✗ Incorrect'}</button>`;
+        });
+        h += `</div>`;
+        if (done) {
+          const ok = ua === q.ans;
+          h += `<div class="explanation"><strong>${ok ? '✓ Benar!' : '✗ Kurang tepat.'}</strong> ${q.exp}</div>`;
+        }
+      }
+
+      // Nav
+      const isLast = qIdx >= tot - 1;
+      h += `<div class="nav">
+    <button class="nav-btn" onclick="prev()" ${qIdx === 0 ? 'disabled' : ''}>← Prev</button>
+    <span class="q-counter">Q${qIdx + 1} / ${tot} · ${ans} answered</span>
+    ${isLast
+          ? `<button class="nav-btn test-primary" onclick="showR()">Results →</button>`
+          : `<button class="nav-btn primary" onclick="next()">Next →</button>`
+        }
+  </div>`;
+      h += `</div>`; // end card
+      root.innerHTML = h;
+    }
+
+    function buildWESentence(q, done, ua) {
+      // We'll highlight parts inline in the sentence
+      const raw = q.s;
+      const parts = q.parts;
+      let out = '';
+      // The sentence already has | delimiters for parts
+      // Format: text |A|underlinedA|B| text |B|underlinedB... 
+      // But actually we stored full sentence and separate parts array
+      // Let's just show the full sentence text cleanly with underlined spans below
+      // Show sentence first
+      let cleanSentence = raw.replace(/\|[A-D]\|/g, '').trim();
+      out += `<span style="font-size:14px;line-height:2">${cleanSentence}</span><br><br>`;
+      out += `<span style="font-size:12px;color:#666;">Underlined parts:</span><br>`;
+      const labels = ['A', 'B', 'C', 'D'];
+      parts.forEach((part, i) => {
+        if (!part) return;
+        let style = 'display:inline-block;border-bottom:2px solid ';
+        let color = '#1a56a8';
+        if (done) {
+          if (i === q.ans) color = ua === i ? '#059669' : '#059669';
+          else if (ua === i) color = '#dc2626';
+        }
+        style += color + ';margin-right:16px;padding:1px 3px;font-size:13px;cursor:' + (done ? 'default' : 'pointer');
+        out += `<span style="${style}" ${done ? '' : ('onclick="selWE(' + i + ')"')}>
+      <span style="font-size:10px;font-weight:700;color:${color};vertical-align:super">(${labels[i]})</span>
+      ${part}
+    </span>`;
+      });
+      return out;
+    }
+
+    // ─── ACTIONS ─────────────────────────────────────────────────────────────────
+    function selMCQ(i) { state.answers[state.section + '-' + state.idx] = i; render(); }
+    function selCI(c) { state.answers[state.section + '-' + state.idx] = c; render(); }
+    function selWE(i) { state.answers[state.section + '-' + state.idx] = i; render(); }
+    function next() { state.idx++; render(); }
+    function prev() { if (state.idx > 0) { state.idx--; render(); } }
+    function chg(k) { state.section = k; state.idx = 0; state.answers = {}; state.mode = 'quiz'; render(); }
+    function showR() { state.mode = 'result'; render(); }
+    function rst() { state.idx = 0; state.answers = {}; state.mode = 'quiz'; render(); }
+    function rev() { state.idx = 0; state.mode = 'quiz'; render(); }
+
+    render();
+  </script>
+</body>
+
+</html>

@@ -7,17 +7,20 @@ interface TestScreenProps {
   label: string;
   sub: string;
   totalSeconds: number;
+  questionOffset: number;
+  audioOffset: number;
   onFinish: (answers: Record<number, number>) => void;
   onExit: () => void;
 }
 
 const LETTERS = ["A", "B", "C", "D"];
 
-const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, onExit }: TestScreenProps) => {
+const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOffset, audioOffset, onFinish, onExit }: TestScreenProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [timeLeft, setTimeLeft] = useState(totalSeconds);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [showDots, setShowDots] = useState(false);
   const [audioError, setAudioError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const answersRef = useRef<Record<number, number>>({});
@@ -90,10 +93,9 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
 
   // Determine the global listening index for TTS
   const getListeningIndex = useCallback(() => {
-    if (testType === "listening") return currentIndex;
-    if (testType === "full" && currentIndex < 50) return currentIndex;
+    if (testType === "listening") return audioOffset + currentIndex;
     return -1;
-  }, [testType, currentIndex]);
+  }, [audioOffset, currentIndex, testType]);
 
   const stopAudio = useCallback(() => {
     if (!audioRef.current) return;
@@ -112,15 +114,14 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
     }
 
     const idx = getListeningIndex();
-    if (idx < 0) return;
-
-    const source = `/listening/${idx}.mp3`;
+    const source = q.audio ? `/listening/longman/${q.audio}` : idx >= 0 ? `/listening/${idx}.mp3` : null;
+    if (!source) return;
     const sourceUrl = new URL(source, window.location.origin).toString();
     if (audio.src !== sourceUrl) {
-      audio.src = source;
+      audio.src = sourceUrl;
     }
 
-    audio.currentTime = 0;
+    audio.currentTime = q.audioSeekMinute ? q.audioSeekMinute * 60 : 0;
     setAudioError(null);
     void audio.play()
       .then(() => setIsSpeaking(true))
@@ -135,7 +136,8 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
     setAudioError(null);
   }, [currentIndex, stopAudio]);
 
-  const showDots = Math.min(total, 30);
+
+
 
   return (
     <div className="animate-fade-in">
@@ -157,24 +159,42 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
 
       {/* Body */}
       <div className="p-6 bg-card rounded-b-xl">
-        <div className="flex items-center justify-between mb-4 flex-col md:flex-row gap-3">
-          <span className="text-xs text-muted-foreground font-sans">
-            Questionn {currentIndex + 1} of {total}
-          </span>
-          <div className="flex flex-wrap gap-1 max-w-[400px]">
-            {Array.from({ length: total }).map((_, i) => (
-              <div
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`w-5 h-5 rounded-full border-2 cursor-pointer transition-all flex items-center justify-center text-[0.5rem] ${
-                  answers[i] !== undefined ? "bg-navy border-navy text-white " : "border-border "
-                } ${i === currentIndex ? "border-gold ring-2 ring-gold/40" : ""}`}
-              >
-
-                {i+1}
+        {testType === "listening" && q.instruction && (
+          <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50/70 p-4">
+            <div className="text-[11px] tracking-[0.2em] uppercase text-amber-700 font-semibold font-sans">Longman Listening</div>
+            <div className="mt-2 text-sm text-foreground font-sans leading-relaxed">{q.instruction}</div>
+            {q.audio && (
+              <div className="mt-3 text-xs text-amber-800 font-sans">
+                Audio file: {q.audio} {q.audioSeekMinute !== undefined ? `· start at minute ${q.audioSeekMinute}` : ""}
               </div>
-            ))}
+            )}
           </div>
+        )}
+
+        {/* Question navigation (collapsible) */}
+        <div className="mb-4">
+          <button
+            onClick={() => setShowDots((v) => !v)}
+            className="w-full flex items-center justify-between text-xs text-muted-foreground font-sans hover:text-foreground transition-colors py-1 px-2 rounded-lg hover:bg-muted"
+          >
+            <span>Question {currentIndex + 1} of {total}</span>
+            <span className={`transition-transform duration-200 ${showDots ? "rotate-180" : ""}`}>▾</span>
+          </button>
+          {showDots && (
+            <div className="flex flex-wrap gap-1 mt-2 px-1">
+              {Array.from({ length: total }).map((_, i) => (
+                <div
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  className={`w-5 h-5 rounded-full border-2 cursor-pointer transition-all flex items-center justify-center text-[0.5rem] ${
+                    answers[i] !== undefined ? "bg-navy border-navy text-white" : "border-border"
+                  } ${i === currentIndex ? "border-gold ring-2 ring-gold/40" : ""}`}
+                >
+                  {i + 1}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Audio player */}
@@ -268,6 +288,14 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, onFinish, o
             <button onClick={onExit} className="border-2 border-navy text-navy font-sans font-semibold text-sm rounded-lg px-5 py-2.5 hover:bg-navy/5 transition-colors">
               Exit
             </button>
+            {import.meta.env.DEV && (
+              <button
+                onClick={() => onFinish(answers)}
+                className="bg-amber-600 hover:bg-amber-700 text-white font-sans font-semibold text-sm rounded-lg px-4 py-2.5 transition-colors"
+              >
+                Skip Section (Dev)
+              </button>
+            )}
           </div>
           <button onClick={nextQ} className="gradient-navy text-gold font-sans font-semibold text-sm rounded-lg px-5 py-2.5 hover:opacity-85 transition-opacity">
             {currentIndex === total - 1 ? "Finish ✓" : "Next →"}
