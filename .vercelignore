@@ -1,0 +1,12 @@
+# Exclude local environment files — use Vercel Dashboard env vars instead
+.env
+.env.local
+.env.*.local
+
+# Exclude local server env
+server/.env
+
+# Exclude dev artifacts
+dist-server/
+node_modules
+server/node_modules
