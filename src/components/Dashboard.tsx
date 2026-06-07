@@ -3,6 +3,8 @@ import { LONGMAN_LISTENING_QUESTIONS } from "@/data/longmanListening";
 import { QUESTIONS } from "@/data/questions";
 import LeaderboardCard from "./LeaderboardCard";
 import ProgressCard from "./ProgressCard";
+import { useAuth } from "@/hooks/useAuth";
+import { Eye, EyeOff } from "lucide-react";
 
 interface DashboardProps {
   userName: string;
@@ -14,7 +16,7 @@ interface DashboardProps {
   startLabel?: string;
 }
 
-type Tab = "sections" | "progress" | "leaderboard";
+type Tab = "sections" | "progress" | "leaderboard" | "profile";
 
 const Dashboard = ({
   userName,
@@ -26,6 +28,72 @@ const Dashboard = ({
   startLabel = "Mulai",
 }: DashboardProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("sections");
+  const { updateProfile } = useAuth();
+
+  // Profile settings states
+  const [profileName, setProfileName] = useState(userName);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [profileError, setProfileError] = useState("");
+  const [profileSuccess, setProfileSuccess] = useState("");
+  const [profileLoading, setProfileLoading] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleUpdateName = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setProfileError("");
+    setProfileSuccess("");
+
+    if (!profileName.trim()) {
+      setProfileError("Nama tidak boleh kosong");
+      return;
+    }
+    setProfileLoading(true);
+
+    try {
+      await updateProfile({ name: profileName });
+      setProfileSuccess("Nama berhasil diperbarui!");
+    } catch (err) {
+      setProfileError(err instanceof Error ? err.message : "Gagal memperbarui nama");
+    } finally {
+      setProfileLoading(false);
+    }
+  };
+
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setProfileError("");
+    setProfileSuccess("");
+
+    if (!currentPassword) {
+      setProfileError("Password saat ini wajib diisi");
+      return;
+    }
+    if (newPassword.length < 6) {
+      setProfileError("Password baru minimal 6 karakter");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setProfileError("Konfirmasi password baru tidak cocok");
+      return;
+    }
+    setProfileLoading(true);
+
+    try {
+      await updateProfile({ currentPassword, newPassword });
+      setProfileSuccess("Password berhasil diubah!");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (err) {
+      setProfileError(err instanceof Error ? err.message : "Gagal mengubah password");
+    } finally {
+      setProfileLoading(false);
+    }
+  };
 
   const listeningCount = LONGMAN_LISTENING_QUESTIONS.length;
   const structureCount = QUESTIONS.structure.length;
@@ -84,6 +152,7 @@ const Dashboard = ({
     { key: "sections", label: "Latihan", icon: "📚" },
     { key: "progress", label: "Progress", icon: "📈" },
     { key: "leaderboard", label: "Ranking", icon: "🏆" },
+    { key: "profile", label: "Profil", icon: "👤" },
   ];
 
   return (
@@ -194,6 +263,182 @@ const Dashboard = ({
         {activeTab === "leaderboard" && (
           <div className="p-4">
             <LeaderboardCard currentUserEmail={userEmail} />
+          </div>
+        )}
+
+        {/* === PROFILE TAB === */}
+        {activeTab === "profile" && (
+          <div className="p-6 flex flex-col gap-6 font-sans">
+            {/* User Header Info */}
+            <div className="flex items-center gap-4 border-b border-border pb-6">
+              <div className="w-16 h-16 rounded-full gradient-gold flex items-center justify-center text-navy font-display font-bold text-2xl shadow-inner flex-shrink-0">
+                {userName.charAt(0).toUpperCase()}
+              </div>
+              <div className="min-w-0">
+                <h2 className="text-lg font-bold text-navy truncate">{userName}</h2>
+                <p className="text-sm text-muted-foreground truncate">{userEmail}</p>
+              </div>
+            </div>
+
+            {/* Error and Success Notifications */}
+            {profileError && (
+              <div className="bg-red-500/10 border border-red-500/20 text-red-700 rounded-lg px-4 py-2.5 text-sm animate-fade-in">
+                ⚠️ {profileError}
+              </div>
+            )}
+            {profileSuccess && (
+              <div className="bg-green-500/10 border border-green-500/20 text-green-700 rounded-lg px-4 py-2.5 text-sm animate-fade-in">
+                ✅ {profileSuccess}
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Profile Details Form */}
+              <div className="border border-border rounded-xl p-5 bg-card flex flex-col gap-4 shadow-sm">
+                <div>
+                  <h3 className="text-sm font-bold text-navy uppercase tracking-wider mb-1">Informasi Profil</h3>
+                  <p className="text-xs text-muted-foreground">Perbarui informasi nama lengkap Anda di sini.</p>
+                </div>
+
+                <form onSubmit={handleUpdateName} className="flex flex-col gap-4">
+                  <div>
+                    <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
+                      Nama Lengkap
+                    </label>
+                    <input
+                      type="text"
+                      value={profileName}
+                      onChange={(e) => setProfileName(e.target.value)}
+                      placeholder="Nama Lengkap"
+                      required
+                      className="w-full bg-background border border-input rounded-lg px-3 py-2 text-sm outline-none focus:border-navy/50 transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
+                      Email (Tidak dapat diubah)
+                    </label>
+                    <input
+                      type="email"
+                      value={userEmail}
+                      disabled
+                      className="w-full bg-muted border border-input rounded-lg px-3 py-2 text-sm text-muted-foreground cursor-not-allowed outline-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={profileLoading}
+                    className="gradient-gold text-navy font-bold rounded-lg py-2.5 text-xs hover:opacity-90 transition-opacity disabled:opacity-60 font-semibold uppercase tracking-wider flex items-center justify-center gap-2"
+                  >
+                    {profileLoading ? (
+                      <>
+                        <span className="inline-block w-3 h-3 border-2 border-navy/40 border-t-navy rounded-full animate-spin" />
+                        Menyimpan...
+                      </>
+                    ) : (
+                      "Simpan Nama"
+                    )}
+                  </button>
+                </form>
+              </div>
+
+              {/* Password Settings Form */}
+              <div className="border border-border rounded-xl p-5 bg-card flex flex-col gap-4 shadow-sm">
+                <div>
+                  <h3 className="text-sm font-bold text-navy uppercase tracking-wider mb-1">Ganti Password</h3>
+                  <p className="text-xs text-muted-foreground">Ganti password akun Anda untuk keamanan ekstra.</p>
+                </div>
+
+                <form onSubmit={handleUpdatePassword} className="flex flex-col gap-4">
+                  <div>
+                    <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
+                      Password Saat Ini
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showCurrentPassword ? "text" : "password"}
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        placeholder="••••••••"
+                        required
+                        className="w-full bg-background border border-input rounded-lg pl-3 pr-10 py-2 text-sm outline-none focus:border-navy/50 transition-colors"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-muted-foreground/80 transition-colors focus:outline-none"
+                      >
+                        {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
+                      Password Baru
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showNewPassword ? "text" : "password"}
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="••••••••"
+                        required
+                        minLength={6}
+                        className="w-full bg-background border border-input rounded-lg pl-3 pr-10 py-2 text-sm outline-none focus:border-navy/50 transition-colors"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-muted-foreground/80 transition-colors focus:outline-none"
+                      >
+                        {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
+                      Konfirmasi Password Baru
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="••••••••"
+                        required
+                        className="w-full bg-background border border-input rounded-lg pl-3 pr-10 py-2 text-sm outline-none focus:border-navy/50 transition-colors"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-muted-foreground/80 transition-colors focus:outline-none"
+                      >
+                        {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={profileLoading}
+                    className="gradient-gold text-navy font-bold rounded-lg py-2.5 text-xs hover:opacity-90 transition-opacity disabled:opacity-60 font-semibold uppercase tracking-wider flex items-center justify-center gap-2"
+                  >
+                    {profileLoading ? (
+                      <>
+                        <span className="inline-block w-3 h-3 border-2 border-navy/40 border-t-navy rounded-full animate-spin" />
+                        Mengganti...
+                      </>
+                    ) : (
+                      "Ganti Password"
+                    )}
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         )}
       </div>

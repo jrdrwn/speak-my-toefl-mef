@@ -53,6 +53,24 @@ export const authApi = {
     apiFetch<{ user: { id: string; email: string; name: string; createdAt: string } }>(
       "/api/auth/me"
     ),
+
+  forgotPassword: (email: string) =>
+    apiFetch<{ success: boolean; mockOtp?: string; message: string }>(
+      "/api/auth/forgot-password",
+      { method: "POST", body: JSON.stringify({ email }) }
+    ),
+
+  resetPassword: (email: string, otp: string, passwordNew: string) =>
+    apiFetch<{ success: boolean; message: string }>(
+      "/api/auth/reset-password",
+      { method: "POST", body: JSON.stringify({ email, otp, newPassword: passwordNew }) }
+    ),
+
+  updateProfile: (data: { name?: string; currentPassword?: string; newPassword?: string }) =>
+    apiFetch<{ success: boolean; token: string; user: { id: string; email: string; name: string } }>(
+      "/api/auth/profile",
+      { method: "PUT", body: JSON.stringify(data) }
+    ),
 };
 
 // Results API

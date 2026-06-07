@@ -17,6 +17,7 @@ interface AuthContextValue {
   register: (email: string, name: string, password: string) => Promise<AuthUser>;
   logout: () => void;
   clearError: () => void;
+  updateProfile: (data: { name?: string; currentPassword?: string; newPassword?: string }) => Promise<AuthUser>;
 }
 
 const TOKEN_KEY = "toefl_token";
@@ -100,6 +101,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const clearError = useCallback(() => setError(null), []);
 
+  const updateProfile = useCallback(async (data: { name?: string; currentPassword?: string; newPassword?: string }): Promise<AuthUser> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await authApi.updateProfile(data);
+      localStorage.setItem(TOKEN_KEY, res.token);
+      localStorage.setItem(USER_KEY, JSON.stringify(res.user));
+      setToken(res.token);
+      setUser(res.user);
+      return res.user;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Gagal memperbarui profil";
+      setError(msg);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -112,6 +132,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         register,
         logout,
         clearError,
+        updateProfile,
       }}
     >
       {children}

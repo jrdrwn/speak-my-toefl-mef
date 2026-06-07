@@ -135,4 +135,151 @@ router.get("/me", authMiddleware, async (req: AuthRequest, res: Response): Promi
   }
 });
 
+// In-memory store for reset OTP codes
+const resetCodes = new Map<string, { otp: string; expires: number }>();
+
+// POST /api/auth/forgot-password
+router.post("/forgot-password", async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      res.status(400).json({ error: "Email wajib diisi" });
+      return;
+    }
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      res.status(404).json({ error: "Email tidak terdaftar" });
+      return;
+    }
+
+    // Generate 6-digit OTP code
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expires = Date.now() + 10 * 60 * 1000; // 10 minutes expiry
+
+    resetCodes.set(email, { otp, expires });
+
+    res.json({
+      success: true,
+      message: "Simulasi OTP terkirim ke email Anda",
+      mockOtp: otp,
+    });
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    res.status(500).json({ error: "Server error saat memproses permintaan" });
+  }
+});
+
+// POST /api/auth/reset-password
+router.post("/reset-password", async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, otp, newPassword } = req.body;
+    if (!email || !otp || !newPassword) {
+      res.status(400).json({ error: "Semua kolom wajib diisi" });
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      res.status(400).json({ error: "Password minimal 6 karakter" });
+      return;
+    }
+
+    const record = resetCodes.get(email);
+    if (!record || record.expires < Date.now()) {
+      res.status(400).json({ error: "OTP tidak valid atau sudah kadaluwarsa" });
+      return;
+    }
+
+    if (record.otp !== otp) {
+      res.status(400).json({ error: "Kode OTP salah" });
+      return;
+    }
+
+    // Update user's password
+    const passwordHash = await bcrypt.hash(newPassword, 12);
+    await prisma.user.update({
+      where: { email },
+      data: { passwordHash },
+    });
+
+    // Delete the used reset code
+    resetCodes.delete(email);
+
+    res.json({ success: true, message: "Password berhasil diperbarui" });
+  } catch (err) {
+    console.error("Reset password error:", err);
+    res.status(500).json({ error: "Server error saat mereset password" });
+  }
+});
+
+// PUT /api/auth/profile
+router.put("/profile", authMiddleware, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { name, currentPassword, newPassword } = req.body;
+    const userId = req.userId;
+
+    if (!userId) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      res.status(404).json({ error: "User tidak ditemukan" });
+      return;
+    }
+
+    const updateData: { name?: string; passwordHash?: string } = {};
+
+    if (name !== undefined) {
+      if (!name.trim()) {
+        res.status(400).json({ error: "Nama tidak boleh kosong" });
+        return;
+      }
+      updateData.name = name.trim();
+    }
+
+    if (newPassword) {
+      if (!currentPassword) {
+        res.status(400).json({ error: "Password saat ini wajib diisi untuk mengubah password" });
+        return;
+      }
+
+      const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
+      if (!isMatch) {
+        res.status(400).json({ error: "Password saat ini salah" });
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        res.status(400).json({ error: "Password baru minimal 6 karakter" });
+        return;
+      }
+
+      updateData.passwordHash = await bcrypt.hash(newPassword, 12);
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: updateData,
+    });
+
+    const token = jwt.sign(
+      { userId: updatedUser.id, email: updatedUser.email },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
+
+    res.json({
+      success: true,
+      token,
+      user: { id: updatedUser.id, email: updatedUser.email, name: updatedUser.name },
+    });
+  } catch (err) {
+    console.error("Update profile error:", err);
+    res.status(500).json({ error: "Server error saat memperbarui profil" });
+  }
+});
+
 export default router;
+
