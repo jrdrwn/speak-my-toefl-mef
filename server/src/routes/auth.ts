@@ -135,9 +135,6 @@ router.get("/me", authMiddleware, async (req: AuthRequest, res: Response): Promi
   }
 });
 
-// In-memory store for reset OTP codes
-const resetCodes = new Map<string, { otp: string; expires: number }>();
-
 // POST /api/auth/forgot-password
 router.post("/forgot-password", async (req: Request, res: Response): Promise<void> => {
   try {
@@ -153,62 +150,21 @@ router.post("/forgot-password", async (req: Request, res: Response): Promise<voi
       return;
     }
 
-    // Generate 6-digit OTP code
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expires = Date.now() + 10 * 60 * 1000; // 10 minutes expiry
-
-    resetCodes.set(email, { otp, expires });
-
-    res.json({
-      success: true,
-      message: "Simulasi OTP terkirim ke email Anda",
-      mockOtp: otp,
-    });
-  } catch (err) {
-    console.error("Forgot password error:", err);
-    res.status(500).json({ error: "Server error saat memproses permintaan" });
-  }
-});
-
-// POST /api/auth/reset-password
-router.post("/reset-password", async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { email, otp, newPassword } = req.body;
-    if (!email || !otp || !newPassword) {
-      res.status(400).json({ error: "Semua kolom wajib diisi" });
-      return;
-    }
-
-    if (newPassword.length < 6) {
-      res.status(400).json({ error: "Password minimal 6 karakter" });
-      return;
-    }
-
-    const record = resetCodes.get(email);
-    if (!record || record.expires < Date.now()) {
-      res.status(400).json({ error: "OTP tidak valid atau sudah kadaluwarsa" });
-      return;
-    }
-
-    if (record.otp !== otp) {
-      res.status(400).json({ error: "Kode OTP salah" });
-      return;
-    }
-
-    // Update user's password
-    const passwordHash = await bcrypt.hash(newPassword, 12);
+    // Reset password to default '123456'
+    const defaultPassword = "123456";
+    const passwordHash = await bcrypt.hash(defaultPassword, 12);
     await prisma.user.update({
       where: { email },
       data: { passwordHash },
     });
 
-    // Delete the used reset code
-    resetCodes.delete(email);
-
-    res.json({ success: true, message: "Password berhasil diperbarui" });
+    res.json({
+      success: true,
+      message: `Password Anda berhasil di-reset menjadi '${defaultPassword}'. Silakan masuk dan segera ganti password Anda di menu profil.`,
+    });
   } catch (err) {
-    console.error("Reset password error:", err);
-    res.status(500).json({ error: "Server error saat mereset password" });
+    console.error("Forgot password error:", err);
+    res.status(500).json({ error: "Server error saat memproses permintaan" });
   }
 });
 

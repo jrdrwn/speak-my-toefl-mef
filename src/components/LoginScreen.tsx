@@ -4,7 +4,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { authApi } from "@/lib/api";
 
 type RegisterStep = "idle" | "success";
-type ForgotStep = "request" | "reset";
 
 const LoginScreen = () => {
   const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
@@ -16,10 +15,6 @@ const LoginScreen = () => {
   const [registeredName, setRegisteredName] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
-  const [forgotStep, setForgotStep] = useState<ForgotStep>("request");
-  const [forgotOtp, setForgotOtp] = useState("");
-  const [forgotNewPassword, setForgotNewPassword] = useState("");
-  const [forgotMockOtp, setForgotMockOtp] = useState("");
   const [forgotLoading, setForgotLoading] = useState(false);
 
   const { login, register, loading, error, clearError } = useAuth();
@@ -32,42 +27,12 @@ const LoginScreen = () => {
 
     try {
       const res = await authApi.forgotPassword(email);
-      setForgotMockOtp(res.mockOtp || "");
-      setForgotStep("reset");
-    } catch (err) {
-      setLocalError(err instanceof Error ? err.message : "Gagal meminta reset password");
-    } finally {
-      setForgotLoading(false);
-    }
-  };
-
-  const handleResetPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLocalError("");
-    clearError();
-
-    if (!forgotOtp.trim()) {
-      setLocalError("Kode OTP tidak boleh kosong");
-      return;
-    }
-    if (forgotNewPassword.length < 6) {
-      setLocalError("Password baru minimal 6 karakter");
-      return;
-    }
-    setForgotLoading(true);
-
-    try {
-      await authApi.resetPassword(email, forgotOtp, forgotNewPassword);
       setMode("login");
-      setForgotStep("request");
-      setForgotOtp("");
-      setForgotNewPassword("");
-      setForgotMockOtp("");
       setEmail("");
       setPassword("");
-      setLocalError("Password berhasil diperbarui! Silakan masuk.");
+      setLocalError(res.message || "Password berhasil di-reset ke '123456'! Silakan masuk.");
     } catch (err) {
-      setLocalError(err instanceof Error ? err.message : "Gagal mereset password");
+      setLocalError(err instanceof Error ? err.message : "Gagal meminta reset password");
     } finally {
       setForgotLoading(false);
     }
@@ -140,76 +105,26 @@ const LoginScreen = () => {
         {mode === "forgot" ? (
           <div>
             <h2 className="text-card font-display text-lg mb-1">
-              {forgotStep === "request" ? "Lupa Password" : "Reset Password"}
+              Lupa Password
             </h2>
             <p className="text-card/50 text-sm mb-6 font-sans">
-              {forgotStep === "request"
-                ? "Masukkan email terdaftar untuk meminta kode reset."
-                : "Masukkan kode OTP dan password baru Anda."}
+              Masukkan email terdaftar Anda untuk mereset password ke default ('123456').
             </p>
 
-            {forgotStep === "reset" && forgotMockOtp && (
-              <div className="bg-blue-500/20 border border-blue-400/40 rounded-lg px-4 py-3 text-blue-300 text-xs font-sans mb-6">
-                💡 <strong>Simulasi OTP:</strong> Gunakan kode <span className="text-gold font-bold tracking-wider">{forgotMockOtp}</span> untuk mereset password email <strong>{email}</strong>.
+            <form onSubmit={handleForgotPasswordRequest} className="flex flex-col gap-4">
+              <div>
+                <label className="block text-card/70 text-xs tracking-wider mb-1.5 font-sans uppercase">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="kamu@example.com"
+                  required
+                  className="w-full bg-card/10 border border-gold/30 rounded-lg px-4 py-2.5 text-card text-sm font-sans outline-none focus:border-gold transition-colors placeholder:text-card/30"
+                />
               </div>
-            )}
-
-            <form onSubmit={forgotStep === "request" ? handleForgotPasswordRequest : handleResetPassword} className="flex flex-col gap-4">
-              {forgotStep === "request" ? (
-                <div>
-                  <label className="block text-card/70 text-xs tracking-wider mb-1.5 font-sans uppercase">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="kamu@example.com"
-                    required
-                    className="w-full bg-card/10 border border-gold/30 rounded-lg px-4 py-2.5 text-card text-sm font-sans outline-none focus:border-gold transition-colors placeholder:text-card/30"
-                  />
-                </div>
-              ) : (
-                <>
-                  <div>
-                    <label className="block text-card/70 text-xs tracking-wider mb-1.5 font-sans uppercase">
-                      Kode OTP (6 Digit)
-                    </label>
-                    <input
-                      type="text"
-                      maxLength={6}
-                      value={forgotOtp}
-                      onChange={(e) => setForgotOtp(e.target.value)}
-                      placeholder="123456"
-                      required
-                      className="w-full bg-card/10 border border-gold/30 rounded-lg px-4 py-2.5 text-card text-sm font-sans outline-none focus:border-gold transition-colors placeholder:text-card/30"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-card/70 text-xs tracking-wider mb-1.5 font-sans uppercase">
-                      Password Baru
-                    </label>
-                    <div className="relative">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        value={forgotNewPassword}
-                        onChange={(e) => setForgotNewPassword(e.target.value)}
-                        placeholder="••••••••"
-                        required
-                        minLength={6}
-                        className="w-full bg-card/10 border border-gold/30 rounded-lg pl-4 pr-10 py-2.5 text-card text-sm font-sans outline-none focus:border-gold transition-colors placeholder:text-card/30"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-card/50 hover:text-card/80 transition-colors focus:outline-none"
-                      >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
-                    </div>
-                  </div>
-                </>
-              )}
 
               {/* Error */}
               {displayError && (
@@ -230,7 +145,7 @@ const LoginScreen = () => {
                     Memproses...
                   </>
                 ) : (
-                  forgotStep === "request" ? "Kirim Kode OTP →" : "Perbarui Password →"
+                  "Reset Password →"
                 )}
               </button>
             </form>
@@ -240,7 +155,6 @@ const LoginScreen = () => {
                 type="button"
                 onClick={() => {
                   setMode("login");
-                  setForgotStep("request");
                   setLocalError("");
                   clearError();
                   setShowPassword(false);
