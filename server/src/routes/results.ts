@@ -129,7 +129,7 @@ router.post("/", authMiddleware, async (req: AuthRequest, res: Response): Promis
     });
   } catch (err) {
     console.error("Save result error:", err);
-    res.status(500).json({ error: "Server error saat menyimpan hasil" });
+    res.status(500).json({ error: "Server error saving results" });
   }
 });
 

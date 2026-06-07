@@ -38,7 +38,7 @@ const TYPE_COLOR: Record<string, string> = {
 };
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("id-ID", {
+  return new Date(iso).toLocaleDateString("en-US", {
     day: "numeric",
     month: "short",
     hour: "2-digit",
@@ -68,7 +68,7 @@ const ProgressCard = () => {
     return (
       <div className="bg-card border border-border rounded-xl p-5 flex items-center justify-center gap-2 min-h-[120px]">
         <span className="inline-block w-5 h-5 border-2 border-navy/20 border-t-navy rounded-full animate-spin" />
-        <span className="text-muted-foreground text-sm font-sans">Memuat progress...</span>
+        <span className="text-muted-foreground text-sm font-sans">Loading progress...</span>
       </div>
     );
   }
@@ -84,9 +84,9 @@ const ProgressCard = () => {
         <div className="gradient-navy px-5 py-4">
           <div className="flex items-center gap-2">
             <span className="text-xl">📈</span>
-            <h2 className="text-card font-display font-bold text-base">Progress Kamu</h2>
+            <h2 className="text-card font-display font-bold text-base">Your Progress</h2>
           </div>
-          <p className="text-gold/80 text-xs font-sans mt-0.5">Statistik latihan TOEFL</p>
+          <p className="text-gold/80 text-xs font-sans mt-0.5">TOEFL practice statistics</p>
         </div>
 
         <div className="p-4">
@@ -120,7 +120,7 @@ const ProgressCard = () => {
                 {progress.currentStreak > 0 ? "🔥" : "💤"}
               </div>
               <div className="text-xl font-bold text-navy font-sans">{progress.currentStreak}</div>
-              <div className="text-xs text-muted-foreground font-sans">Hari Streak</div>
+              <div className="text-xs text-muted-foreground font-sans">Streak</div>
             </div>
             <div className="bg-cream border border-border rounded-xl p-3 text-center">
               <div className="text-2xl mb-0.5">⭐</div>
@@ -130,7 +130,7 @@ const ProgressCard = () => {
             <div className="bg-cream border border-border rounded-xl p-3 text-center">
               <div className="text-2xl mb-0.5">📝</div>
               <div className="text-xl font-bold text-navy font-sans">{progress.testsCount}</div>
-              <div className="text-xs text-muted-foreground font-sans">Total Tes</div>
+              <div className="text-xs text-muted-foreground font-sans">Total Tests</div>
             </div>
             <div className="bg-cream border border-border rounded-xl p-3 text-center">
               <div className="text-2xl mb-0.5">🏆</div>
@@ -147,7 +147,7 @@ const ProgressCard = () => {
       {recentResults.length > 0 && (
         <div className="bg-card border border-border rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b border-border">
-            <h3 className="text-sm font-semibold text-navy font-sans">Riwayat Tes Terbaru</h3>
+            <h3 className="text-sm font-semibold text-navy font-sans">Recent Test History</h3>
           </div>
           <div className="divide-y divide-border">
             {recentResults.slice(0, 5).map((r) => {
@@ -170,7 +170,7 @@ const ProgressCard = () => {
                           style={{ width: `${accuracy}%` }}
                         />
                       </div>
-                      <span className="text-xs text-muted-foreground font-sans">{accuracy}% benar</span>
+                      <span className="text-xs text-muted-foreground font-sans">{accuracy}% correct</span>
                     </div>
                   </div>
                   <div className="text-right flex-shrink-0">

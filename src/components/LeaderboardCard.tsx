@@ -60,7 +60,7 @@ const LeaderboardCard = ({ currentUserEmail }: LeaderboardCardProps) => {
             <div className="bg-gold/20 border border-gold/40 rounded-full px-3 py-1">
               <span className="text-gold text-xs font-bold font-sans">Rank #{myRank}</span>
             </div>
-            <p className="text-gold/50 text-xs font-sans mt-1">dari {total} peserta</p>
+            <p className="text-gold/50 text-xs font-sans mt-1">out of {total} participants</p>
           </div>
         )}
       </div>
@@ -69,7 +69,7 @@ const LeaderboardCard = ({ currentUserEmail }: LeaderboardCardProps) => {
       <div className="bg-amber-50/60 border-b border-amber-200/60 px-5 py-2.5 flex items-center gap-2">
         <span className="text-amber-600 text-sm">ℹ️</span>
         <p className="text-amber-700 text-xs font-sans">
-          Skor diurutkan berdasarkan <strong>Full Test</strong>. Selesaikan full test untuk naik peringkat!
+          Scores are ranked by <strong>Full Test</strong>. Complete a full test to increase your rank!
         </p>
       </div>
 
@@ -78,18 +78,18 @@ const LeaderboardCard = ({ currentUserEmail }: LeaderboardCardProps) => {
         {loading ? (
           <div className="flex items-center justify-center py-8 gap-2">
             <span className="inline-block w-5 h-5 border-2 border-navy/20 border-t-navy rounded-full animate-spin" />
-            <span className="text-muted-foreground text-sm font-sans">Memuat leaderboard...</span>
+            <span className="text-muted-foreground text-sm font-sans">Loading leaderboard...</span>
           </div>
         ) : error ? (
           <div className="text-center py-6 text-muted-foreground text-sm font-sans">
-            Gagal memuat leaderboard. Coba lagi nanti.
+            Failed to load leaderboard. Please try again later.
           </div>
         ) : leaders.length === 0 ? (
           <div className="text-center py-8">
             <div className="text-4xl mb-2">🌟</div>
-            <p className="text-navy font-semibold font-sans text-sm">Belum ada data</p>
+            <p className="text-navy font-semibold font-sans text-sm">No data available</p>
             <p className="text-muted-foreground text-xs font-sans mt-1">
-              Jadilah yang pertama masuk leaderboard!
+              Be the first to join the leaderboard!
             </p>
           </div>
         ) : (
@@ -126,18 +126,18 @@ const LeaderboardCard = ({ currentUserEmail }: LeaderboardCardProps) => {
                       </p>
                       {isMe && (
                         <span className="text-xs bg-gold text-navy px-1.5 py-0.5 rounded-full font-bold flex-shrink-0">
-                          Kamu
+                          You
                         </span>
                       )}
                       {!entry.hasFullTest && (
                         <span className="text-xs bg-gray-100 text-gray-500 border border-gray-200 px-1.5 py-0.5 rounded-full font-sans flex-shrink-0">
-                          Belum full test
+                          No full test yet
                         </span>
                       )}
                     </div>
                     <p className="text-xs text-muted-foreground font-sans mt-0.5">
-                      {entry.testsCount} tes · {entry.totalXp} XP
-                      {entry.currentStreak > 0 ? ` · 🔥 ${entry.currentStreak} hari` : ""}
+                      {entry.testsCount} test{entry.testsCount !== 1 ? "s" : ""} · {entry.totalXp} XP
+                      {entry.currentStreak > 0 ? ` · 🔥 ${entry.currentStreak} day${entry.currentStreak !== 1 ? "s" : ""}` : ""}
                     </p>
                   </div>
 
@@ -153,7 +153,7 @@ const LeaderboardCard = ({ currentUserEmail }: LeaderboardCardProps) => {
                     ) : (
                       <div className="text-xs text-muted-foreground font-sans text-right">
                         <span className="block text-lg">—</span>
-                        <span className="text-xs">belum ada</span>
+                        <span className="text-xs">no score</span>
                       </div>
                     )}
                   </div>

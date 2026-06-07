@@ -44,7 +44,7 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
     const handleEnded = () => setIsSpeaking(false);
     const handleError = () => {
       setIsSpeaking(false);
-      setAudioError("Audio custom untuk soal ini belum tersedia.");
+      setAudioError("Custom audio for this question is not available.");
     };
     const handleTimeUpdate = () => setAudioCurrentTime(audio.currentTime);
     const handleDurationChange = () => {
@@ -147,7 +147,7 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
       .then(() => setIsSpeaking(true))
       .catch(() => {
         setIsSpeaking(false);
-        setAudioError("Audio tidak bisa diputar di device ini.");
+        setAudioError("Audio cannot be played on this device.");
       });
   }, [getListeningIndex, isSpeaking, stopAudio]);
 
@@ -238,7 +238,7 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
               </button>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-semibold text-navy font-sans truncate">{q.audio}</div>
-                <div className="text-xs text-muted-foreground font-sans">{q.part} · {isSpeaking ? "Sedang diputar..." : audioDuration > 0 ? "Klik ▶ untuk melanjutkan" : "Klik ▶ untuk mendengarkan"}</div>
+                <div className="text-xs text-muted-foreground font-sans">{q.part} · {isSpeaking ? "Playing..." : audioDuration > 0 ? "Click ▶ to resume" : "Click ▶ to listen"}</div>
                 {audioError && <div className="text-xs text-destructive font-sans mt-0.5">{audioError}</div>}
               </div>
               {/* Waveform animation */}

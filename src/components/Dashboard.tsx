@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LONGMAN_LISTENING_QUESTIONS } from "@/data/longmanListening";
-import { QUESTIONS } from "@/data/questions";
+import LONGMAN_STRUCTURE_QUESTIONS from "@/data/longmanStructure";
+import LONGMAN_READING_QUESTIONS from "@/data/longmanReading";
 import LeaderboardCard from "./LeaderboardCard";
 import ProgressCard from "./ProgressCard";
 import { useAuth } from "@/hooks/useAuth";
@@ -25,7 +26,7 @@ const Dashboard = ({
   onStartSection,
   onLogout,
   startDisabled = false,
-  startLabel = "Mulai",
+  startLabel = "Start",
 }: DashboardProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("sections");
   const { updateProfile } = useAuth();
@@ -48,16 +49,16 @@ const Dashboard = ({
     setProfileSuccess("");
 
     if (!profileName.trim()) {
-      setProfileError("Nama tidak boleh kosong");
+      setProfileError("Name cannot be empty");
       return;
     }
     setProfileLoading(true);
 
     try {
       await updateProfile({ name: profileName });
-      setProfileSuccess("Nama berhasil diperbarui!");
+      setProfileSuccess("Name updated successfully!");
     } catch (err) {
-      setProfileError(err instanceof Error ? err.message : "Gagal memperbarui nama");
+      setProfileError(err instanceof Error ? err.message : "Failed to update name");
     } finally {
       setProfileLoading(false);
     }
@@ -69,35 +70,35 @@ const Dashboard = ({
     setProfileSuccess("");
 
     if (!currentPassword) {
-      setProfileError("Password saat ini wajib diisi");
+      setProfileError("Current password is required");
       return;
     }
     if (newPassword.length < 6) {
-      setProfileError("Password baru minimal 6 karakter");
+      setProfileError("New password must be at least 6 characters");
       return;
     }
     if (newPassword !== confirmPassword) {
-      setProfileError("Konfirmasi password baru tidak cocok");
+      setProfileError("Confirm new password does not match");
       return;
     }
     setProfileLoading(true);
 
     try {
       await updateProfile({ currentPassword, newPassword });
-      setProfileSuccess("Password berhasil diubah!");
+      setProfileSuccess("Password changed successfully!");
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
     } catch (err) {
-      setProfileError(err instanceof Error ? err.message : "Gagal mengubah password");
+      setProfileError(err instanceof Error ? err.message : "Failed to change password");
     } finally {
       setProfileLoading(false);
     }
   };
 
   const listeningCount = LONGMAN_LISTENING_QUESTIONS.length;
-  const structureCount = QUESTIONS.structure.length;
-  const readingCount = QUESTIONS.reading.length;
+  const structureCount = LONGMAN_STRUCTURE_QUESTIONS.length;
+  const readingCount = LONGMAN_READING_QUESTIONS.length;
   const fullCount = listeningCount + structureCount + readingCount;
 
   const sections = [
@@ -149,10 +150,10 @@ const Dashboard = ({
   ];
 
   const tabs: { key: Tab; label: string; icon: string }[] = [
-    { key: "sections", label: "Latihan", icon: "📚" },
+    { key: "sections", label: "Practice", icon: "📚" },
     { key: "progress", label: "Progress", icon: "📈" },
-    { key: "leaderboard", label: "Ranking", icon: "🏆" },
-    { key: "profile", label: "Profil", icon: "👤" },
+    { key: "leaderboard", label: "Leaderboard", icon: "🏆" },
+    { key: "profile", label: "Profile", icon: "👤" },
   ];
 
   return (
@@ -201,7 +202,7 @@ const Dashboard = ({
           <div className="p-5">
             <div className="flex items-center justify-between gap-3 mb-4">
               <p className="text-xs text-muted-foreground tracking-widest uppercase font-sans">
-                Pilih Section
+                Select Section
               </p>
               <button
                 onClick={onStartExam}
@@ -243,7 +244,7 @@ const Dashboard = ({
                     <div className="text-sm font-bold text-navy font-sans">{s.qs}</div>
                     <div className="text-xs text-muted-foreground font-sans">{s.mins}</div>
                     <span className="text-xs text-navy/40 font-sans group-hover:text-navy/70 transition-colors">
-                      Mulai →
+                      Start →
                     </span>
                   </div>
                 </div>
@@ -296,20 +297,20 @@ const Dashboard = ({
               {/* Profile Details Form */}
               <div className="border border-border rounded-xl p-5 bg-card flex flex-col gap-4 shadow-sm">
                 <div>
-                  <h3 className="text-sm font-bold text-navy uppercase tracking-wider mb-1">Informasi Profil</h3>
-                  <p className="text-xs text-muted-foreground">Perbarui informasi nama lengkap Anda di sini.</p>
+                  <h3 className="text-sm font-bold text-navy uppercase tracking-wider mb-1">Profile Information</h3>
+                  <p className="text-xs text-muted-foreground">Update your full name information here.</p>
                 </div>
 
                 <form onSubmit={handleUpdateName} className="flex flex-col gap-4">
                   <div>
                     <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
-                      Nama Lengkap
+                      Full Name
                     </label>
                     <input
                       type="text"
                       value={profileName}
                       onChange={(e) => setProfileName(e.target.value)}
-                      placeholder="Nama Lengkap"
+                      placeholder="Full Name"
                       required
                       className="w-full bg-background border border-input rounded-lg px-3 py-2 text-sm outline-none focus:border-navy/50 transition-colors"
                     />
@@ -317,7 +318,7 @@ const Dashboard = ({
 
                   <div>
                     <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
-                      Email (Tidak dapat diubah)
+                      Email (Cannot be changed)
                     </label>
                     <input
                       type="email"
@@ -335,10 +336,10 @@ const Dashboard = ({
                     {profileLoading ? (
                       <>
                         <span className="inline-block w-3 h-3 border-2 border-navy/40 border-t-navy rounded-full animate-spin" />
-                        Menyimpan...
+                        Saving...
                       </>
                     ) : (
-                      "Simpan Nama"
+                      "Save Name"
                     )}
                   </button>
                 </form>
@@ -347,14 +348,14 @@ const Dashboard = ({
               {/* Password Settings Form */}
               <div className="border border-border rounded-xl p-5 bg-card flex flex-col gap-4 shadow-sm">
                 <div>
-                  <h3 className="text-sm font-bold text-navy uppercase tracking-wider mb-1">Ganti Password</h3>
-                  <p className="text-xs text-muted-foreground">Ganti password akun Anda untuk keamanan ekstra.</p>
+                  <h3 className="text-sm font-bold text-navy uppercase tracking-wider mb-1">Change Password</h3>
+                  <p className="text-xs text-muted-foreground">Change your account password for extra security.</p>
                 </div>
 
                 <form onSubmit={handleUpdatePassword} className="flex flex-col gap-4">
                   <div>
                     <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
-                      Password Saat Ini
+                      Current Password
                     </label>
                     <div className="relative">
                       <input
@@ -377,7 +378,7 @@ const Dashboard = ({
 
                   <div>
                     <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
-                      Password Baru
+                      New Password
                     </label>
                     <div className="relative">
                       <input
@@ -401,7 +402,7 @@ const Dashboard = ({
 
                   <div>
                     <label className="block text-muted-foreground text-xs font-semibold mb-1 uppercase tracking-wide">
-                      Konfirmasi Password Baru
+                      Confirm New Password
                     </label>
                     <div className="relative">
                       <input
@@ -430,10 +431,10 @@ const Dashboard = ({
                     {profileLoading ? (
                       <>
                         <span className="inline-block w-3 h-3 border-2 border-navy/40 border-t-navy rounded-full animate-spin" />
-                        Mengganti...
+                        Changing...
                       </>
                     ) : (
-                      "Ganti Password"
+                      "Change Password"
                     )}
                   </button>
                 </form>

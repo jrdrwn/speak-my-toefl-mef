@@ -157,11 +157,11 @@ const ResultsScreen = ({
           >
             <div className="bg-gold/20 border border-gold/50 rounded-full px-4 py-1.5 flex items-center gap-2">
               <span className="text-gold font-bold text-sm font-sans">
-                ✨ +{savedResult.xpEarned} XP diperoleh!
+                ✨ +{savedResult.xpEarned} XP earned!
               </span>
               {savedResult.streakBonus > 0 && (
                 <span className="text-xs text-gold/80 font-sans">
-                  (termasuk 🔥 +{savedResult.streakBonus} streak bonus)
+                  (including 🔥 +{savedResult.streakBonus} streak bonus)
                 </span>
               )}
             </div>
@@ -171,20 +171,20 @@ const ResultsScreen = ({
         {/* Streak info */}
         {savedResult && savedResult.newStreak > 0 && (
           <p className="text-gold/70 text-xs font-sans mt-2">
-            🔥 Streak sekarang: <span className="font-bold">{savedResult.newStreak} hari</span>
+            🔥 Current Streak: <span className="font-bold">{savedResult.newStreak} day{savedResult.newStreak !== 1 ? "s" : ""}</span>
           </p>
         )}
 
         {saving && (
           <div className="mt-3 flex items-center justify-center gap-2">
             <span className="inline-block w-3 h-3 border-2 border-gold/40 border-t-gold rounded-full animate-spin" />
-            <span className="text-gold/60 text-xs font-sans">Menyimpan hasil...</span>
+            <span className="text-gold/60 text-xs font-sans">Saving results...</span>
           </div>
         )}
 
         {saveError && (
           <p className="text-red-300/80 text-xs font-sans mt-2">
-            ⚠️ Gagal menyimpan hasil (tidak terkoneksi ke server)
+            ⚠️ Failed to save results (no connection to server)
           </p>
         )}
       </div>

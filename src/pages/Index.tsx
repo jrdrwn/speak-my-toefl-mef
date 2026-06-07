@@ -257,7 +257,7 @@ const Index = () => {
               logout();
             }}
             startDisabled={examFlow.length === 0}
-            startLabel={examFlow.length === 0 ? "Listening belum siap" : "Mulai"}
+            startLabel={examFlow.length === 0 ? "Listening not ready" : "Start"}
           />
         )}
         {screen === "test" && testConfig && (

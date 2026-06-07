@@ -11,9 +11,9 @@ const JWT_SECRET = process.env.JWT_SECRET || "toefl-secret-key-change-in-product
 const JWT_EXPIRES_IN = "7d";
 
 const registerSchema = z.object({
-  email: z.string().email("Email tidak valid"),
-  name: z.string().min(2, "Nama minimal 2 karakter").max(50),
-  password: z.string().min(6, "Password minimal 6 karakter"),
+  email: z.string().email("Invalid email"),
+  name: z.string().min(2, "Name must be at least 2 characters").max(50),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 const loginSchema = z.object({
@@ -34,7 +34,7 @@ router.post("/register", async (req: Request, res: Response): Promise<void> => {
 
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
-      res.status(409).json({ error: "Email sudah terdaftar" });
+      res.status(409).json({ error: "Email is already registered" });
       return;
     }
 
@@ -69,7 +69,7 @@ router.post("/register", async (req: Request, res: Response): Promise<void> => {
     });
   } catch (err) {
     console.error("Register error:", err);
-    res.status(500).json({ error: "Server error saat register" });
+    res.status(500).json({ error: "Server error during registration" });
   }
 });
 
@@ -78,7 +78,7 @@ router.post("/login", async (req: Request, res: Response): Promise<void> => {
   try {
     const body = loginSchema.safeParse(req.body);
     if (!body.success) {
-      res.status(400).json({ error: "Email atau password tidak valid" });
+      res.status(400).json({ error: "Invalid email or password" });
       return;
     }
 
@@ -86,13 +86,13 @@ router.post("/login", async (req: Request, res: Response): Promise<void> => {
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
-      res.status(401).json({ error: "Email atau password salah" });
+      res.status(401).json({ error: "Incorrect email or password" });
       return;
     }
 
     const passwordMatch = await bcrypt.compare(password, user.passwordHash);
     if (!passwordMatch) {
-      res.status(401).json({ error: "Email atau password salah" });
+      res.status(401).json({ error: "Incorrect email or password" });
       return;
     }
 
@@ -113,7 +113,7 @@ router.post("/login", async (req: Request, res: Response): Promise<void> => {
     });
   } catch (err) {
     console.error("Login error:", err);
-    res.status(500).json({ error: "Server error saat login" });
+    res.status(500).json({ error: "Server error during login" });
   }
 });
 
@@ -125,7 +125,7 @@ router.get("/me", authMiddleware, async (req: AuthRequest, res: Response): Promi
       select: { id: true, email: true, name: true, createdAt: true },
     });
     if (!user) {
-      res.status(404).json({ error: "User tidak ditemukan" });
+      res.status(404).json({ error: "User not found" });
       return;
     }
     res.json({ user });
@@ -140,13 +140,13 @@ router.post("/forgot-password", async (req: Request, res: Response): Promise<voi
   try {
     const { email } = req.body;
     if (!email) {
-      res.status(400).json({ error: "Email wajib diisi" });
+      res.status(400).json({ error: "Email is required" });
       return;
     }
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
-      res.status(404).json({ error: "Email tidak terdaftar" });
+      res.status(404).json({ error: "Email is not registered" });
       return;
     }
 
@@ -160,11 +160,11 @@ router.post("/forgot-password", async (req: Request, res: Response): Promise<voi
 
     res.json({
       success: true,
-      message: `Password Anda berhasil di-reset menjadi '${defaultPassword}'. Silakan masuk dan segera ganti password Anda di menu profil.`,
+      message: `Your password has been successfully reset to '${defaultPassword}'. Please sign in and change your password in the profile menu.`,
     });
   } catch (err) {
     console.error("Forgot password error:", err);
-    res.status(500).json({ error: "Server error saat memproses permintaan" });
+    res.status(500).json({ error: "Server error processing request" });
   }
 });
 
@@ -189,7 +189,7 @@ router.put("/profile", authMiddleware, async (req: AuthRequest, res: Response): 
 
     if (name !== undefined) {
       if (!name.trim()) {
-        res.status(400).json({ error: "Nama tidak boleh kosong" });
+        res.status(400).json({ error: "Name cannot be empty" });
         return;
       }
       updateData.name = name.trim();
@@ -197,18 +197,18 @@ router.put("/profile", authMiddleware, async (req: AuthRequest, res: Response): 
 
     if (newPassword) {
       if (!currentPassword) {
-        res.status(400).json({ error: "Password saat ini wajib diisi untuk mengubah password" });
+        res.status(400).json({ error: "Current password is required to change password" });
         return;
       }
 
       const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
       if (!isMatch) {
-        res.status(400).json({ error: "Password saat ini salah" });
+        res.status(400).json({ error: "Incorrect current password" });
         return;
       }
 
       if (newPassword.length < 6) {
-        res.status(400).json({ error: "Password baru minimal 6 karakter" });
+        res.status(400).json({ error: "New password must be at least 6 characters" });
         return;
       }
 
@@ -233,7 +233,7 @@ router.put("/profile", authMiddleware, async (req: AuthRequest, res: Response): 
     });
   } catch (err) {
     console.error("Update profile error:", err);
-    res.status(500).json({ error: "Server error saat memperbarui profil" });
+    res.status(500).json({ error: "Server error updating profile" });
   }
 });
 

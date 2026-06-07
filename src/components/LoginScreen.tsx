@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Eye, EyeOff } from "lucide-react";
 import { authApi } from "@/lib/api";
+import { LONGMAN_LISTENING_QUESTIONS } from "@/data/longmanListening";
+import LONGMAN_READING_QUESTIONS from "@/data/longmanReading";
+import LONGMAN_STRUCTURE_QUESTIONS from "@/data/longmanStructure";
+
+const totalQuestions = LONGMAN_LISTENING_QUESTIONS.length + LONGMAN_STRUCTURE_QUESTIONS.length + LONGMAN_READING_QUESTIONS.length;
 
 type RegisterStep = "idle" | "success";
 
@@ -30,9 +35,9 @@ const LoginScreen = () => {
       setMode("login");
       setEmail("");
       setPassword("");
-      setLocalError(res.message || "Password berhasil di-reset ke '123456'! Silakan masuk.");
+      setLocalError(res.message || "Password successfully reset to '123456'! Please log in.");
     } catch (err) {
-      setLocalError(err instanceof Error ? err.message : "Gagal meminta reset password");
+      setLocalError(err instanceof Error ? err.message : "Failed to request password reset");
     } finally {
       setForgotLoading(false);
     }
@@ -45,7 +50,7 @@ const LoginScreen = () => {
 
     try {
       if (mode === "register") {
-        if (!name.trim()) { setLocalError("Nama tidak boleh kosong"); return; }
+        if (!name.trim()) { setLocalError("Name cannot be empty"); return; }
         const user = await register(email, name.trim(), password);
         // Show success banner — auth state already set, redirect handled by parent
         setRegisteredName(user.name);
@@ -70,17 +75,17 @@ const LoginScreen = () => {
             🎉
           </div>
           <h2 className="text-card font-display text-xl font-bold mb-2">
-            Akun Berhasil Dibuat!
+            Account Created Successfully!
           </h2>
           <p className="text-card/60 text-sm font-sans mb-1">
-            Selamat datang, <span className="text-gold font-semibold">{registeredName}</span>!
+            Welcome, <span className="text-gold font-semibold">{registeredName}</span>!
           </p>
           <p className="text-card/40 text-xs font-sans mb-6">
-            Kamu sudah otomatis masuk ke dashboard.
+            You have automatically logged into the dashboard.
           </p>
           <div className="flex items-center justify-center gap-2 text-green-400/80 text-xs font-sans">
             <span className="inline-block w-3 h-3 border-2 border-green-400/40 border-t-green-400 rounded-full animate-spin" />
-            Memuat dashboard...
+            Loading dashboard...
           </div>
         </div>
       </div>
@@ -98,17 +103,17 @@ const LoginScreen = () => {
         TOEFL ITP Practice Test
       </h1>
       <p className="text-gold text-xs tracking-wider text-center mb-8 font-sans">
-        Official Simulation · 140 Questions
+        Official Simulation · {totalQuestions} Questions
       </p>
 
       <div className="bg-card/5 border border-gold/30 rounded-xl p-8 w-full max-w-sm">
         {mode === "forgot" ? (
           <div>
             <h2 className="text-card font-display text-lg mb-1">
-              Lupa Password
+              Forgot Password
             </h2>
             <p className="text-card/50 text-sm mb-6 font-sans">
-              Masukkan email terdaftar Anda untuk mereset password ke default ('123456').
+              Enter your registered email to reset the password to the default ('123456').
             </p>
 
             <form onSubmit={handleForgotPasswordRequest} className="flex flex-col gap-4">
@@ -142,7 +147,7 @@ const LoginScreen = () => {
                 {forgotLoading ? (
                   <>
                     <span className="inline-block w-4 h-4 border-2 border-navy/40 border-t-navy rounded-full animate-spin" />
-                    Memproses...
+                    Processing...
                   </>
                 ) : (
                   "Reset Password →"
@@ -161,7 +166,7 @@ const LoginScreen = () => {
                 }}
                 className="text-gold/80 hover:text-gold text-xs font-sans transition-colors"
               >
-                ← Kembali ke Masuk
+                ← Back to Login
               </button>
             </div>
           </div>
@@ -177,7 +182,7 @@ const LoginScreen = () => {
                     : "text-card/60 hover:text-card/80"
                   }`}
               >
-                Masuk
+                Login
               </button>
               <button
                 type="button"
@@ -187,17 +192,17 @@ const LoginScreen = () => {
                     : "text-card/60 hover:text-card/80"
                   }`}
               >
-                Daftar
+                Register
               </button>
             </div>
 
             <h2 className="text-card font-display text-lg mb-1">
-              {mode === "login" ? "Selamat datang kembali" : "Buat akun baru"}
+              {mode === "login" ? "Welcome back" : "Create new account"}
             </h2>
             <p className="text-card/50 text-sm mb-6 font-sans">
               {mode === "login"
-                ? "Masuk untuk melanjutkan latihan"
-                : "Daftar dan mulai persiapan TOEFL"}
+                ? "Sign in to continue practicing"
+                : "Register and start your TOEFL preparation"}
             </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -205,7 +210,7 @@ const LoginScreen = () => {
               {mode === "register" && (
                 <div>
                   <label className="block text-card/70 text-xs tracking-wider mb-1.5 font-sans uppercase">
-                    Nama lengkap
+                    Full name
                   </label>
                   <input
                     type="text"
@@ -257,7 +262,7 @@ const LoginScreen = () => {
                   </button>
                 </div>
                 {mode === "register" && (
-                  <p className="text-card/40 text-xs mt-1 font-sans">Minimal 6 karakter</p>
+                  <p className="text-card/40 text-xs mt-1 font-sans">Minimum 6 characters</p>
                 )}
                 {mode === "login" && (
                   <div className="text-right mt-1.5">
@@ -265,14 +270,13 @@ const LoginScreen = () => {
                       type="button"
                       onClick={() => {
                         setMode("forgot");
-                        setForgotStep("request");
                         setLocalError("");
                         clearError();
                         setShowPassword(false);
                       }}
                       className="text-gold/80 hover:text-gold text-xs font-sans transition-colors"
                     >
-                      Lupa password?
+                      Forgot password?
                     </button>
                   </div>
                 )}
@@ -294,10 +298,10 @@ const LoginScreen = () => {
                 {loading ? (
                   <>
                     <span className="inline-block w-4 h-4 border-2 border-navy/40 border-t-navy rounded-full animate-spin" />
-                    {mode === "login" ? "Masuk..." : "Mendaftar..."}
+                    {mode === "login" ? "Logging in..." : "Registering..."}
                   </>
                 ) : (
-                  mode === "login" ? "Masuk →" : "Buat Akun →"
+                  mode === "login" ? "Login →" : "Create Account →"
                 )}
               </button>
             </form>

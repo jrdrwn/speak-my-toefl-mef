@@ -26,7 +26,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -40,7 +40,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -54,7 +54,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -68,7 +68,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -82,7 +82,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -96,7 +96,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -110,7 +110,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -124,7 +124,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -138,7 +138,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -152,7 +152,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -166,7 +166,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -180,7 +180,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -194,7 +194,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-04 Part A, Conversations 1-13.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -208,7 +208,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -222,7 +222,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -236,7 +236,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -250,7 +250,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -264,7 +264,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -278,7 +278,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -292,7 +292,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -306,7 +306,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -320,7 +320,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -334,7 +334,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -348,7 +348,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -362,7 +362,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -376,7 +376,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-05 Part A Conversations 14-26.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -390,7 +390,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-06 Part A, Conversatons 27-30.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -404,7 +404,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-06 Part A, Conversatons 27-30.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -418,7 +418,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-06 Part A, Conversatons 27-30.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       },
       {
@@ -432,7 +432,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-06 Part A, Conversatons 27-30.m4a",
         "part": "★ Part A — TOEFL Test",
-        "instruction": "Soal resmi TOEFL Part A (30 soal). Audio-based: pilih jawaban terbaik berdasarkan percakapan singkat yang Anda dengar.",
+        "instruction": "Official TOEFL Part A questions (30 questions). Audio-based: choose the best answer based on the short conversation you hear.",
         "audioSeekMinute": 0
       }
     ]
@@ -454,7 +454,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-08 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Dalam percakapan, wanita tersebut menyebutkan dirinya sebagai mahasiswa senior (tingkat akhir) — Kunci: A.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | In the conversation, the woman refers to herself as a senior student — Key: A.",
         "audioSeekMinute": 0
       },
       {
@@ -468,7 +468,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-08 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Topik utama percakapan: mata kuliah apa saja yang diwajibkan untuk jurusan sastra (literature major) — Kunci: C.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | Main topic of the conversation: which courses are required for a literature major — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -482,7 +482,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-08 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Disebutkan bahwa terdapat delapan mata kuliah wajib untuk jurusan tersebut — Kunci: C.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | It is mentioned that there are eight required courses for the major — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -496,7 +496,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-08 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Mata kuliah yang dideskripsikan secara spesifik adalah literary analysis (analisis sastra) — Kunci: C.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | The course described in detail is literary analysis — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -510,7 +510,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-09 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Informasi tentang lumba-lumba diperoleh dari sebuah kuliah (lecture) — Kunci: D.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | Information about dolphins was obtained from a lecture — Key: D.",
         "audioSeekMinute": 0
       },
       {
@@ -524,7 +524,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-09 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Lumba-lumba menggunakan sonar untuk mengenali objek di dalam air (echolocation) — Kunci: B.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | Dolphins use sonar to recognize objects in the water (echolocation) — Key: B.",
         "audioSeekMinute": 0
       },
       {
@@ -538,7 +538,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-09 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Disebutkan angka lima puluh (fifty) dalam konteks penelitian kecerdasan lumba-lumba — Kunci: C.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | The number fifty is mentioned in the context of dolphin intelligence research — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -552,7 +552,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-09 Part B, Conversation_ Questions.m4a",
         "part": "★ Part B (Q31–38)",
-        "instruction": "TOEFL Part B — Percakapan panjang antara dua orang. Dengarkan seluruh percakapan lalu jawab beberapa pertanyaan. Fokus pada topik, detail, dan inferensi. | Kesimpulan: kita baru mulai memahami seberapa besar kecerdasan lumba-lumba — Kunci: D.",
+        "instruction": "TOEFL Part B — Long conversation between two people. Listen to the entire conversation, then answer several questions. Focus on topic, details, and inference. | Conclusion: we are just beginning to learn how intelligent dolphins are — Key: D.",
         "audioSeekMinute": 0
       }
     ]
@@ -574,7 +574,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Tujuan utama Sierra Club adalah melindungi lingkungan alam (natural environment) — Kunci: B.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The primary purpose of the Sierra Club is to protect the natural environment — Key: B.",
         "audioSeekMinute": 0
       },
       {
@@ -588,7 +588,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Sierra Club telah berdiri lebih dari satu abad (more than a century) — Kunci: C.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The Sierra Club has been in existence for more than a century — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -602,7 +602,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Sierra Club beroperasi di pegunungan Sierra Nevada — Kunci: C.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The Sierra Club operates in the Sierra Nevada mountains — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -616,7 +616,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-11 Part C, Talk_ Questions 39-42.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Sierra Club beroperasi di seluruh Amerika Serikat — Kunci: B.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The Sierra Club operates in the entire United States — Key: B.",
         "audioSeekMinute": 0
       },
       {
@@ -630,7 +630,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Situasinya adalah tur kampus universitas untuk mahasiswa baru — Kunci: B.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The situation is a university campus tour for new students — Key: B.",
         "audioSeekMinute": 0
       },
       {
@@ -644,7 +644,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Yang diperlukan untuk menggunakan fasilitas olahraga adalah kartu identitas mahasiswa yang berlaku — Kunci: C.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | What is needed to use the athletic facilities is a valid student identification card — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -658,7 +658,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Untuk mendaftar olahraga intramural, mahasiswa harus pergi ke kantor Athletic Department — Kunci: D.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | To sign up for an intramural sport, a student must go to the Athletic Department office — Key: D.",
         "audioSeekMinute": 0
       },
       {
@@ -672,7 +672,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-12 Part C, Talk_ Questions 43-46.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Langkah berikutnya dalam tur adalah mengunjungi Art Center — Kunci: A.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The next step on the tour is to visit the Art Center — Key: A.",
         "audioSeekMinute": 0
       },
       {
@@ -686,7 +686,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Kuliah ini membahas dua aliran pemikiran dalam bidang sastra (literature) — Kunci: C.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | This lecture discusses two schools of thought in the field of literature — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -700,7 +700,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Kedua aliran memiliki kesamaan namun berbeda secara esensial — Kunci: B.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The two schools are somewhat similar but have an essential difference — Key: B.",
         "audioSeekMinute": 0
       },
       {
@@ -714,7 +714,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Aliran pertama bersifat objektif (berdasarkan fakta dan observasi nyata) — Kunci: A.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The first school of thought is objective (based on facts and real observation) — Key: A.",
         "audioSeekMinute": 0
       },
       {
@@ -728,7 +728,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-13 Part C, Talk_ Questions 47-50 T.m4a",
         "part": "★ Part C (Q39–50)",
-        "instruction": "TOEFL Part C — Ceramah/monolog panjang. Dengarkan seluruh talk lalu jawab pertanyaan. Fokus pada main idea, detail, dan tujuan pembicara. | Aliran kedua menekankan lingkungan/environment sebagai faktor utama — Kunci: C.",
+        "instruction": "TOEFL Part C — Long talk/monologue. Listen to the entire talk, then answer the questions. Focus on main idea, details, and the speaker's purpose. | The second school of thought emphasizes environment as the primary factor — Key: C.",
         "audioSeekMinute": 0
       }
     ]
@@ -740,7 +740,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
     "audioOffset": 0,
     "questions": [
       {
-        "q": "💡 Strategi: Dengarkan baris terakhir percakapan. Kata-kata di baris terakhir sering mengandung implikasi, idiom, atau ekspresi yang menjadi kunci jawaban. — What does the woman think about the movie?",
+        "q": "💡 Strategy: Listen to the last line of the conversation. The words in the last line often contain implications, idioms, or expressions that are key to the answer. — What does the woman think about the movie?",
         "a": [
           "She has strong ideas about movies.",
           "She prefers comedies over westerns and romances.",
@@ -750,7 +750,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir wanita: 'I have no idea.' = Dia tidak tahu — Kunci: D.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | Woman's last line: 'I have no idea.' = She does not know — Key: D.",
         "audioSeekMinute": 0
       },
       {
@@ -764,7 +764,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | 'No one answered' mengimplikasikan rumah kemungkinan kosong — Kunci: B.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | 'No one answered' implies the house was probably empty — Key: B.",
         "audioSeekMinute": 0
       },
       {
@@ -778,7 +778,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | 'Highly unlikely that I got the job' = wawancara tampaknya tidak berhasil — Kunci: C.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | 'Highly unlikely that I got the job' = the interview was apparently unsuccessful — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -792,7 +792,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir mengindikasikan dia akan segera pergi — Kunci: A.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | The last line indicates he will be leaving soon — Key: A.",
         "audioSeekMinute": 0
       },
       {
@@ -806,7 +806,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Implikasi dari baris terakhir: dia berhasil membuka pintu — Kunci: C.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | Implication of the last line: he succeeded in opening the door — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -820,7 +820,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Nada baris terakhir mengindikasikan preferensi untuk makan malam yang berbeda — Kunci: D.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | The tone of the last line indicates a preference for a different dinner — Key: D.",
         "audioSeekMinute": 0
       },
       {
@@ -834,7 +834,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir menyiratkan dia tidak bisa membantu malam ini — Kunci: B.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | The last line implies she cannot help tonight — Key: B.",
         "audioSeekMinute": 0
       },
       {
@@ -848,7 +848,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Implikasi baris terakhir: kuliah membosankan — Kunci: C.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | Implication of the last line: the lecture was boring — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -862,7 +862,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir mengindikasikan belum semua tagihan dibayar — Kunci: A.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | The last line indicates not all bills have been paid yet — Key: A.",
         "audioSeekMinute": 0
       },
       {
@@ -876,7 +876,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | 'Try to return fast' = mencoba kembali dengan cepat — Kunci: D.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | 'Try to return fast' = try to come back quickly — Key: D.",
         "audioSeekMinute": 0
       },
       {
@@ -890,7 +890,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir: Tim ada di sini baru saja — Kunci: C.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | Last line: Tim was here just a moment ago — Key: C.",
         "audioSeekMinute": 0
       },
       {
@@ -904,7 +904,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Implikasi: tidak bisa parkir di sana — Kunci: D.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | Implication: parking is not allowed there — Key: D.",
         "audioSeekMinute": 0
       },
       {
@@ -918,7 +918,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 0,
         "audio": "1-14 TOEFL Exercise 1.m4a",
         "part": "Exercise 1 — Last Line Focus",
-        "instruction": "TOEFL Exercise 1 — Fokus pada kalimat TERAKHIR dialog untuk menjawab pertanyaan. Kalimat terakhir biasanya mengandung kunci jawaban. | Baris terakhir mengindikasikan makanan cukup tersedia — Kunci: A.",
+        "instruction": "TOEFL Exercise 1 — Focus on the LAST line of the dialogue to answer the question. The last line usually contains the key to the answer. | The last line indicates that plenty of food is available — Key: A.",
         "audioSeekMinute": 0
       }
     ]
@@ -940,7 +940,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": null,
         "part": "Exercise 2 — Synonyms",
-        "instruction": "Pilih jawaban yang mengandung sinonim dari kata kunci di baris terakhir dialogue.",
+        "instruction": "Choose the answer that contains a synonym of the key word in the last line of the dialogue.",
         "audioSeekMinute": 0
       },
       {
@@ -954,7 +954,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": null,
         "part": "Exercise 2 — Synonyms",
-        "instruction": "Pilih jawaban yang mengandung sinonim dari kata kunci di baris terakhir dialogue.",
+        "instruction": "Choose the answer that contains a synonym of the key word in the last line of the dialogue.",
         "audioSeekMinute": 0
       },
       {
@@ -968,7 +968,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": null,
         "part": "Exercise 2 — Synonyms",
-        "instruction": "Pilih jawaban yang mengandung sinonim dari kata kunci di baris terakhir dialogue.",
+        "instruction": "Choose the answer that contains a synonym of the key word in the last line of the dialogue.",
         "audioSeekMinute": 0
       }
     ]
@@ -1138,7 +1138,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 2,
         "audio": null,
         "part": "Exercise 3 — Avoid Similar Sounds",
-        "instruction": "Jawaban yang benar BUKAN yang mengandung bunyi mirip dari kata kunci di baris terakhir.",
+        "instruction": "The correct answer is NOT the one containing a similar sound to the key word in the last line.",
         "audioSeekMinute": 0
       },
       {
@@ -1152,7 +1152,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 3,
         "audio": null,
         "part": "Exercise 3 — Avoid Similar Sounds",
-        "instruction": "Jawaban yang benar BUKAN yang mengandung bunyi mirip dari kata kunci di baris terakhir.",
+        "instruction": "The correct answer is NOT the one containing a similar sound to the key word in the last line.",
         "audioSeekMinute": 0
       },
       {
@@ -1166,7 +1166,7 @@ export const LONGMAN_LISTENING_SECTIONS: LongmanListeningSection[] = [
         "correct": 1,
         "audio": null,
         "part": "Exercise 3 — Avoid Similar Sounds",
-        "instruction": "Jawaban yang benar BUKAN yang mengandung bunyi mirip dari kata kunci di baris terakhir.",
+        "instruction": "The correct answer is NOT the one containing a similar sound to the key word in the last line.",
         "audioSeekMinute": 0
       }
     ]

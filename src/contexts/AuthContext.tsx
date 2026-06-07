@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(res.user);
       return res.user;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Login gagal";
+      const msg = err instanceof Error ? err.message : "Login failed";
       setError(msg);
       throw err;
     } finally {
@@ -83,7 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(res.user);
       return res.user;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Register gagal";
+      const msg = err instanceof Error ? err.message : "Registration failed";
       setError(msg);
       throw err;
     } finally {
@@ -112,7 +112,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(res.user);
       return res.user;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Gagal memperbarui profil";
+      const msg = err instanceof Error ? err.message : "Failed to update profile";
       setError(msg);
       throw err;
     } finally {
