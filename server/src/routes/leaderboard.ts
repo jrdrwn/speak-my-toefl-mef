@@ -1,6 +1,9 @@
 import { Router, Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, UserProgress, User } from "@prisma/client";
 import { authMiddleware, AuthRequest } from "../middleware/auth";
+
+type ProgressWithUser = UserProgress & { user: Pick<User, "name" | "email"> };
+
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -24,7 +27,7 @@ router.get("/", async (_req: Request, res: Response): Promise<void> => {
       },
     });
 
-    const leaderboard = allProgress.map((entry, idx) => ({
+    const leaderboard = allProgress.map((entry: ProgressWithUser, idx: number) => ({
       rank: idx + 1,
       name: entry.user.name,
       email: entry.user.email,
@@ -53,7 +56,7 @@ router.get("/me", authMiddleware, async (req: AuthRequest, res: Response): Promi
       ],
     });
 
-    const myIndex = allProgress.findIndex((p) => p.userId === req.userId);
+    const myIndex = allProgress.findIndex((p: UserProgress) => p.userId === req.userId);
 
     res.json({
       rank: myIndex >= 0 ? myIndex + 1 : null,
