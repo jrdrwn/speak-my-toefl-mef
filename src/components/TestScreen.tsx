@@ -22,9 +22,12 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showDots, setShowDots] = useState(false);
   const [audioError, setAudioError] = useState<string | null>(null);
+  const [audioDuration, setAudioDuration] = useState(0);
+  const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const answersRef = useRef<Record<number, number>>({});
   const onFinishRef = useRef(onFinish);
+  const prevAudioSrcRef = useRef<string | null>(null);
 
   useEffect(() => {
     answersRef.current = answers;
@@ -43,15 +46,23 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
       setIsSpeaking(false);
       setAudioError("Audio custom untuk soal ini belum tersedia.");
     };
+    const handleTimeUpdate = () => setAudioCurrentTime(audio.currentTime);
+    const handleDurationChange = () => {
+      if (isFinite(audio.duration)) setAudioDuration(audio.duration);
+    };
 
     audio.addEventListener("ended", handleEnded);
     audio.addEventListener("error", handleError);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("durationchange", handleDurationChange);
     audioRef.current = audio;
 
     return () => {
       audio.pause();
       audio.removeEventListener("ended", handleEnded);
       audio.removeEventListener("error", handleError);
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("durationchange", handleDurationChange);
       audio.src = "";
       audioRef.current = null;
     };
@@ -102,7 +113,16 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
     setIsSpeaking(false);
+    setAudioCurrentTime(0);
   }, []);
+
+  const seekTo = useCallback((pct: number) => {
+    const audio = audioRef.current;
+    if (!audio || !audioDuration) return;
+    const newTime = pct * audioDuration;
+    audio.currentTime = newTime;
+    setAudioCurrentTime(newTime);
+  }, [audioDuration]);
 
   const playAudio = useCallback(() => {
     const audio = audioRef.current;
@@ -131,10 +151,18 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
       });
   }, [getListeningIndex, isSpeaking, stopAudio]);
 
+  // Stop audio only when the audio SOURCE changes (different file), not on every question change.
+  // This allows questions sharing the same audio track to keep playing continuously.
   useEffect(() => {
-    stopAudio();
+    const currentAudioFile = q.audio ?? null;
+    if (currentAudioFile !== prevAudioSrcRef.current) {
+      stopAudio();
+      setAudioDuration(0);
+      setAudioCurrentTime(0);
+      prevAudioSrcRef.current = currentAudioFile;
+    }
     setAudioError(null);
-  }, [currentIndex, stopAudio]);
+  }, [currentIndex, q.audio, stopAudio]);
 
 
 
@@ -199,29 +227,70 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
 
         {/* Audio player */}
         {q.audio && (
-          <div className="bg-muted border border-border rounded-lg p-4 mb-6 flex items-center gap-3">
-            <button
-              onClick={playAudio}
-              className="w-10 h-10 rounded-full gradient-navy flex items-center justify-center text-gold flex-shrink-0 hover:opacity-85 transition-opacity"
-            >
-              {isSpeaking ? "⏸" : "▶"}
-            </button>
-            <div className="flex-1">
-              <div className="text-sm font-semibold text-navy font-sans">{q.audio}</div>
-              <div className="text-xs text-muted-foreground font-sans">{q.part} · Click ▶ to listen</div>
-              {audioError && <div className="text-xs text-destructive font-sans mt-1">{audioError}</div>}
+          <div className="bg-gradient-to-br from-navy/5 to-navy/10 border border-navy/20 rounded-xl p-4 mb-6">
+            {/* Top row: play button + file info + waveform */}
+            <div className="flex items-center gap-3 mb-3">
+              <button
+                onClick={playAudio}
+                className="w-10 h-10 rounded-full gradient-navy flex items-center justify-center text-gold flex-shrink-0 hover:opacity-85 transition-opacity shadow-sm"
+              >
+                {isSpeaking ? "⏸" : "▶"}
+              </button>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-semibold text-navy font-sans truncate">{q.audio}</div>
+                <div className="text-xs text-muted-foreground font-sans">{q.part} · {isSpeaking ? "Sedang diputar..." : audioDuration > 0 ? "Klik ▶ untuk melanjutkan" : "Klik ▶ untuk mendengarkan"}</div>
+                {audioError && <div className="text-xs text-destructive font-sans mt-0.5">{audioError}</div>}
+              </div>
+              {/* Waveform animation */}
+              <div className="flex items-center gap-0.5 h-6 flex-shrink-0">
+                {[5, 12, 8, 16, 6, 14, 9, 11].map((h, i) => (
+                  <span
+                    key={i}
+                    className="w-[3px] rounded-sm transition-all"
+                    style={{
+                      height: `${h}px`,
+                      backgroundColor: isSpeaking ? "var(--color-gold, #c9a84c)" : "#94a3b8",
+                      animation: isSpeaking ? `wave-bar 0.7s ease-in-out ${i * 0.08}s infinite alternate` : "none",
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="flex items-center gap-0.5 h-5">
-              {[6, 14, 10, 16, 8, 12].map((h, i) => (
-                <span
-                  key={i}
-                  className="w-[3px] bg-gold rounded-sm transition-all"
+
+            {/* Progress bar + timestamps */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-mono text-navy/60 w-10 text-right flex-shrink-0">
+                {String(Math.floor(audioCurrentTime / 60)).padStart(2, "0")}:{String(Math.floor(audioCurrentTime % 60)).padStart(2, "0")}
+              </span>
+              {/* Seekable progress bar */}
+              <div
+                className="flex-1 h-2 bg-navy/15 rounded-full cursor-pointer relative group"
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                  seekTo(pct);
+                }}
+              >
+                <div
+                  className="h-2 rounded-full transition-[width] duration-100"
                   style={{
-                    height: `${h}px`,
-                    animation: isSpeaking ? `wave-bar 0.8s ease-in-out ${i * 0.1}s infinite alternate` : "none",
+                    width: `${audioDuration > 0 ? (audioCurrentTime / audioDuration) * 100 : 0}%`,
+                    background: "linear-gradient(90deg, #c9a84c, #e8c96a)",
                   }}
                 />
-              ))}
+                {/* Thumb */}
+                <div
+                  className="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-gold border-2 border-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity -ml-1.5"
+                  style={{
+                    left: `${audioDuration > 0 ? (audioCurrentTime / audioDuration) * 100 : 0}%`,
+                  }}
+                />
+              </div>
+              <span className="text-[11px] font-mono text-navy/60 w-10 flex-shrink-0">
+                {audioDuration > 0
+                  ? `${String(Math.floor(audioDuration / 60)).padStart(2, "0")}:${String(Math.floor(audioDuration % 60)).padStart(2, "0")}`
+                  : "--:--"}
+              </span>
             </div>
           </div>
         )}

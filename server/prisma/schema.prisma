@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../../../node_modules/.prisma/client"
+  binaryTargets = ["native", "rhel-openssl-1.0.x", "rhel-openssl-3.0.x"]
+}
+
+
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime      @default(now())
+  lastLoginAt  DateTime?
+  testResults  TestResult[]
+  userProgress UserProgress?
+}
+
+model TestResult {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  testType   String   // "full" | "listening" | "structure" | "reading"
+  score      Int      // scaled score (full: 1-677, section: 31-68)
+  rawCorrect Int
+  totalQs    Int
+  lScore     Int?     // listening scaled score (full test only)
+  sScore     Int?     // structure scaled score (full test only)
+  rScore     Int?     // reading scaled score (full test only)
+  xpEarned   Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model UserProgress {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalXp       Int      @default(0)
+  currentStreak Int      @default(0)
+  longestStreak Int      @default(0)
+  lastActiveAt  DateTime @default(now())
+  testsCount    Int      @default(0)
+  bestScore     Int      @default(0) // best full test score (TOEFL scale 677)
+  updatedAt     DateTime @updatedAt
+}

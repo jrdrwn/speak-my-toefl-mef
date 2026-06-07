@@ -3,12 +3,13 @@ import LoginScreen from "@/components/LoginScreen";
 import ResultsScreen from "@/components/ResultsScreen";
 import TestScreen from "@/components/TestScreen";
 import { LONGMAN_LISTENING_QUESTIONS, LONGMAN_LISTENING_SECTIONS } from "@/data/longmanListening";
-import LONGMAN_READING_QUESTIONS from '@/data/longmanReading';
-import LONGMAN_STRUCTURE_QUESTIONS from '@/data/longmanStructure';
-import { QUESTIONS, Question } from "@/data/questions";
+import LONGMAN_READING_QUESTIONS from "@/data/longmanReading";
+import LONGMAN_STRUCTURE_QUESTIONS from "@/data/longmanStructure";
+import { Question } from "@/data/questions";
+import { useAuth } from "@/hooks/useAuth";
 import { useCallback, useMemo, useState } from "react";
 
-type Screen = "login" | "dashboard" | "test" | "results";
+type Screen = "dashboard" | "test" | "results";
 
 interface TestConfig {
   type: string;
@@ -90,68 +91,140 @@ const buildExamFlow = () => {
 };
 
 const Index = () => {
-  const [screen, setScreen] = useState<Screen>("login");
-  const [userName, setUserName] = useState("Student");
-  const [scores, setScores] = useState<number[]>([]);
+  const { user, isAuthenticated, logout } = useAuth();
+
+  const [screen, setScreen] = useState<Screen>("dashboard");
   const [testConfig, setTestConfig] = useState<TestConfig | null>(null);
   const [flowStageIndex, setFlowStageIndex] = useState(0);
   const [flowAnswers, setFlowAnswers] = useState<Record<number, number>>({});
   const [lastAnswers, setLastAnswers] = useState<Record<number, number>>({});
+  const [sectionTestType, setSectionTestType] = useState<string>("full");
+  const [sectionFlow, setSectionFlow] = useState<TestConfig[]>([]);
+  const [sectionQuestions, setSectionQuestions] = useState<Question[]>([]);
 
-  const examFlow = useMemo(() => {
-    return buildExamFlow();
-  }, []);
+  const examFlow = useMemo(() => buildExamFlow(), []);
 
-  const combinedQuestions = useMemo(() => {
-    return [...LONGMAN_LISTENING_QUESTIONS, ...LONGMAN_STRUCTURE_QUESTIONS, ...LONGMAN_READING_QUESTIONS];
-  }, []);
-
-  const handleLogin = useCallback((name: string) => {
-    setUserName(name);
-    setScreen("dashboard");
-  }, []);
+  const combinedQuestions = useMemo(
+    () => [...LONGMAN_LISTENING_QUESTIONS, ...LONGMAN_STRUCTURE_QUESTIONS, ...LONGMAN_READING_QUESTIONS],
+    []
+  );
 
   const startExam = useCallback(() => {
     if (examFlow.length === 0) return;
     setFlowStageIndex(0);
     setFlowAnswers({});
     setLastAnswers({});
+    setSectionTestType("full");
     setTestConfig(examFlow[0]);
     setScreen("test");
   }, [examFlow]);
 
-  const finishExam = useCallback((answers: Record<number, number>) => {
-    setLastAnswers(answers);
-    const qs = combinedQuestions;
-    let correct = 0;
-    qs.forEach((q, i) => {
-      if (answers[i] === q.correct) correct += 1;
-    });
-    const lScore = Math.round(31 + (correct / qs.length) * 37);
-    setScores((prev) => [...prev, lScore * 10]);
-    setScreen("results");
-  }, [combinedQuestions]);
+  const startSection = useCallback(
+    (type: string) => {
+      let sectionFlow: TestConfig[];
+      if (type === "listening") {
+        const allListeningQuestions = LONGMAN_LISTENING_SECTIONS.flatMap((s) => s.questions);
+        const listeningSections = splitIntoSections(allListeningQuestions, NUM_SECTIONS);
+        let offset = 0;
+        sectionFlow = listeningSections.map((qs, i) => {
+          const cfg: TestConfig = {
+            type: "listening",
+            questions: qs,
+            label: "Listening Comprehension",
+            sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
+            seconds: Math.round(7 * 60 * NUM_SECTIONS * (qs.length / allListeningQuestions.length)),
+            questionOffset: offset,
+            audioOffset: offset,
+          };
+          offset += qs.length;
+          return cfg;
+        });
+      } else if (type === "structure") {
+        const structureSections = splitIntoSections(LONGMAN_STRUCTURE_QUESTIONS, NUM_SECTIONS);
+        let offset = 0;
+        sectionFlow = structureSections.map((qs, i) => {
+          const cfg: TestConfig = {
+            type: "structure",
+            questions: qs,
+            label: "Structure & Written Expression",
+            sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
+            seconds: Math.round((25 * 60) / NUM_SECTIONS),
+            questionOffset: offset,
+            audioOffset: 0,
+          };
+          offset += qs.length;
+          return cfg;
+        });
+      } else if (type === "reading") {
+        const readingSections = splitIntoSections(LONGMAN_READING_QUESTIONS, NUM_SECTIONS);
+        let offset = 0;
+        sectionFlow = readingSections.map((qs, i) => {
+          const cfg: TestConfig = {
+            type: "reading",
+            questions: qs,
+            label: "Reading Comprehension",
+            sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
+            seconds: Math.round((55 * 60) / NUM_SECTIONS),
+            questionOffset: offset,
+            audioOffset: 0,
+          };
+          offset += qs.length;
+          return cfg;
+        });
+      } else {
+        startExam();
+        return;
+      }
 
-  const handleFinish = useCallback((answers: Record<number, number>) => {
-    if (!testConfig) return;
+      if (sectionFlow.length === 0) return;
+      const allSectionQs = sectionFlow.flatMap((s) => s.questions);
+      setFlowStageIndex(0);
+      setFlowAnswers({});
+      setLastAnswers({});
+      setSectionTestType(type);
+      setSectionQuestions(allSectionQs);
+      setTestConfig(sectionFlow[0]);
+      setSectionFlow(sectionFlow);
+      setScreen("test");
+    },
+    [startExam]
+  );
 
-    const mergedAnswers = {
-      ...flowAnswers,
-      ...Object.fromEntries(
-        Object.entries(answers).map(([key, value]) => [testConfig.questionOffset + Number(key), value]),
-      ),
-    };
+  const finishExam = useCallback(
+    (answers: Record<number, number>) => {
+      setLastAnswers(answers);
+      setScreen("results");
+    },
+    []
+  );
 
-    const nextStageIndex = flowStageIndex + 1;
-    if (nextStageIndex < examFlow.length) {
-      setFlowAnswers(mergedAnswers);
-      setFlowStageIndex(nextStageIndex);
-      setTestConfig(examFlow[nextStageIndex]);
-      return;
-    }
+  const handleFinish = useCallback(
+    (answers: Record<number, number>) => {
+      if (!testConfig) return;
 
-    finishExam(mergedAnswers);
-  }, [examFlow, finishExam, flowAnswers, flowStageIndex, testConfig]);
+      const mergedAnswers = {
+        ...flowAnswers,
+        ...Object.fromEntries(
+          Object.entries(answers).map(([key, value]) => [
+            testConfig.questionOffset + Number(key),
+            value,
+          ])
+        ),
+      };
+
+      const activeFlow = sectionTestType === "full" ? examFlow : sectionFlow;
+      const nextStageIndex = flowStageIndex + 1;
+      if (nextStageIndex < activeFlow.length) {
+        setFlowAnswers(mergedAnswers);
+        setFlowStageIndex(nextStageIndex);
+        setTestConfig(activeFlow[nextStageIndex]);
+        return;
+      }
+
+      finishExam(mergedAnswers);
+    },
+    [examFlow, sectionFlow, sectionTestType, finishExam, flowAnswers, flowStageIndex, testConfig]
+  );
 
   const handleExitTest = useCallback(() => {
     setScreen("dashboard");
@@ -160,16 +233,29 @@ const Index = () => {
     setFlowAnswers({});
   }, []);
 
+  // Show login if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="w-full max-w-3xl">
+          <LoginScreen />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-3xl">
-        {screen === "login" && <LoginScreen onLogin={handleLogin} />}
         {screen === "dashboard" && (
           <Dashboard
-            userName={userName}
-            scores={scores}
+            userName={user!.name}
+            userEmail={user!.email}
             onStartExam={startExam}
-            onLogout={() => setScreen("login")}
+            onStartSection={startSection}
+            onLogout={() => {
+              logout();
+            }}
             startDisabled={examFlow.length === 0}
             startLabel={examFlow.length === 0 ? "Listening belum siap" : "Mulai"}
           />
@@ -190,10 +276,14 @@ const Index = () => {
         )}
         {screen === "results" && testConfig && (
           <ResultsScreen
-            testType="full"
-            questions={combinedQuestions}
+            testType={sectionTestType}
+            questions={
+              sectionTestType === "full" ? combinedQuestions : sectionQuestions
+            }
             answers={lastAnswers}
-            onRetry={startExam}
+            onRetry={() =>
+              sectionTestType === "full" ? startExam() : startSection(sectionTestType)
+            }
             onDashboard={() => setScreen("dashboard")}
           />
         )}
