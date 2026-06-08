@@ -37,6 +37,23 @@ function splitIntoSections<T>(items: T[], count: number): T[][] {
   return result;
 }
 
+// --- Waktu standar TOEFL ITP per section ---
+// Listening : 35 menit / 50 soal standar
+// Structure  : 25 menit / 40 soal standar
+// Reading    : 55 menit / 50 soal standar
+// Jika jumlah soal melebihi standar, waktu dihitung proporsional
+const TIMING = {
+  listening: { baseMinutes: 35, baseSoal: 50 },
+  structure: { baseMinutes: 25, baseSoal: 40 },
+  reading:   { baseMinutes: 55, baseSoal: 50 },
+};
+
+/** Hitung detik proporsional berdasarkan jumlah soal aktual vs standar. */
+function calcSeconds(type: "listening" | "structure" | "reading", actualCount: number): number {
+  const { baseMinutes, baseSoal } = TIMING[type];
+  return Math.round((actualCount / baseSoal) * baseMinutes * 60);
+}
+
 const buildExamFlow = () => {
   const stages: TestConfig[] = [];
   let currentOffset = 0;
@@ -50,7 +67,8 @@ const buildExamFlow = () => {
       questions: qs,
       label: "Longman Listening",
       sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-      seconds: Math.round(7 * 60 * NUM_SECTIONS * (qs.length / allListeningQuestions.length)),
+      // Full exam: waktu proporsional per sub-section
+      seconds: Math.round(calcSeconds("listening", allListeningQuestions.length) / NUM_SECTIONS),
       questionOffset: currentOffset,
       audioOffset: currentOffset,
     });
@@ -65,7 +83,7 @@ const buildExamFlow = () => {
       questions: qs,
       label: "Structure & Written Expression",
       sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-      seconds: Math.round((25 * 60) / NUM_SECTIONS),
+      seconds: Math.round(calcSeconds("structure", LONGMAN_STRUCTURE_QUESTIONS.length) / NUM_SECTIONS),
       questionOffset: currentOffset,
       audioOffset: 0,
     });
@@ -80,7 +98,7 @@ const buildExamFlow = () => {
       questions: qs,
       label: "Reading Comprehension",
       sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-      seconds: Math.round((55 * 60) / NUM_SECTIONS),
+      seconds: Math.round(calcSeconds("reading", LONGMAN_READING_QUESTIONS.length) / NUM_SECTIONS),
       questionOffset: currentOffset,
       audioOffset: 0,
     });
@@ -132,7 +150,8 @@ const Index = () => {
             questions: qs,
             label: "Listening Comprehension",
             sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-            seconds: Math.round(7 * 60 * NUM_SECTIONS * (qs.length / allListeningQuestions.length)),
+            // Per-section dari card: TANPA timer
+            seconds: 0,
             questionOffset: offset,
             audioOffset: offset,
           };
@@ -148,7 +167,8 @@ const Index = () => {
             questions: qs,
             label: "Structure & Written Expression",
             sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-            seconds: Math.round((25 * 60) / NUM_SECTIONS),
+            // Per-section dari card: TANPA timer
+            seconds: 0,
             questionOffset: offset,
             audioOffset: 0,
           };
@@ -164,7 +184,8 @@ const Index = () => {
             questions: qs,
             label: "Reading Comprehension",
             sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-            seconds: Math.round((55 * 60) / NUM_SECTIONS),
+            // Per-section dari card: TANPA timer
+            seconds: 0,
             questionOffset: offset,
             audioOffset: 0,
           };
@@ -172,6 +193,7 @@ const Index = () => {
           return cfg;
         });
       } else {
+        // type === "full" → gunakan startExam() yang memiliki timer
         startExam();
         return;
       }

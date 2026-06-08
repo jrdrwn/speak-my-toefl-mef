@@ -28,6 +28,8 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
   const answersRef = useRef<Record<number, number>>({});
   const onFinishRef = useRef(onFinish);
   const prevAudioSrcRef = useRef<string | null>(null);
+  const currentIndexRef = useRef(0);   // mirror currentIndex untuk diakses di dalam interval
+  const totalRef = useRef(questions.length); // mirror total soal
 
   useEffect(() => {
     answersRef.current = answers;
@@ -36,6 +38,15 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
   useEffect(() => {
     onFinishRef.current = onFinish;
   }, [onFinish]);
+
+  // Sinkronkan ref agar bisa dibaca di dalam setInterval closure
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    totalRef.current = questions.length;
+  }, [questions.length]);
 
   useEffect(() => {
     const audio = new Audio();
@@ -68,19 +79,31 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
     };
   }, []);
 
+  const noTimer = totalSeconds === 0;
+
   useEffect(() => {
+    if (noTimer) return; // Tanpa timer: tidak perlu countdown
     const interval = setInterval(() => {
       setTimeLeft((t) => {
         if (t <= 1) {
           clearInterval(interval);
-          onFinishRef.current(answersRef.current);
+          // Waktu habis → pindah ke soal berikutnya (bukan langsung selesai)
+          const ci = currentIndexRef.current;
+          const tot = totalRef.current;
+          if (ci >= tot - 1) {
+            // Sudah soal terakhir → selesaikan section
+            onFinishRef.current(answersRef.current);
+          } else {
+            // Masih ada soal → lanjut ke berikutnya, timer berhenti di 0
+            setCurrentIndex(ci + 1);
+          }
           return 0;
         }
         return t - 1;
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [noTimer]);
 
   const q = questions[currentIndex];
   const total = questions.length;
@@ -175,9 +198,16 @@ const TestScreen = ({ questions, testType, label, sub, totalSeconds, questionOff
           <div className="text-gold text-xs font-sans tracking-wider">{label}</div>
           <div className="text-card/60 text-xs font-sans mt-0.5">{sub}</div>
         </div>
-        <div className={`font-mono font-bold text-lg ${timerColor}`}>
-          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
-        </div>
+        {noTimer ? (
+          <div className="flex items-center gap-1.5 bg-card/10 border border-card/20 rounded-full px-3 py-1">
+            <span className="text-card/50 text-xs">⏱</span>
+            <span className="text-card/60 text-xs font-sans font-medium">No Limit</span>
+          </div>
+        ) : (
+          <div className={`font-mono font-bold text-lg ${timerColor}`}>
+            {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+          </div>
+        )}
       </div>
 
       {/* Progress bar */}

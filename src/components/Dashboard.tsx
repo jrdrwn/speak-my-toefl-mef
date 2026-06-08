@@ -101,6 +101,16 @@ const Dashboard = ({
   const readingCount = LONGMAN_READING_QUESTIONS.length;
   const fullCount = listeningCount + structureCount + readingCount;
 
+  // Hitung total waktu full test secara proporsional (sama dengan formula di Index.tsx)
+  const totalFullMinutes = Math.round(
+    (listeningCount / 50) * 35 +
+    (structureCount / 40) * 25 +
+    (readingCount   / 50) * 55
+  );
+  const fullMinsLabel = totalFullMinutes >= 60
+    ? `${Math.floor(totalFullMinutes / 60)} jam ${totalFullMinutes % 60} menit`
+    : `${totalFullMinutes} min`;
+
   const sections = [
     {
       type: "listening",
@@ -111,7 +121,7 @@ const Dashboard = ({
       badge: "Part A · B · C",
       badgeClass: "bg-amber-100 text-amber-800",
       qs: `${listeningCount} Qs`,
-      mins: "35 min",
+      mins: null, // Tanpa timer saat latihan per-section
     },
     {
       type: "structure",
@@ -122,7 +132,7 @@ const Dashboard = ({
       badge: "Grammar · Syntax",
       badgeClass: "bg-blue-100 text-blue-800",
       qs: `${structureCount} Qs`,
-      mins: "25 min",
+      mins: null, // Tanpa timer saat latihan per-section
     },
     {
       type: "reading",
@@ -133,7 +143,7 @@ const Dashboard = ({
       badge: "5 Passages",
       badgeClass: "bg-green-100 text-green-800",
       qs: `${readingCount} Qs`,
-      mins: "55 min",
+      mins: null, // Tanpa timer saat latihan per-section
     },
     {
       type: "full",
@@ -144,7 +154,7 @@ const Dashboard = ({
       badge: "Official Format",
       badgeClass: "bg-purple-100 text-purple-800",
       qs: `${fullCount} Qs`,
-      mins: "115 min",
+      mins: fullMinsLabel, // Dihitung proporsional dari jumlah soal aktual
       special: true,
     },
   ];
@@ -242,7 +252,14 @@ const Dashboard = ({
                   </div>
                   <div className="text-right flex-shrink-0 flex flex-col items-end gap-1">
                     <div className="text-sm font-bold text-navy font-sans">{s.qs}</div>
-                    <div className="text-xs text-muted-foreground font-sans">{s.mins}</div>
+                    {s.mins ? (
+                      <div className="text-xs text-muted-foreground font-sans">{s.mins}</div>
+                    ) : (
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground/60 font-sans">
+                        <span>⏱</span>
+                        <span>No Limit</span>
+                      </div>
+                    )}
                     <span className="text-xs text-navy/40 font-sans group-hover:text-navy/70 transition-colors">
                       Start →
                     </span>
