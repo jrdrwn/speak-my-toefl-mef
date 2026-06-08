@@ -101,15 +101,21 @@ const Dashboard = ({
   const readingCount = LONGMAN_READING_QUESTIONS.length;
   const fullCount = listeningCount + structureCount + readingCount;
 
-  // Hitung total waktu full test secara proporsional (sama dengan formula di Index.tsx)
-  const totalFullMinutes = Math.round(
+  // Hitung total waktu secara proporsional (sama dengan formula di Index.tsx)
+  const totalStructureMinutes = Math.round((structureCount / 40) * 25);
+  const totalReadingMinutes   = Math.round((readingCount   / 50) * 55);
+  const totalFullMinutes      = Math.round(
     (listeningCount / 50) * 35 +
-    (structureCount / 40) * 25 +
-    (readingCount   / 50) * 55
+    totalStructureMinutes +
+    totalReadingMinutes
   );
-  const fullMinsLabel = totalFullMinutes >= 60
-    ? `${Math.floor(totalFullMinutes / 60)} jam ${totalFullMinutes % 60} menit`
-    : `${totalFullMinutes} min`;
+
+  const fmtMins = (m: number) =>
+    m >= 60 ? `${Math.floor(m / 60)} jam ${m % 60} menit` : `${m} menit`;
+
+  const structureMinsLabel = fmtMins(totalStructureMinutes);
+  const readingMinsLabel   = fmtMins(totalReadingMinutes);
+  const fullMinsLabel      = fmtMins(totalFullMinutes);
 
   const sections = [
     {
@@ -132,7 +138,7 @@ const Dashboard = ({
       badge: "Grammar · Syntax",
       badgeClass: "bg-blue-100 text-blue-800",
       qs: `${structureCount} Qs`,
-      mins: null, // Tanpa timer saat latihan per-section
+      mins: structureMinsLabel, // Timer proporsional (25 menit / 40 soal standar)
     },
     {
       type: "reading",
@@ -143,7 +149,7 @@ const Dashboard = ({
       badge: "5 Passages",
       badgeClass: "bg-green-100 text-green-800",
       qs: `${readingCount} Qs`,
-      mins: null, // Tanpa timer saat latihan per-section
+      mins: readingMinsLabel, // Timer proporsional (55 menit / 50 soal standar)
     },
     {
       type: "full",

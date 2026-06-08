@@ -167,8 +167,8 @@ const Index = () => {
             questions: qs,
             label: "Structure & Written Expression",
             sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-            // Per-section dari card: TANPA timer
-            seconds: 0,
+            // Timer proporsional berdasarkan jumlah soal aktual (25 menit / 40 soal standar)
+            seconds: Math.round(calcSeconds("structure", LONGMAN_STRUCTURE_QUESTIONS.length) / NUM_SECTIONS),
             questionOffset: offset,
             audioOffset: 0,
           };
@@ -184,8 +184,8 @@ const Index = () => {
             questions: qs,
             label: "Reading Comprehension",
             sub: `Section ${i + 1} of ${NUM_SECTIONS}`,
-            // Per-section dari card: TANPA timer
-            seconds: 0,
+            // Timer proporsional berdasarkan jumlah soal aktual (55 menit / 50 soal standar)
+            seconds: Math.round(calcSeconds("reading", LONGMAN_READING_QUESTIONS.length) / NUM_SECTIONS),
             questionOffset: offset,
             audioOffset: 0,
           };
